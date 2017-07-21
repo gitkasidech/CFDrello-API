@@ -1,4 +1,4 @@
-import { AuthenUser } from '../models/authenuser' //as rename
+import { AuthenUsers } from '../models/authenuser' //as rename
 
 export const setRoute = async (app) => {
     app.post('/authenuser', havedata);
@@ -8,23 +8,32 @@ export const setRoute = async (app) => {
 export const havedata = async (req, res, next) => {
     // const json = req.body
     // const {idUser, username, fullname, token, email} = json;
-    if (!req.body.token || !req.body.idUser || !req.body.username) {
+    const callcheckreq = await checkreq(req.body);
+    if (callcheckreq) {
         return res.status(500).send("format should be")
     }
-    const callcreate = await creatnewUser(req.body);
-    if(callcreate){
+    const callcreate = await createnewUser(req.body);
+    if (callcreate) {
         res.send('<h1>add New dashboard</h1>');
     }
-    else{
+    else {
         res.send('<h1>dashboard</h1>');
     }
 
 }
-export const creatnewUser = async (body) => {
-    const users = new AuthenUser(body);
-    const user = await AuthenUser.findOne({ idUser: body.idUser });
+export const checkreq = (body) => {
+    if (!body.token || !body.idUser || !body.username) {
+        return true
+    }
+    else {
+        return false
+    }
+}
+export const createnewUser = async (body) => {
+    const users = new AuthenUsers(body);
+    const user = await AuthenUsers.findOne({ idUser: body.idUser });
     if (!user) {
-        const newuser = await AuthenUser.create({
+        const newuser = await AuthenUsers.create({
             idUser: body.idUser,
             username: body.username,
             fullname: body.fullname,
