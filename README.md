@@ -1,7 +1,7 @@
 # CFDrello
 
-* $ git clone  https://github.com/leeangkit/testCFDrello.git
-* $ cd testCFDrello
+* $ git clone  https://github.com/leeangkit/CFDrello-API.git
+* $ cd CFDrello-API
 * $ npm install
 
 run mongodb with docker
