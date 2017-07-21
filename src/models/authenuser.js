@@ -13,6 +13,6 @@ const AuthenUserSchema = mongoose.Schema({
     email: String
 });
 
-export const AuthenUser = mongoose.model('AuthenUser', AuthenUserSchema);
+export const AuthenUsers = mongoose.model('AuthenUser', AuthenUserSchema);
 
 

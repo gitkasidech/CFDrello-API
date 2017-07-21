@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.AuthenUser = undefined;
+exports.AuthenUsers = undefined;
 
 var _mongoose = require('mongoose');
 
@@ -25,5 +25,5 @@ var AuthenUserSchema = _mongoose2.default.Schema({
     email: String
 });
 
-var AuthenUser = exports.AuthenUser = _mongoose2.default.model('AuthenUser', AuthenUserSchema);
+var AuthenUsers = exports.AuthenUsers = _mongoose2.default.model('AuthenUser', AuthenUserSchema);
 //# sourceMappingURL=authenuser.js.map
