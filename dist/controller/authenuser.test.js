@@ -17,9 +17,9 @@ var _authens2 = _interopRequireDefault(_authens);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var AuthenUsers = new _authens2.default();
-jest.mock('../models/authenuser', function () {
-    return { AuthenUsers: AuthenUsers };
-});
+// jest.mock('../models/authenuser', () => {
+//     return { AuthenUsers }
+// });
 
 test('checkreq have token,idUser,username', function () {
     expect((0, _authenuser.checkreq)({
@@ -78,7 +78,12 @@ test('create new user', (0, _asyncToGenerator3.default)(_regenerator2.default.ma
         while (1) {
             switch (_context.prev = _context.next) {
                 case 0:
-                    givenUser = {};
+                    givenUser = {
+                        idUser: "",
+                        username: "",
+                        fullname: "",
+                        token: ""
+                    };
                     _context.next = 3;
                     return (0, _authenuser.createnewUser)(givenUser);
 
@@ -105,8 +110,7 @@ test('old user', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(func
                         idUser: "1",
                         username: "xxxxx",
                         fullname: "xxxx xxxxx",
-                        token: "12345678",
-                        email: " "
+                        token: "12345678"
                     };
                     _context2.next = 3;
                     return (0, _authenuser.createnewUser)(givenUser);
