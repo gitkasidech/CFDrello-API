@@ -9,8 +9,7 @@ const AuthenUserSchema = mongoose.Schema({
     idUser: String,
     username: String,
     fullname: String,
-    token: String,
-    email: String
+    token: String
 });
 
 export const AuthenUsers = mongoose.model('AuthenUser', AuthenUserSchema);

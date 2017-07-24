@@ -37,8 +37,7 @@ export const createnewUser = async (body) => {
             idUser: body.idUser,
             username: body.username,
             fullname: body.fullname,
-            token: body.token,
-            email: body.email
+            token: body.token
         });
         //res.json(users);
         console.log("add complete");

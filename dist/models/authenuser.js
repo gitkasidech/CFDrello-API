@@ -21,8 +21,7 @@ var AuthenUserSchema = _mongoose2.default.Schema({
     idUser: String,
     username: String,
     fullname: String,
-    token: String,
-    email: String
+    token: String
 });
 
 var AuthenUsers = exports.AuthenUsers = _mongoose2.default.model('AuthenUser', AuthenUserSchema);

@@ -115,8 +115,7 @@ var createnewUser = exports.createnewUser = function () {
                             idUser: body.idUser,
                             username: body.username,
                             fullname: body.fullname,
-                            token: body.token,
-                            email: body.email
+                            token: body.token
                         });
 
                     case 7:

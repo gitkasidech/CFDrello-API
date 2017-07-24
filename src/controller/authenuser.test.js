@@ -62,8 +62,7 @@ test('create new user', async () => {
         idUser: "",
         username: "",
         fullname: "",
-        token: "",
-        email: ""
+        token: ""
     }
     const rec = await createnewUser(givenUser)
     expect(rec).toBe(true)
@@ -74,8 +73,7 @@ test('old user', async () => {
         idUser: "1",
         username: "xxxxx",
         fullname: "xxxx xxxxx",
-        token: "12345678",
-        email: " "
+        token: "12345678"
     }
     const rec = await createnewUser(givenUser)
     expect(rec).toBe(false)
