@@ -67,9 +67,9 @@ var havedata = exports.havedata = function () {
                         callcreate = _context2.sent;
 
                         if (callcreate) {
-                            res.send('<h1>add New dashboard</h1>');
+                            res.json({ canAccessDashboard: true });
                         } else {
-                            res.send('<h1>dashboard</h1>');
+                            res.json({ canAccessDashboard: false });
                         }
 
                     case 9:
@@ -85,7 +85,7 @@ var havedata = exports.havedata = function () {
     };
 }();
 var checkreq = exports.checkreq = function checkreq(body) {
-    if (!body.token || !body.idUser || !body.username) {
+    if (!body.token || !body.id || !body.username) {
         return true;
     } else {
         return false;
@@ -100,7 +100,7 @@ var createnewUser = exports.createnewUser = function () {
                     case 0:
                         users = new _authenuser.AuthenUsers(body);
                         _context3.next = 3;
-                        return _authenuser.AuthenUsers.findOne({ idUser: body.idUser });
+                        return _authenuser.AuthenUsers.findOne({ idUser: body.id });
 
                     case 3:
                         user = _context3.sent;
@@ -112,7 +112,7 @@ var createnewUser = exports.createnewUser = function () {
 
                         _context3.next = 7;
                         return _authenuser.AuthenUsers.create({
-                            idUser: body.idUser,
+                            idUser: body.id,
                             username: body.username,
                             fullname: body.fullname,
                             token: body.token

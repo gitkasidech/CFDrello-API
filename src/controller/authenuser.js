@@ -14,15 +14,15 @@ export const havedata = async (req, res, next) => {
     }
     const callcreate = await createnewUser(req.body);
     if (callcreate) {
-        res.send('<h1>add New dashboard</h1>');
+        res.json({canAccessDashboard: true});
     }
     else {
-        res.send('<h1>dashboard</h1>');
+        res.json({canAccessDashboard: false});
     }
 
 }
 export const checkreq = (body) => {
-    if (!body.token || !body.idUser || !body.username) {
+    if (!body.token || !body.id || !body.username) {
         return true
     }
     else {
@@ -31,10 +31,10 @@ export const checkreq = (body) => {
 }
 export const createnewUser = async (body) => {
     const users = new AuthenUsers(body);
-    const user = await AuthenUsers.findOne({ idUser: body.idUser });
+    const user = await AuthenUsers.findOne({ idUser: body.id });
     if (!user) {
         const newuser = await AuthenUsers.create({
-            idUser: body.idUser,
+            idUser: body.id,
             username: body.username,
             fullname: body.fullname,
             token: body.token
