@@ -10,6 +10,7 @@ export const havedata = async (req, res, next) => {
     // const {idUser, username, fullname, token, email} = json;
     const callcheckreq = await checkreq(req.body);
     if (callcheckreq) {
+<<<<<<< HEAD
         return res.status(500).send("format should be")
     }
     const callcreate = await createnewUser(req.body);
@@ -18,11 +19,25 @@ export const havedata = async (req, res, next) => {
     }
     else {
         res.json({ canAccessDashboard: false });;
+=======
+        //return res.status(500).send("format should be")
+        res.json({ dontHaveToken: true });
     }
-
+    else {
+        const callcreate = await createnewUser(req.body);
+        if (callcreate) {
+            console.log("create new user complete");
+            res.json({ dontHaveToken: false });
+        }
+        else {
+            console.log("have a user already!!");
+            res.json({ dontHaveToken: false });
+        }
+>>>>>>> unittest
+    }
 }
 export const checkreq = (body) => {
-    if (!body.token || !body.id || !body.username) {
+    if (!body.token) {
         return true
     }
     else {
@@ -39,14 +54,9 @@ export const createnewUser = async (body) => {
             fullname: body.fullname,
             token: body.token
         });
-        //res.json(users);
-        console.log("add complete");
-        // res.send('<h1>add New dashboard</h1>');
         return true
     }
     else {
-        console.log("have a user already!!");
-        // res.send('<h1>dashboard</h1>');
         return false
     }
 }
