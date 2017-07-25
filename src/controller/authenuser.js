@@ -10,23 +10,21 @@ export const havedata = async (req, res, next) => {
     // const {idUser, username, fullname, token, email} = json;
     const callcheckreq = await checkreq(req.body);
     if (callcheckreq) {
-        //return res.status(500).send("format should be")
-        res.json({ dontHaveToken: true });
+        return res.status(500).send("format should be")
+    }
+
+    const callcreate = await createnewUser(req.body);
+    if (callcreate) {
+        console.log("create new user complete");
+        res.json({ canAccessDashboard: true });
     }
     else {
-        const callcreate = await createnewUser(req.body);
-        if (callcreate) {
-            console.log("create new user complete");
-            res.json({ dontHaveToken: false });
-        }
-        else {
-            console.log("have a user already!!");
-            res.json({ dontHaveToken: false });
-        }
+        console.log("have a user already!!");
+        res.json({ canAccessDashboard: false });
     }
 }
 export const checkreq = (body) => {
-    if (!body.token) {
+    if (!body.token || !body.id || !body.username) {
         return true
     }
     else {

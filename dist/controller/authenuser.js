@@ -53,31 +53,28 @@ var havedata = exports.havedata = function () {
                         callcheckreq = _context2.sent;
 
                         if (!callcheckreq) {
-                            _context2.next = 7;
+                            _context2.next = 5;
                             break;
                         }
 
-                        //return res.status(500).send("format should be")
-                        res.json({ dontHaveToken: true });
-                        _context2.next = 11;
-                        break;
+                        return _context2.abrupt('return', res.status(500).send("format should be"));
 
-                    case 7:
-                        _context2.next = 9;
+                    case 5:
+                        _context2.next = 7;
                         return createnewUser(req.body);
 
-                    case 9:
+                    case 7:
                         callcreate = _context2.sent;
 
                         if (callcreate) {
                             console.log("create new user complete");
-                            res.json({ dontHaveToken: false });
+                            res.json({ canAccessDashboard: true });
                         } else {
                             console.log("have a user already!!");
-                            res.json({ dontHaveToken: false });
+                            res.json({ canAccessDashboard: false });
                         }
 
-                    case 11:
+                    case 9:
                     case 'end':
                         return _context2.stop();
                 }
@@ -90,7 +87,7 @@ var havedata = exports.havedata = function () {
     };
 }();
 var checkreq = exports.checkreq = function checkreq(body) {
-    if (!body.token) {
+    if (!body.token || !body.id || !body.username) {
         return true;
     } else {
         return false;
