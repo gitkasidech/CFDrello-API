@@ -73,12 +73,8 @@ var havedata = exports.havedata = function () {
                             console.log("create new user complete");
                             res.json({ dontHaveToken: false });
                         } else {
-<<<<<<< HEAD
-                            res.json({ canAccessDashboard: false });;
-=======
                             console.log("have a user already!!");
                             res.json({ dontHaveToken: false });
->>>>>>> unittest
                         }
 
                     case 11:

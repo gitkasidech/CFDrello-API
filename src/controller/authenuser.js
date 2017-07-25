@@ -10,16 +10,6 @@ export const havedata = async (req, res, next) => {
     // const {idUser, username, fullname, token, email} = json;
     const callcheckreq = await checkreq(req.body);
     if (callcheckreq) {
-<<<<<<< HEAD
-        return res.status(500).send("format should be")
-    }
-    const callcreate = await createnewUser(req.body);
-    if (callcreate) {
-        res.json({ canAccessDashboard: true });
-    }
-    else {
-        res.json({ canAccessDashboard: false });;
-=======
         //return res.status(500).send("format should be")
         res.json({ dontHaveToken: true });
     }
@@ -33,7 +23,6 @@ export const havedata = async (req, res, next) => {
             console.log("have a user already!!");
             res.json({ dontHaveToken: false });
         }
->>>>>>> unittest
     }
 }
 export const checkreq = (body) => {
