@@ -8,12 +8,17 @@ export const setRoute = async (app) => {
 export const havedata = async (req, res, next) => {
     // const json = req.body
     // const {idUser, username, fullname, token, email} = json;
+    console.log(req.body)
     const callcheckreq = await checkreq(req.body);
+    console.log(callcheckreq)
     if (callcheckreq) {
         return res.status(500).send("format should be")
     }
 
-    const callcreate = await createnewUser(req.body);
+    const users = new AuthenUsers(req.body);
+    const user = await AuthenUsers.findOne({ idUser: req.body.id });
+
+    const callcreate = await createnewUser(user,req.body);
     if (callcreate) {
         console.log("create new user complete");
         res.json({ canAccessDashboard: true });
@@ -31,10 +36,11 @@ export const checkreq = (body) => {
         return false
     }
 }
-export const createnewUser = async (body) => {
-    const users = new AuthenUsers(body);
-    const user = await AuthenUsers.findOne({ idUser: body.id });
+export const createnewUser = async (user,body) => {
+    // const users = new AuthenUsers(body);
+    // const user = await AuthenUsers.findOne({ idUser: body.id });
     if (!user) {
+        const users = new AuthenUsers(body);
         const newuser = await AuthenUsers.create({
             idUser: body.id,
             username: body.username,
