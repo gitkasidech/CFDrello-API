@@ -53,26 +53,31 @@ var havedata = exports.havedata = function () {
                         callcheckreq = _context2.sent;
 
                         if (!callcheckreq) {
-                            _context2.next = 5;
+                            _context2.next = 7;
                             break;
                         }
 
-                        return _context2.abrupt('return', res.status(500).send("format should be"));
-
-                    case 5:
-                        _context2.next = 7;
-                        return createnewUser(req.body);
+                        //return res.status(500).send("format should be")
+                        res.json({ dontHaveToken: true });
+                        _context2.next = 11;
+                        break;
 
                     case 7:
+                        _context2.next = 9;
+                        return createnewUser(req.body);
+
+                    case 9:
                         callcreate = _context2.sent;
 
                         if (callcreate) {
-                            res.json({ canAccessDashboard: true });
+                            console.log("create new user complete");
+                            res.json({ dontHaveToken: false });
                         } else {
-                            res.json({ canAccessDashboard: false });
+                            console.log("have a user already!!");
+                            res.json({ dontHaveToken: false });
                         }
 
-                    case 9:
+                    case 11:
                     case 'end':
                         return _context2.stop();
                 }
@@ -85,7 +90,7 @@ var havedata = exports.havedata = function () {
     };
 }();
 var checkreq = exports.checkreq = function checkreq(body) {
-    if (!body.token || !body.id || !body.username) {
+    if (!body.token) {
         return true;
     } else {
         return false;
@@ -106,7 +111,7 @@ var createnewUser = exports.createnewUser = function () {
                         user = _context3.sent;
 
                         if (user) {
-                            _context3.next = 12;
+                            _context3.next = 11;
                             break;
                         }
 
@@ -120,18 +125,12 @@ var createnewUser = exports.createnewUser = function () {
 
                     case 7:
                         newuser = _context3.sent;
-
-                        //res.json(users);
-                        console.log("add complete");
-                        // res.send('<h1>add New dashboard</h1>');
                         return _context3.abrupt('return', true);
 
-                    case 12:
-                        console.log("have a user already!!");
-                        // res.send('<h1>dashboard</h1>');
+                    case 11:
                         return _context3.abrupt('return', false);
 
-                    case 14:
+                    case 12:
                     case 'end':
                         return _context3.stop();
                 }
