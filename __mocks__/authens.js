@@ -3,10 +3,6 @@ export default class MockAuthens {
         this.records = records;
     }
 
-    findOne({ idUser }) {
-        return new Promise(resolve => resolve(this.records.find((item) => item.idUser == idUser)))
-    }
-
     create(records = []) {
         this.records = records;
     }
