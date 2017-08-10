@@ -47,7 +47,6 @@ var havedata = exports.havedata = function () {
                 switch (_context2.prev = _context2.next) {
                     case 0:
                         // const json = req.body
-                        // const {idUser, username, fullname, token, email} = json;
                         console.log(req.body);
                         _context2.next = 3;
                         return checkreq(req.body);
@@ -71,21 +70,34 @@ var havedata = exports.havedata = function () {
 
                     case 10:
                         user = _context2.sent;
-                        _context2.next = 13;
+
+                        console.log(user);
+
+                        _context2.next = 14;
                         return createnewUser(user, req.body);
 
-                    case 13:
+                    case 14:
                         callcreate = _context2.sent;
 
                         if (callcreate) {
                             console.log("create new user complete");
-                            res.json({ canAccessDashboard: true });
+                            //add to sprint 2 query data
+                            res.json({
+                                canAccessDashboard: true,
+                                fullname: req.body.fullName,
+                                token: req.body.token
+                            });
                         } else {
                             console.log("have a user already!!");
-                            res.json({ canAccessDashboard: false });
+                            //add to sprint 2 query data
+                            res.json({
+                                canAccessDashboard: false,
+                                fullname: req.body.fullName,
+                                token: req.body.token
+                            });
                         }
 
-                    case 15:
+                    case 16:
                     case 'end':
                         return _context2.stop();
                 }
@@ -97,23 +109,42 @@ var havedata = exports.havedata = function () {
         return _ref2.apply(this, arguments);
     };
 }();
-var checkreq = exports.checkreq = function () {
-    var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(body) {
+var checkreq = exports.checkreq = function checkreq(body) {
+    if (!body.token || !body.id || !body.username) {
+        return true;
+    } else {
+        return false;
+    }
+};
+var createnewUser = exports.createnewUser = function () {
+    var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(user, body) {
+        var users, newuser;
         return _regenerator2.default.wrap(function _callee3$(_context3) {
             while (1) {
                 switch (_context3.prev = _context3.next) {
                     case 0:
-                        if (!(!body.token || !body.id || !body.username)) {
-                            _context3.next = 4;
+                        if (user) {
+                            _context3.next = 8;
                             break;
                         }
 
-                        return _context3.abrupt('return', true);
+                        users = new _authenuser.AuthenUsers(body);
+                        _context3.next = 4;
+                        return _authenuser.AuthenUsers.create({
+                            idUser: body.id,
+                            username: body.username,
+                            fullname: body.fullName,
+                            token: body.token
+                        });
 
                     case 4:
+                        newuser = _context3.sent;
+                        return _context3.abrupt('return', true);
+
+                    case 8:
                         return _context3.abrupt('return', false);
 
-                    case 5:
+                    case 9:
                     case 'end':
                         return _context3.stop();
                 }
@@ -121,77 +152,8 @@ var checkreq = exports.checkreq = function () {
         }, _callee3, undefined);
     }));
 
-    return function checkreq(_x5) {
+    return function createnewUser(_x5, _x6) {
         return _ref3.apply(this, arguments);
     };
 }();
-var createnewUser = exports.createnewUser = function () {
-    var _ref4 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee4(user, body) {
-        var users, newuser;
-        return _regenerator2.default.wrap(function _callee4$(_context4) {
-            while (1) {
-                switch (_context4.prev = _context4.next) {
-                    case 0:
-                        if (user) {
-                            _context4.next = 8;
-                            break;
-                        }
-
-                        users = new _authenuser.AuthenUsers(body);
-                        _context4.next = 4;
-                        return _authenuser.AuthenUsers.create({
-                            idUser: body.id,
-                            username: body.username,
-                            fullname: body.fullname,
-                            token: body.token
-                        });
-
-                    case 4:
-                        newuser = _context4.sent;
-                        return _context4.abrupt('return', true);
-
-                    case 8:
-                        return _context4.abrupt('return', false);
-
-                    case 9:
-                    case 'end':
-                        return _context4.stop();
-                }
-            }
-        }, _callee4, undefined);
-    }));
-
-    return function createnewUser(_x6, _x7) {
-        return _ref4.apply(this, arguments);
-    };
-}();
-
-// export const authenuserController = async (req, res, next) => {
-//         // const json = req.body
-//         // const {idUser, username, fullname, token, email} = json;
-//         if (!req.body.token||!req.body.idUser||!req.body.username) {
-//             res.status(500).send("format should be")
-//         }
-//         else{
-//             const users = new AuthenUser(req.body); 
-//             const user = await AuthenUser.findOne({idUser: req.body.idUser});
-//             if(!user){
-//                 const newuser = await AuthenUser.create({
-//                 idUser: req.body.idUser,
-//                 username: req.body.username,
-//                 fullname: req.body.fullname,
-//                 token: req.body.token,
-//                 email: req.body.email
-//             });
-//             //res.json(users);
-//             console.log("add complete");
-//             res.send('<h1>add New dashboard</h1>');
-//             }
-//             else{
-//                 console.log("have a user already!!");
-//                 res.send('<h1>dashboard</h1>');
-//             }
-//         }
-
-// }
 //# sourceMappingURL=authenuser.js.map

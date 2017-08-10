@@ -14,15 +14,15 @@ app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Methods', 'GET,POST');
     res.header('Access-Control-Allow-Headers', 'appid, X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
     if ('OPTIONS' == req.method) {
-        res.send(200);
+        res.send(200);  //200 is OK
     } else {
         next();
     }
 });
 
-route.setRoute(app);
+route.setRoute(app); //go to route 
 
-app.set('port', process.env.PORT || 7777);
+app.set('port', process.env.PORT || 7777); //set port is 7777
 
 app.listen(app.get('port'), function () {
     console.log('-----------------------------------------------------\r\n');

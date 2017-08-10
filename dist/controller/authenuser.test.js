@@ -1,5 +1,13 @@
 'use strict';
 
+var _regenerator = require('babel-runtime/regenerator');
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
 var _authenuser = require('./authenuser');
 
 var _authens = require('authens');
@@ -8,17 +16,9 @@ var _authens2 = _interopRequireDefault(_authens);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// const AuthenUsers = new MockAuthens();
-// jest.mock('../controller', () => {})
-// jest.mock('./authenuser', () => {
-//   return {
-//     createnewUser: jest.fn().mockReturnValue(Promise.resolve([]))
-//   }
-// });
-
 test('checkreq have token,idUser,username', function () {
     expect((0, _authenuser.checkreq)({
-        "idUser": "1",
+        "id": "1",
         "username": "xxxxx",
         "token": "12345678"
     })) === false;
@@ -32,7 +32,7 @@ test('checkreq have token', function () {
 
 test('checkreq have idUser', function () {
     expect((0, _authenuser.checkreq)({
-        "idUser": "1"
+        "id": "1"
     })).toBe(true);
 });
 
@@ -44,7 +44,7 @@ test('checkreq have username', function () {
 
 test('checkreq have token,idUser', function () {
     expect((0, _authenuser.checkreq)({
-        "idUser": "1",
+        "id": "1",
         "token": "12345678"
     })).toBe(true);
 });
@@ -58,7 +58,7 @@ test('checkreq have token,username', function () {
 
 test('checkreq have idUser,username', function () {
     expect((0, _authenuser.checkreq)({
-        "idUser": "1",
+        "id": "1",
         "username": "xxxxx"
     })).toBe(true);
 });
@@ -67,36 +67,49 @@ test('checkreq don\'t have idUser,username', function () {
     expect((0, _authenuser.checkreq)({})).toBe(true);
 });
 
-// test('create new user', async () => {
-// const givenUser = {
-//     idUser: "",
-//     username: "",
-//     fullname: "",
-//     token: ""
-// }
-// const rec = await createnewUser(givenUser)
-// expect(rec).toBe(true)
+test('old user', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee() {
+    var user, givenUser, rec;
+    return _regenerator2.default.wrap(function _callee$(_context) {
+        while (1) {
+            switch (_context.prev = _context.next) {
+                case 0:
+                    user = {
+                        id: "001",
+                        username: "xxx",
+                        fullname: "yyy",
+                        token: "zzz"
+                    };
+                    givenUser = {
+                        id: "001",
+                        username: "xxx",
+                        fullname: "yyy",
+                        token: "zzz"
+                    };
+                    _context.next = 4;
+                    return (0, _authenuser.createnewUser)(user, givenUser);
 
-// const companies = ['Computerlogy', 'Mojito', 'BAY'].map((item, index) => ({_id: index, idUser: item}))
-// const bayCompany = companies.find((com) => com.name === 'Computerlogy')
-// const Computerlogy = await global['Domain'].findOne({ name: 'Computerlogy'})
-// const General = await global['Domain'].findOne({ name: 'General'})
-// bayCompany.domain_ids.push(Computerlogy._id);
-// bayCompany.domain_ids.push(General._id);
-// global['Company'].setRecords(companies)
-// const domains = await findCorpusWithCompany('Computerlogy', global);
-// expect(domains).toContain(Computerlogy)
-// expect(domains).toContain(General)
-// });
+                case 4:
+                    rec = _context.sent;
 
-// test('old user', async () => {
+                    expect(rec).toBe(false);
+
+                case 6:
+                case 'end':
+                    return _context.stop();
+            }
+        }
+    }, _callee, undefined);
+})));
+
+// test('new user', async () => {
+//     const user = null
 //     const givenUser = {
-//         idUser: "1",
-//         username: "xxxxx",
-//         fullname: "xxxx xxxxx",
-//         token: "12345678"
+//         id: "001",
+//         username: "xxx",
+//         fullname: "yyy",
+//         token: "zzz"
 //     }
-//     const rec = await createnewUser(givenUser)
-//     expect(rec).toBe(false)
+//     const rec = await newUser(givenUser)
+//     expect(rec).toBe(true)
 // });
 //# sourceMappingURL=authenuser.test.js.map
