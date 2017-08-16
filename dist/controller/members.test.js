@@ -8,63 +8,38 @@ var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _authenuser = require('./authenuser');
-
-var _authens = require('authens');
-
-var _authens2 = _interopRequireDefault(_authens);
+var _members = require('./members');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-test('checkreq have token,idUser,username', function () {
-    expect((0, _authenuser.checkreq)({
+test('checkreq', function () {
+    expect((0, _members.checkreq)({
+        "token": "12345678"
+    })).toBe(true);
+    expect((0, _members.checkreq)({
+        "id": "1"
+    })).toBe(true);
+    expect((0, _members.checkreq)({
+        "username": "xxxxx"
+    })).toBe(true);
+    expect((0, _members.checkreq)({
+        "id": "1",
+        "token": "12345678"
+    })).toBe(true);
+    expect((0, _members.checkreq)({
+        "username": "xxxxx",
+        "token": "12345678"
+    })).toBe(true);
+    expect((0, _members.checkreq)({
+        "id": "1",
+        "username": "xxxxx"
+    })).toBe(true);
+    expect((0, _members.checkreq)({})).toBe(true);
+    expect((0, _members.checkreq)({
         "id": "1",
         "username": "xxxxx",
         "token": "12345678"
     })) === false;
-});
-
-test('checkreq have token', function () {
-    expect((0, _authenuser.checkreq)({
-        "token": "12345678"
-    })).toBe(true);
-});
-
-test('checkreq have idUser', function () {
-    expect((0, _authenuser.checkreq)({
-        "id": "1"
-    })).toBe(true);
-});
-
-test('checkreq have username', function () {
-    expect((0, _authenuser.checkreq)({
-        "username": "xxxxx"
-    })).toBe(true);
-});
-
-test('checkreq have token,idUser', function () {
-    expect((0, _authenuser.checkreq)({
-        "id": "1",
-        "token": "12345678"
-    })).toBe(true);
-});
-
-test('checkreq have token,username', function () {
-    expect((0, _authenuser.checkreq)({
-        "username": "xxxxx",
-        "token": "12345678"
-    })).toBe(true);
-});
-
-test('checkreq have idUser,username', function () {
-    expect((0, _authenuser.checkreq)({
-        "id": "1",
-        "username": "xxxxx"
-    })).toBe(true);
-});
-
-test('checkreq don\'t have idUser,username', function () {
-    expect((0, _authenuser.checkreq)({})).toBe(true);
 });
 
 test('old user', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee() {
@@ -86,7 +61,7 @@ test('old user', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(func
                         token: "zzz"
                     };
                     _context.next = 4;
-                    return (0, _authenuser.createnewUser)(user, givenUser);
+                    return (0, _members.createnewUser)(user, givenUser);
 
                 case 4:
                     rec = _context.sent;
@@ -109,7 +84,7 @@ test('old user', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(func
 //         fullname: "yyy",
 //         token: "zzz"
 //     }
-//     const rec = await newUser(givenUser)
+//     const rec = await createnewUser(givenUser)
 //     expect(rec).toBe(true)
 // });
-//# sourceMappingURL=authenuser.test.js.map
+//# sourceMappingURL=members.test.js.map

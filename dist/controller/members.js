@@ -13,7 +13,7 @@ var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _authenuser = require('../models/authenuser');
+var _members = require('../models/members');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25,7 +25,7 @@ var setRoute = exports.setRoute = function () {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
-                        app.post('/authenuser', havedata);
+                        app.post('/members', havedata);
 
                     case 1:
                     case 'end':
@@ -41,12 +41,11 @@ var setRoute = exports.setRoute = function () {
 }();
 var havedata = exports.havedata = function () {
     var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(req, res, next) {
-        var callcheckreq, users, user, callcreate;
+        var callcheckreq, user, callcreate;
         return _regenerator2.default.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
-                        // const json = req.body
                         console.log(req.body);
                         _context2.next = 3;
                         return checkreq(req.body);
@@ -64,19 +63,18 @@ var havedata = exports.havedata = function () {
                         return _context2.abrupt('return', res.status(500).send("format should be"));
 
                     case 7:
-                        users = new _authenuser.AuthenUsers(req.body);
-                        _context2.next = 10;
-                        return _authenuser.AuthenUsers.findOne({ idUser: req.body.id });
+                        _context2.next = 9;
+                        return _members.Members.findOne({ id: req.body.id });
 
-                    case 10:
+                    case 9:
                         user = _context2.sent;
 
                         console.log(user);
 
-                        _context2.next = 14;
+                        _context2.next = 13;
                         return createnewUser(user, req.body);
 
-                    case 14:
+                    case 13:
                         callcreate = _context2.sent;
 
                         if (callcreate) {
@@ -85,7 +83,8 @@ var havedata = exports.havedata = function () {
                             res.json({
                                 canAccessDashboard: true,
                                 fullname: req.body.fullName,
-                                token: req.body.token
+                                token: req.body.token,
+                                idBoards: req.body.idBoards
                             });
                         } else {
                             console.log("have a user already!!");
@@ -93,11 +92,12 @@ var havedata = exports.havedata = function () {
                             res.json({
                                 canAccessDashboard: false,
                                 fullname: req.body.fullName,
-                                token: req.body.token
+                                token: req.body.token,
+                                idBoards: req.body.idBoards
                             });
                         }
 
-                    case 16:
+                    case 15:
                     case 'end':
                         return _context2.stop();
                 }
@@ -118,33 +118,33 @@ var checkreq = exports.checkreq = function checkreq(body) {
 };
 var createnewUser = exports.createnewUser = function () {
     var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(user, body) {
-        var users, newuser;
+        var newuser;
         return _regenerator2.default.wrap(function _callee3$(_context3) {
             while (1) {
                 switch (_context3.prev = _context3.next) {
                     case 0:
                         if (user) {
-                            _context3.next = 8;
+                            _context3.next = 7;
                             break;
                         }
 
-                        users = new _authenuser.AuthenUsers(body);
-                        _context3.next = 4;
-                        return _authenuser.AuthenUsers.create({
-                            idUser: body.id,
+                        _context3.next = 3;
+                        return _members.Members.create({
+                            id: body.id,
                             username: body.username,
                             fullname: body.fullName,
-                            token: body.token
+                            token: body.token,
+                            idBoards: body.idBoards
                         });
 
-                    case 4:
+                    case 3:
                         newuser = _context3.sent;
                         return _context3.abrupt('return', true);
 
-                    case 8:
+                    case 7:
                         return _context3.abrupt('return', false);
 
-                    case 9:
+                    case 8:
                     case 'end':
                         return _context3.stop();
                 }
@@ -156,4 +156,4 @@ var createnewUser = exports.createnewUser = function () {
         return _ref3.apply(this, arguments);
     };
 }();
-//# sourceMappingURL=authenuser.js.map
+//# sourceMappingURL=members.js.map

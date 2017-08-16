@@ -2,13 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
-const route = require('./controller/authenuser');
+const routeM = require('./controller/members');
+const routeB = require('./controller/boards');
+const routeL = require('./controller/lists');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-app.use(function (req, res, next) {
+app.use(async (req, res, next) => {
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,POST');
@@ -20,11 +22,13 @@ app.use(function (req, res, next) {
     }
 });
 
-route.setRoute(app); //go to route 
+routeM.setRoute(app); //go to route 
+routeB.setRoute(app);
+routeL.setRoute(app);
 
 app.set('port', process.env.PORT || 7777); //set port is 7777
 
-app.listen(app.get('port'), function () {
+app.listen(app.get('port'), async () => {
     console.log('-----------------------------------------------------\r\n');
     console.log('Server Start, listening on port: ' + app.get('port') + '\r\n');
     console.log('-----------------------------------------------------');
