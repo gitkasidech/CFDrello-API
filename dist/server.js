@@ -33,7 +33,7 @@ app.use(function () {
                         res.header('Access-Control-Allow-Methods', 'GET,POST');
                         res.header('Access-Control-Allow-Headers', 'appid, X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
                         if ('OPTIONS' == req.method) {
-                            res.send(200); //200 is OK
+                            res.sendStatus(200); //200 is OK
                         } else {
                             next();
                         }
