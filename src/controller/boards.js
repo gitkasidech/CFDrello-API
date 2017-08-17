@@ -21,7 +21,8 @@ export const havedata = async (req, res, next) => {
         res.json({
             createBoards: true,
             id: req.body.id,
-            name: req.body.name
+            name: req.body.name,
+            labelNames: req.body.labelNames
         });
     }
     else {
@@ -30,7 +31,8 @@ export const havedata = async (req, res, next) => {
         res.json({
             createBoards: false,
             id: req.body.id,
-            name: req.body.name
+            name: req.body.name,
+            labelNames: req.body.labelNames
         });
     }
 }
@@ -46,7 +48,8 @@ export const createnewBoards = async (boards, body) => {
     if (!boards) {
         const newboards = await Boards.create({
             id: body.id,
-            name: body.name
+            name: body.name,
+            labelNames: body.labelNames
         })
         return true
     }

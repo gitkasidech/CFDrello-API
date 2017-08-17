@@ -15,7 +15,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var BoardsSchema = _mongoose2.default.Schema({
     id: String,
-    name: String
+    name: String,
+    labelNames: Object
 });
 
 var Boards = exports.Boards = _mongoose2.default.model('Boards', BoardsSchema);

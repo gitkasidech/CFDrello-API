@@ -81,7 +81,8 @@ var havedata = exports.havedata = function () {
                             res.json({
                                 createBoards: true,
                                 id: req.body.id,
-                                name: req.body.name
+                                name: req.body.name,
+                                labelNames: req.body.labelNames
                             });
                         } else {
                             console.log("have boards already!!");
@@ -89,7 +90,8 @@ var havedata = exports.havedata = function () {
                             res.json({
                                 createBoards: false,
                                 id: req.body.id,
-                                name: req.body.name
+                                name: req.body.name,
+                                labelNames: req.body.labelNames
                             });
                         }
 
@@ -127,7 +129,8 @@ var createnewBoards = exports.createnewBoards = function () {
                         _context3.next = 3;
                         return _boards.Boards.create({
                             id: body.id,
-                            name: body.name
+                            name: body.name,
+                            labelNames: body.labelNames
                         });
 
                     case 3:
