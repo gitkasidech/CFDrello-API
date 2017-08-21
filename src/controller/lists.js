@@ -1,59 +1,39 @@
-import { Lists } from '../models/lists' 
+// const Trello = require("node-trello");
+// const t = new Trello("0c0448fe0859bc978758a937fea22dc5", "e5038d4cb3e3c43f2d9c5a340cc9728354cd7c7184eaecb02a8bdc38b7f6c96d");
+// let idBoards = "583fec9f1b0bf4ea049ecebd"
+// t.get("/1/boards/"+idBoards+"/lists",(err, data) =>{
+//   if (err) throw err;
+//   console.log(data.length);
+// });
+import Trello from 'node-trello'
+import {Lists} from '../models/lists'
 
-export const setRoute = async (app) => {
-    app.post('/lists', havedata);
+export const checkCreateLists = async(app_id, token, idBoard) => {
+    let t = new Trello(app_id, token)
+    t.get("/1/boards/"+idBoard+"/lists", async(err, data) => {
+        if (err) throw err
+        const len = data.length
+        for(let i=0;i<len;i++){
+            const lists = await Lists.findOne({id: data[i].id});
+            console.log(data[i].id)
+            console.log(lists)
+            const callcreate = await createnewLists(lists, data[i])
+            if (callcreate)
+                console.log("create new lists complete");
+            else
+                console.log("have a lists already!!");
+        } 
+    })
 }
-export const havedata = async (req, res, next) => {
-    console.log(req.body)
-    const callcheckreq = await checkreq(req.body);
-    console.log(callcheckreq)
-    if (callcheckreq) {
-        return res.status(500).send("format should be")
-    }
 
-    const lists = await Lists.findOne({ id: req.body.id });
-    console.log(lists)
-
-    const callcreate = await createnewLists(lists, req.body);
-    if (callcreate) {
-        console.log("create new lists complete");
-        //add to sprint 2 query data
-        res.json({
-            createLists: true,
-            id: req.body.id,
-            name: req.body.name,
-            idBoard: req.body.idBoard
-        });
-    }
-    else {
-        console.log("have lists already!!");
-        //add to sprint 2 query data
-        res.json({
-            createLists: false,
-            id: req.body.id,
-            name: req.body.name,
-            idBoard: req.body.idBoard
-        });
-    }
-}
-export const checkreq = (body) => {
-    if (!body.id || !body.name || !body.idBoard) {
-        return true
-    }
-    else {
-        return false
-    }
-}
-export const createnewLists = async (lists, body) => {
+export const createnewLists = async(lists, data) => {
     if (!lists) {
-        const newlists = await Lists.create({
-            id: body.id,
-            name: body.name,
-            idBoard: body.idBoard
+        const newlist = await Lists.create({
+            id: data.id,
+            name: data.name,
+            idBoard: data.idBoard
         })
         return true
-    }
-    else {
+    } else
         return false
-    }
 }

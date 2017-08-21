@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.createnewUser = exports.checkreq = exports.havedata = exports.setRoute = undefined;
+exports.createnewUser = exports.checkreq = exports.havedata = undefined;
 
 var _regenerator = require('babel-runtime/regenerator');
 
@@ -15,19 +15,62 @@ var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
 var _members = require('../models/members');
 
+var _boards = require('./boards');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//as rename
-
-var setRoute = exports.setRoute = function () {
-    var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(app) {
+var havedata = exports.havedata = function () {
+    var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(sendData) {
+        var inf, callcheckreq, user, callcreate, callBoards;
         return _regenerator2.default.wrap(function _callee$(_context) {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
-                        app.post('/members', havedata);
+                        inf = sendData;
 
-                    case 1:
+                        console.log(inf);
+                        _context.next = 4;
+                        return checkreq(inf);
+
+                    case 4:
+                        callcheckreq = _context.sent;
+
+                        console.log(callcheckreq);
+
+                        if (!callcheckreq) {
+                            _context.next = 8;
+                            break;
+                        }
+
+                        return _context.abrupt('return', res.status(500).send("format should be"));
+
+                    case 8:
+                        _context.next = 10;
+                        return _members.Members.findOne({ id: inf.id });
+
+                    case 10:
+                        user = _context.sent;
+
+                        console.log(user);
+
+                        _context.next = 14;
+                        return createnewUser(user, inf);
+
+                    case 14:
+                        callcreate = _context.sent;
+
+                        if (callcreate) {
+                            console.log("create new user complete");
+                        } else {
+                            console.log("have a user already!!");
+                        }
+                        _context.next = 18;
+                        return (0, _boards.checkCreateBoard)(inf);
+
+                    case 18:
+                        callBoards = _context.sent;
+
+                    case 19:
                     case 'end':
                         return _context.stop();
                 }
@@ -35,69 +78,47 @@ var setRoute = exports.setRoute = function () {
         }, _callee, undefined);
     }));
 
-    return function setRoute(_x) {
+    return function havedata(_x) {
         return _ref.apply(this, arguments);
     };
-}();
-var havedata = exports.havedata = function () {
-    var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(req, res, next) {
-        var callcheckreq, user, callcreate;
+}(); //as rename
+var checkreq = exports.checkreq = function checkreq(inf) {
+    if (!inf.token || !inf.id || !inf.username || !inf.app_id || !inf.idBoards) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
+var createnewUser = exports.createnewUser = function () {
+    var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(user, body) {
+        var newuser;
         return _regenerator2.default.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
-                        console.log(req.body);
-                        _context2.next = 3;
-                        return checkreq(req.body);
-
-                    case 3:
-                        callcheckreq = _context2.sent;
-
-                        console.log(callcheckreq);
-
-                        if (!callcheckreq) {
+                        if (user) {
                             _context2.next = 7;
                             break;
                         }
 
-                        return _context2.abrupt('return', res.status(500).send("format should be"));
+                        _context2.next = 3;
+                        return _members.Members.create({
+                            id: body.id,
+                            username: body.username,
+                            fullName: body.fullName,
+                            token: body.token,
+                            idBoards: body.idBoards
+                        });
+
+                    case 3:
+                        newuser = _context2.sent;
+                        return _context2.abrupt('return', true);
 
                     case 7:
-                        _context2.next = 9;
-                        return _members.Members.findOne({ id: req.body.id });
+                        return _context2.abrupt('return', false);
 
-                    case 9:
-                        user = _context2.sent;
-
-                        console.log(user);
-
-                        _context2.next = 13;
-                        return createnewUser(user, req.body);
-
-                    case 13:
-                        callcreate = _context2.sent;
-
-                        if (callcreate) {
-                            console.log("create new user complete");
-                            //add to sprint 2 query data
-                            res.json({
-                                canAccessDashboard: true,
-                                fullname: req.body.fullName,
-                                token: req.body.token,
-                                idBoards: req.body.idBoards
-                            });
-                        } else {
-                            console.log("have a user already!!");
-                            //add to sprint 2 query data
-                            res.json({
-                                canAccessDashboard: false,
-                                fullname: req.body.fullName,
-                                token: req.body.token,
-                                idBoards: req.body.idBoards
-                            });
-                        }
-
-                    case 15:
+                    case 8:
                     case 'end':
                         return _context2.stop();
                 }
@@ -105,55 +126,8 @@ var havedata = exports.havedata = function () {
         }, _callee2, undefined);
     }));
 
-    return function havedata(_x2, _x3, _x4) {
+    return function createnewUser(_x2, _x3) {
         return _ref2.apply(this, arguments);
-    };
-}();
-var checkreq = exports.checkreq = function checkreq(body) {
-    if (!body.token || !body.id || !body.username) {
-        return true;
-    } else {
-        return false;
-    }
-};
-var createnewUser = exports.createnewUser = function () {
-    var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(user, body) {
-        var newuser;
-        return _regenerator2.default.wrap(function _callee3$(_context3) {
-            while (1) {
-                switch (_context3.prev = _context3.next) {
-                    case 0:
-                        if (user) {
-                            _context3.next = 7;
-                            break;
-                        }
-
-                        _context3.next = 3;
-                        return _members.Members.create({
-                            id: body.id,
-                            username: body.username,
-                            fullname: body.fullName,
-                            token: body.token,
-                            idBoards: body.idBoards
-                        });
-
-                    case 3:
-                        newuser = _context3.sent;
-                        return _context3.abrupt('return', true);
-
-                    case 7:
-                        return _context3.abrupt('return', false);
-
-                    case 8:
-                    case 'end':
-                        return _context3.stop();
-                }
-            }
-        }, _callee3, undefined);
-    }));
-
-    return function createnewUser(_x5, _x6) {
-        return _ref3.apply(this, arguments);
     };
 }();
 //# sourceMappingURL=members.js.map
