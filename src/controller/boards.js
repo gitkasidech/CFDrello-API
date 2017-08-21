@@ -1,59 +1,35 @@
-import { Boards } from '../models/boards' 
+import Trello from 'node-trello'
+import {Boards} from '../models/boards'
+import { checkCreateLists } from './lists'
 
-export const setRoute = async (app) => {
-    app.post('/boards', havedata);
-}
-export const havedata = async (req, res, next) => {
-    console.log(req.body)
-    const callcheckreq = await checkreq(req.body);
-    console.log(callcheckreq)
-    if (callcheckreq) {
-        return res.status(500).send("format should be")
-    }
+export const checkCreateBoard = async (inf) => {
+    console.log(inf)
+    const len = (inf.idBoards).length
+    let t = new Trello(inf.app_id, inf.token)
 
-    const boards = await Boards.findOne({ id: req.body.id });
-    console.log(boards)
-
-    const callcreate = await createnewBoards(boards, req.body);
-    if (callcreate) {
-        console.log("create new boards complete");
-        //add to sprint 2 query data
-        res.json({
-            createBoards: true,
-            id: req.body.id,
-            name: req.body.name,
-            labelNames: req.body.labelNames
-        });
-    }
-    else {
-        console.log("have boards already!!");
-        //add to sprint 2 query data
-        res.json({
-            createBoards: false,
-            id: req.body.id,
-            name: req.body.name,
-            labelNames: req.body.labelNames
-        });
+    for (let i = 0; i < len; i++) {
+        t.get("/1/boards/" + (inf.idBoards)[i], async (err, data) => {
+            if (err) throw err
+            const boards = await Boards.findOne({id:(inf.idBoards)[i]});
+            const callcreate = await createnewBoards(boards,data)
+            if (callcreate) 
+                console.log("create new board complete");
+            else 
+                console.log("have a board already!!");
+            const callLists = await checkCreateLists(inf.app_id, inf.token,(inf.idBoards)[i])
+        })
     }
 }
-export const checkreq = (body) => {
-    if (!body.id || !body.name) {
-        return true
-    }
-    else {
-        return false
-    }
-}
-export const createnewBoards = async (boards, body) => {
-    if (!boards) {
-        const newboards = await Boards.create({
-            id: body.id,
-            name: body.name,
-            labelNames: body.labelNames
+
+export const createnewBoards = async (boards,data) => {
+    if(!boards){
+        const newboard = await Boards.create({
+            id: data.id,
+            name: data.name,
+            labelNames: data.labelNames
         })
         return true
     }
-    else {
-        return false
-    }
+    else
+        return false  
 }

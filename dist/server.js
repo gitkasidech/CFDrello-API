@@ -8,18 +8,26 @@ var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
+var _express = require('express');
+
+var _express2 = _interopRequireDefault(_express);
+
+var _bodyParser = require('body-parser');
+
+var _bodyParser2 = _interopRequireDefault(_bodyParser);
+
+var _path = require('path');
+
+var _path2 = _interopRequireDefault(_path);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var express = require('express');
-var bodyParser = require('body-parser');
-var path = require('path');
-var app = express();
-var routeM = require('./controller/members');
-var routeB = require('./controller/boards');
-var routeL = require('./controller/lists');
+var app = (0, _express2.default)();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
+var route = require('./web/router/router');
+
+app.use(_bodyParser2.default.json());
+app.use(_bodyParser2.default.urlencoded({
     extended: true
 }));
 app.use(function () {
@@ -51,9 +59,7 @@ app.use(function () {
     };
 }());
 
-routeM.setRoute(app); //go to route 
-routeB.setRoute(app);
-routeL.setRoute(app);
+route.setRoute(app); //go to route 
 
 app.set('port', process.env.PORT || 7777); //set port is 7777
 

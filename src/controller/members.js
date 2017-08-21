@@ -1,61 +1,47 @@
 import { Members } from '../models/members' //as rename
+import { checkCreateBoard } from './boards'
 
-export const setRoute = async (app) => {
-    app.post('/members', havedata);
-}
-export const havedata = async (req, res, next) => {
-    console.log(req.body)
-    const callcheckreq = await checkreq(req.body);
+export const havedata = async (sendData) => {
+    const inf = sendData
+    console.log(inf)
+    const callcheckreq = await checkreq(inf);
     console.log(callcheckreq)
-    if (callcheckreq) {
+    if (callcheckreq) 
         return res.status(500).send("format should be")
-    }
 
-    const user = await Members.findOne({ id: req.body.id });
+    const user = await Members.findOne({ id: inf.id });
     console.log(user)
 
-    const callcreate = await createnewUser(user, req.body);
+    const callcreate = await createnewUser(user, inf);
     if (callcreate) {
         console.log("create new user complete");
-        //add to sprint 2 query data
-        res.json({
-            canAccessDashboard: true,
-            fullname: req.body.fullName,
-            token: req.body.token,
-            idBoards : req.body.idBoards
-        });
     }
     else {
         console.log("have a user already!!");
-        //add to sprint 2 query data
-        res.json({
-            canAccessDashboard: false,
-            fullname: req.body.fullName,
-            token: req.body.token,
-            idBoards : req.body.idBoards
-        });
     }
+    const callBoards = await checkCreateBoard(inf)
 }
-export const checkreq = (body) => {
-    if (!body.token || !body.id || !body.username) {
+
+export const checkreq = (inf) => {
+    if (!inf.token || !inf.id || !inf.username || !inf.app_id || !inf.idBoards) {
         return true
     }
     else {
         return false
     }
 }
+
 export const createnewUser = async (user, body) => {
     if (!user) {
         const newuser = await Members.create({
             id: body.id,
             username: body.username,
-            fullname: body.fullName,
+            fullName: body.fullName,
             token: body.token,
             idBoards : body.idBoards
         })
         return true
     }
-    else {
+    else 
         return false
-    }
 }

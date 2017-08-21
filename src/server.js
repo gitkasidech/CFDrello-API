@@ -1,10 +1,9 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
+import express from 'express'
+import bodyParser from 'body-parser'
+import path from 'path'
 const app = express();
-const routeM = require('./controller/members');
-const routeB = require('./controller/boards');
-const routeL = require('./controller/lists');
+
+const route = require('./web/router/router')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -22,9 +21,7 @@ app.use(async (req, res, next) => {
     }
 });
 
-routeM.setRoute(app); //go to route 
-routeB.setRoute(app);
-routeL.setRoute(app);
+route.setRoute(app); //go to route 
 
 app.set('port', process.env.PORT || 7777); //set port is 7777
 
