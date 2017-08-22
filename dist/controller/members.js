@@ -27,50 +27,43 @@ var havedata = exports.havedata = function () {
                 switch (_context.prev = _context.next) {
                     case 0:
                         inf = sendData;
-
-                        console.log(inf);
-                        _context.next = 4;
+                        _context.next = 3;
                         return checkreq(inf);
 
-                    case 4:
+                    case 3:
                         callcheckreq = _context.sent;
 
-                        console.log(callcheckreq);
-
                         if (!callcheckreq) {
-                            _context.next = 8;
+                            _context.next = 6;
                             break;
                         }
 
                         return _context.abrupt('return', res.status(500).send("format should be"));
 
-                    case 8:
-                        _context.next = 10;
+                    case 6:
+                        _context.next = 8;
                         return _members.Members.findOne({ id: inf.id });
 
-                    case 10:
+                    case 8:
                         user = _context.sent;
+                        _context.next = 11;
+                        return createnewUser(_members.Members, user, inf);
 
-                        console.log(user);
-
-                        _context.next = 14;
-                        return createnewUser(user, inf);
-
-                    case 14:
+                    case 11:
                         callcreate = _context.sent;
 
                         if (callcreate) {
-                            console.log("create new user complete");
+                            console.log("create or update new user complete");
                         } else {
                             console.log("have a user already!!");
                         }
-                        _context.next = 18;
+                        _context.next = 15;
                         return (0, _boards.checkCreateBoard)(inf);
 
-                    case 18:
+                    case 15:
                         callBoards = _context.sent;
 
-                    case 19:
+                    case 16:
                     case 'end':
                         return _context.stop();
                 }
@@ -91,8 +84,9 @@ var checkreq = exports.checkreq = function checkreq(inf) {
 };
 
 var createnewUser = exports.createnewUser = function () {
-    var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(user, body) {
-        var newuser;
+    var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(Members, user, body) {
+        var newuser, _newuser;
+
         return _regenerator2.default.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
@@ -103,7 +97,7 @@ var createnewUser = exports.createnewUser = function () {
                         }
 
                         _context2.next = 3;
-                        return _members.Members.create({
+                        return Members.create({
                             id: body.id,
                             username: body.username,
                             fullName: body.fullName,
@@ -113,12 +107,29 @@ var createnewUser = exports.createnewUser = function () {
 
                     case 3:
                         newuser = _context2.sent;
-                        return _context2.abrupt('return', true);
+                        return _context2.abrupt('return', newuser);
 
                     case 7:
+                        if (!(user.username != body.username || user.fullName != body.fullName || user.idBoards.toString() != body.idBoards.toString())) {
+                            _context2.next = 14;
+                            break;
+                        }
+
+                        _context2.next = 10;
+                        return Members.update({ id: body.id }, { $set: {
+                                username: body.username,
+                                fullName: body.fullName,
+                                idBoards: body.idBoards
+                            } });
+
+                    case 10:
+                        _newuser = _context2.sent;
+                        return _context2.abrupt('return', _newuser);
+
+                    case 14:
                         return _context2.abrupt('return', false);
 
-                    case 8:
+                    case 15:
                     case 'end':
                         return _context2.stop();
                 }
@@ -126,7 +137,7 @@ var createnewUser = exports.createnewUser = function () {
         }, _callee2, undefined);
     }));
 
-    return function createnewUser(_x2, _x3) {
+    return function createnewUser(_x2, _x3, _x4) {
         return _ref2.apply(this, arguments);
     };
 }();

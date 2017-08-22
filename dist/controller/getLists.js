@@ -24,16 +24,17 @@ var findLists = exports.findLists = function () {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
+                        console.log('GET \'/lists/' + req.params.idBoard + '\' \uD83E\uDD20 ' + Date());
                         idBoard = req.params.idBoard;
-                        _context.next = 3;
+                        _context.next = 4;
                         return _lists.Lists.find({ idBoard: idBoard }, { id: 1, name: 1, _id: 0 });
 
-                    case 3:
+                    case 4:
                         lists = _context.sent;
                         //1show 0don't show
                         res.json(lists);
 
-                    case 5:
+                    case 6:
                     case 'end':
                         return _context.stop();
                 }
