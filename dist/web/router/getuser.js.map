@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/web/router/getuser.js"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA","file":"getuser.js","sourcesContent":["//import authenuserController from '../../controller/authenuser'\r\n// export const setRoute = async (app) => {\r\n//     app.post('/authenuser', authenuserController);\r\n// }\r\n// \r\n\r\n\r\n"]}

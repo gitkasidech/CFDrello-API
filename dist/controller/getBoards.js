@@ -26,40 +26,41 @@ var findBoards = exports.findBoards = function () {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
+                        console.log('GET \'/boards/' + req.params.idMember + '\' \uD83E\uDD20 ' + Date());
                         idMember = req.params.idMember;
-                        _context.next = 3;
+                        _context.next = 4;
                         return _members.Members.findOne({ id: idMember });
 
-                    case 3:
+                    case 4:
                         user = _context.sent;
                         idBoards = user.idBoards;
                         len = idBoards.length;
                         boards = [];
                         i = 0;
 
-                    case 8:
+                    case 9:
                         if (!(i < len)) {
-                            _context.next = 16;
+                            _context.next = 17;
                             break;
                         }
 
-                        _context.next = 11;
+                        _context.next = 12;
                         return _boards.Boards.findOne({ id: idBoards[i] }, { id: 1, name: 1, _id: 0 });
 
-                    case 11:
+                    case 12:
                         data = _context.sent;
                         //1show 0don't show
                         boards.push(data);
 
-                    case 13:
+                    case 14:
                         i++;
-                        _context.next = 8;
+                        _context.next = 9;
                         break;
 
-                    case 16:
+                    case 17:
                         res.json(boards);
 
-                    case 17:
+                    case 18:
                     case 'end':
                         return _context.stop();
                 }

@@ -41,4 +41,4 @@ var dbCFDrello = exports.dbCFDrello = _mongoose2.default.connect('mongodb://loca
         return _ref.apply(this, arguments);
     };
 }());
-//# sourceMappingURL=dbCFDrello.js.map
+//# sourceMappingURL=index.js.map

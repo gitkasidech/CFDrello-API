@@ -2,8 +2,9 @@ import {Boards} from '../models/boards'
 import { Members } from '../models/members'
 
 export const findBoards = async (req, res, next) => {
-    const idMember = req.params.idMember 
-    const user = await Members.findOne({ id: idMember });
+    console.log(`GET '/boards/${req.params.idMember}' 🤠 ${Date()}`)
+    const idMember = req.params.idMember
+    const user = await Members.findOne({ id: idMember })
     const idBoards = user.idBoards
     const len = idBoards.length
     let boards = []

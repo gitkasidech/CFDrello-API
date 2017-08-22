@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.createnewBoards = exports.checkCreateBoard = undefined;
 
+var _stringify = require('babel-runtime/core-js/json/stringify');
+
+var _stringify2 = _interopRequireDefault(_stringify);
+
 var _regenerator = require('babel-runtime/regenerator');
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
@@ -31,7 +35,6 @@ var checkCreateBoard = exports.checkCreateBoard = function () {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
-                        console.log(inf);
                         len = inf.idBoards.length;
                         t = new _nodeTrello2.default(inf.app_id, inf.token);
 
@@ -57,7 +60,7 @@ var checkCreateBoard = exports.checkCreateBoard = function () {
                                                 case 4:
                                                     boards = _context.sent;
                                                     _context.next = 7;
-                                                    return createnewBoards(boards, data);
+                                                    return createnewBoards(_boards.Boards, boards, data);
 
                                                 case 7:
                                                     callcreate = _context.sent;
@@ -87,7 +90,7 @@ var checkCreateBoard = exports.checkCreateBoard = function () {
                             _loop(i);
                         }
 
-                    case 5:
+                    case 4:
                     case 'end':
                         return _context2.stop();
                 }
@@ -101,8 +104,9 @@ var checkCreateBoard = exports.checkCreateBoard = function () {
 }();
 
 var createnewBoards = exports.createnewBoards = function () {
-    var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(boards, data) {
-        var newboard;
+    var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(Boards, boards, data) {
+        var newboard, _newboard;
+
         return _regenerator2.default.wrap(function _callee3$(_context3) {
             while (1) {
                 switch (_context3.prev = _context3.next) {
@@ -113,7 +117,7 @@ var createnewBoards = exports.createnewBoards = function () {
                         }
 
                         _context3.next = 3;
-                        return _boards.Boards.create({
+                        return Boards.create({
                             id: data.id,
                             name: data.name,
                             labelNames: data.labelNames
@@ -121,12 +125,28 @@ var createnewBoards = exports.createnewBoards = function () {
 
                     case 3:
                         newboard = _context3.sent;
-                        return _context3.abrupt('return', true);
+                        return _context3.abrupt('return', newboard);
 
                     case 7:
+                        if (!(boards.name != data.name || (0, _stringify2.default)(boards.labelNames) != (0, _stringify2.default)(data.labelNames))) {
+                            _context3.next = 14;
+                            break;
+                        }
+
+                        _context3.next = 10;
+                        return Boards.update({ id: data.id }, { $set: {
+                                name: data.name,
+                                labelNames: data.labelNames
+                            } });
+
+                    case 10:
+                        _newboard = _context3.sent;
+                        return _context3.abrupt('return', _newboard);
+
+                    case 14:
                         return _context3.abrupt('return', false);
 
-                    case 8:
+                    case 15:
                     case 'end':
                         return _context3.stop();
                 }
@@ -134,7 +154,7 @@ var createnewBoards = exports.createnewBoards = function () {
         }, _callee3, undefined);
     }));
 
-    return function createnewBoards(_x4, _x5) {
+    return function createnewBoards(_x4, _x5, _x6) {
         return _ref3.apply(this, arguments);
     };
 }();

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { dbCFDrello } from './dbCFDrello' 
+import { dbCFDrello } from './index' 
 
 const CardsSchema = mongoose.Schema({
     id: String,

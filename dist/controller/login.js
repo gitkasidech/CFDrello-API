@@ -9,10 +9,6 @@ var _regenerator = require('babel-runtime/regenerator');
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _stringify = require('babel-runtime/core-js/json/stringify');
-
-var _stringify2 = _interopRequireDefault(_stringify);
-
 var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
@@ -35,8 +31,8 @@ var OAuth = require('oauth').OAuth;
 var requestURL = "https://trello.com/1/OAuthGetRequestToken";
 var accessURL = "https://trello.com/1/OAuthGetAccessToken";
 var authorizeURL = "https://trello.com/1/OAuthAuthorizeToken";
-var sendURL = "https://facebook.com";
-var pages = "mebooksthailand";
+var sendURL = "http://localhost:4200/gettoken";
+var beginURL = "http://localhost:4200";
 var appName = "CFDrello Dashboard";
 
 var key = "662fa775f48bd56cea11e8be634da284";
@@ -55,7 +51,7 @@ var loginAuthen = exports.loginAuthen = function () {
                     case 0:
                         console.log('GET \'/login\' \uD83E\uDD20 ' + Date());
                         oauth.getOAuthRequestToken(function (error, token, tokenSecret, results) {
-                            console.log('in getOAuthRequestToken - token: ' + token + ', tokenSecret: ' + tokenSecret + ', resultes ' + (0, _stringify2.default)(results) + ', error: ' + (0, _stringify2.default)(error));
+                            // console.log(`in getOAuthRequestToken - token: ${token}, tokenSecret: ${tokenSecret}, resultes ${JSON.stringify(results)}, error: ${JSON.stringify(error)}`)
                             oauth_secrets[token] = tokenSecret;
                             res.redirect(authorizeURL + '?oauth_token=' + token + '&name=' + appName + '&expiration=never');
                         });
@@ -92,7 +88,6 @@ var callback = exports.callback = function () {
                                         switch (_context3.prev = _context3.next) {
                                             case 0:
                                                 console.log('in getOAuthAccessToken - accessToken: ' + accessToken + ', accessTokenSecret: ' + accessTokenSecret + ', error: ' + error);
-                                                if (error) res.redirect(sendURL + '/' + pages);
                                                 oauth.getProtectedResource("https://api.trello.com/1/members/me", "GET", accessToken, accessTokenSecret, function () {
                                                     var _ref4 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(error, data, respond) {
                                                         var dataJ, sendData, resData;
@@ -100,6 +95,7 @@ var callback = exports.callback = function () {
                                                             while (1) {
                                                                 switch (_context2.prev = _context2.next) {
                                                                     case 0:
+                                                                        if (error) res.redirect('' + beginURL);
                                                                         console.log('in getProtectedResource - accessToken: ' + accessToken + ', accessTokenSecret: ' + accessTokenSecret);
                                                                         dataJ = JSON.parse(data);
                                                                         sendData = {
@@ -110,15 +106,13 @@ var callback = exports.callback = function () {
                                                                             fullName: dataJ.fullName,
                                                                             idBoards: dataJ.idBoards
                                                                         };
-
-                                                                        console.log(sendData);
                                                                         _context2.next = 6;
                                                                         return (0, _members.havedata)(sendData);
 
                                                                     case 6:
                                                                         resData = _context2.sent;
 
-                                                                        res.redirect(sendURL + '/?token=' + accessToken);
+                                                                        res.redirect(sendURL + '/' + accessToken + '/' + dataJ.id);
 
                                                                     case 8:
                                                                     case 'end':
@@ -133,7 +127,7 @@ var callback = exports.callback = function () {
                                                     };
                                                 }());
 
-                                            case 3:
+                                            case 2:
                                             case 'end':
                                                 return _context3.stop();
                                         }

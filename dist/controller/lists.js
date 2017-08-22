@@ -21,13 +21,6 @@ var _lists = require('../models/lists');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// const Trello = require("node-trello");
-// const t = new Trello("0c0448fe0859bc978758a937fea22dc5", "e5038d4cb3e3c43f2d9c5a340cc9728354cd7c7184eaecb02a8bdc38b7f6c96d");
-// let idBoards = "583fec9f1b0bf4ea049ecebd"
-// t.get("/1/boards/"+idBoards+"/lists",(err, data) =>{
-//   if (err) throw err;
-//   console.log(data.length);
-// });
 var checkCreateLists = exports.checkCreateLists = function () {
     var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(app_id, token, idBoard) {
         var t;
@@ -57,7 +50,7 @@ var checkCreateLists = exports.checkCreateLists = function () {
 
                                             case 4:
                                                 if (!(i < len)) {
-                                                    _context.next = 17;
+                                                    _context.next = 15;
                                                     break;
                                                 }
 
@@ -66,23 +59,20 @@ var checkCreateLists = exports.checkCreateLists = function () {
 
                                             case 7:
                                                 lists = _context.sent;
+                                                _context.next = 10;
+                                                return createnewLists(_lists.Lists, lists, data[i]);
 
-                                                console.log(data[i].id);
-                                                console.log(lists);
-                                                _context.next = 12;
-                                                return createnewLists(lists, data[i]);
-
-                                            case 12:
+                                            case 10:
                                                 callcreate = _context.sent;
 
                                                 if (callcreate) console.log("create new lists complete");else console.log("have a lists already!!");
 
-                                            case 14:
+                                            case 12:
                                                 i++;
                                                 _context.next = 4;
                                                 break;
 
-                                            case 17:
+                                            case 15:
                                             case 'end':
                                                 return _context.stop();
                                         }
@@ -109,8 +99,9 @@ var checkCreateLists = exports.checkCreateLists = function () {
 }();
 
 var createnewLists = exports.createnewLists = function () {
-    var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(lists, data) {
-        var newlist;
+    var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(Lists, lists, data) {
+        var newlist, _newlist;
+
         return _regenerator2.default.wrap(function _callee3$(_context3) {
             while (1) {
                 switch (_context3.prev = _context3.next) {
@@ -121,7 +112,7 @@ var createnewLists = exports.createnewLists = function () {
                         }
 
                         _context3.next = 3;
-                        return _lists.Lists.create({
+                        return Lists.create({
                             id: data.id,
                             name: data.name,
                             idBoard: data.idBoard
@@ -129,12 +120,27 @@ var createnewLists = exports.createnewLists = function () {
 
                     case 3:
                         newlist = _context3.sent;
-                        return _context3.abrupt('return', true);
+                        return _context3.abrupt('return', newlist);
 
                     case 7:
+                        if (!(lists.name != data.name)) {
+                            _context3.next = 14;
+                            break;
+                        }
+
+                        _context3.next = 10;
+                        return Lists.update({ id: data.id }, { $set: {
+                                name: data.name
+                            } });
+
+                    case 10:
+                        _newlist = _context3.sent;
+                        return _context3.abrupt('return', _newlist);
+
+                    case 14:
                         return _context3.abrupt('return', false);
 
-                    case 8:
+                    case 15:
                     case 'end':
                         return _context3.stop();
                 }
@@ -142,7 +148,7 @@ var createnewLists = exports.createnewLists = function () {
         }, _callee3, undefined);
     }));
 
-    return function createnewLists(_x6, _x7) {
+    return function createnewLists(_x6, _x7, _x8) {
         return _ref3.apply(this, arguments);
     };
 }();
