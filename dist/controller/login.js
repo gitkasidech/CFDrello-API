@@ -38,7 +38,7 @@ var appName = "CFDrello Dashboard";
 var key = "662fa775f48bd56cea11e8be634da284";
 var secret = "8e3dd310f5a5a5e8757563ecc30d992664d895abc296441bfc1cf515ffdefa51";
 
-var loginCallback = "http://localhost:7777/callback";
+var loginCallback = "http://localhost:4444/callback";
 var oauth_secrets = {};
 
 var oauth = new OAuth(requestURL, accessURL, key, secret, "1.0A", loginCallback, "HMAC-SHA1");

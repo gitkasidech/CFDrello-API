@@ -54,7 +54,7 @@ var saveData = exports.saveData = function () {
 
                         console.log("create new dashboards complete");
                         console.log(callCreate);
-                        res.json({ idDashboard: callCreate._id });
+                        return _context.abrupt("return", res.json({ idDashboard: callCreate._id }));
 
                     case 15:
                     case "end":

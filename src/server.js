@@ -23,7 +23,7 @@ app.use(async (req, res, next) => {
 
 route.setRoute(app); //go to route 
 
-app.set('port', process.env.PORT || 7777); //set port is 7777
+app.set('port', process.env.PORT || 4444); //set port is 7777
 
 app.listen(app.get('port'), async () => {
     console.log('-----------------------------------------------------\r\n');
