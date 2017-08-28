@@ -27,7 +27,7 @@ var findDashboards = exports.findDashboards = function () {
                         console.log('GET \'/dashboards/' + req.params.idMember + '\' \uD83E\uDD20 ' + Date());
                         idMember = req.params.idMember;
                         _context.next = 4;
-                        return _dashboards.Dashboards.findOne({ idMember: idMember });
+                        return _dashboards.Dashboards.find({ idMember: idMember });
 
                     case 4:
                         dashboards = _context.sent;
