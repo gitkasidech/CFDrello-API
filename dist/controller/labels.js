@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.createnewLists = exports.checkCreateLists = undefined;
+exports.createnewLabels = exports.checkCreateLabels = undefined;
 
 var _regenerator = require('babel-runtime/regenerator');
 
@@ -17,22 +17,22 @@ var _nodeTrello = require('node-trello');
 
 var _nodeTrello2 = _interopRequireDefault(_nodeTrello);
 
-var _lists = require('../models/lists');
+var _labels = require('../models/labels');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var checkCreateLists = exports.checkCreateLists = function () {
-    var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(app_id, token, idBoard) {
+var checkCreateLabels = exports.checkCreateLabels = function () {
+    var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(board, key, token) {
         var t;
         return _regenerator2.default.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
-                        t = new _nodeTrello2.default(app_id, token);
+                        t = new _nodeTrello2.default(key, token);
 
-                        t.get("/1/boards/" + idBoard + "/lists", function () {
+                        t.get("/1/boards/" + board + "/labels", function () {
                             var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(err, data) {
-                                var len, i, lists, callcreate;
+                                var len, i, labels, callLabels;
                                 return _regenerator2.default.wrap(function _callee$(_context) {
                                     while (1) {
                                         switch (_context.prev = _context.next) {
@@ -55,17 +55,17 @@ var checkCreateLists = exports.checkCreateLists = function () {
                                                 }
 
                                                 _context.next = 7;
-                                                return _lists.Lists.findOne({ id: data[i].id });
+                                                return _labels.Labels.findOne({ id: data[i].id });
 
                                             case 7:
-                                                lists = _context.sent;
+                                                labels = _context.sent;
                                                 _context.next = 10;
-                                                return createnewLists(_lists.Lists, lists, data[i]);
+                                                return createnewLabels(_labels.Labels, labels, data[i]);
 
                                             case 10:
-                                                callcreate = _context.sent;
+                                                callLabels = _context.sent;
 
-                                                if (callcreate) console.log("create or update new lists complete");else console.log("have a lists already!!");
+                                                if (callLabels) console.log("create or update new label complete");else console.log("have a label already!!");
 
                                             case 12:
                                                 i++;
@@ -93,49 +93,53 @@ var checkCreateLists = exports.checkCreateLists = function () {
         }, _callee2, undefined);
     }));
 
-    return function checkCreateLists(_x, _x2, _x3) {
+    return function checkCreateLabels(_x, _x2, _x3) {
         return _ref.apply(this, arguments);
     };
 }();
 
-var createnewLists = exports.createnewLists = function () {
-    var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(Lists, lists, data) {
-        var newlist, _newlist;
+var createnewLabels = exports.createnewLabels = function () {
+    var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(Labels, labels, data) {
+        var newlabels, _newlabels;
 
         return _regenerator2.default.wrap(function _callee3$(_context3) {
             while (1) {
                 switch (_context3.prev = _context3.next) {
                     case 0:
-                        if (lists) {
+                        if (labels) {
                             _context3.next = 7;
                             break;
                         }
 
                         _context3.next = 3;
-                        return Lists.create({
+                        return Labels.create({
                             id: data.id,
                             name: data.name,
+                            color: data.color,
+                            uses: data.uses,
                             idBoard: data.idBoard
                         });
 
                     case 3:
-                        newlist = _context3.sent;
-                        return _context3.abrupt('return', newlist);
+                        newlabels = _context3.sent;
+                        return _context3.abrupt('return', newlabels);
 
                     case 7:
-                        if (!(lists.name != data.name)) {
+                        if (!(labels.name != data.name || labels.color != data.color || labels.uses != data.uses)) {
                             _context3.next = 14;
                             break;
                         }
 
                         _context3.next = 10;
-                        return Lists.update({ id: data.id }, { $set: {
-                                name: data.name
+                        return Labels.update({ id: data.id }, { $set: {
+                                name: data.name,
+                                color: data.color,
+                                uses: data.uses
                             } });
 
                     case 10:
-                        _newlist = _context3.sent;
-                        return _context3.abrupt('return', _newlist);
+                        _newlabels = _context3.sent;
+                        return _context3.abrupt('return', _newlabels);
 
                     case 14:
                         return _context3.abrupt('return', false);
@@ -148,8 +152,8 @@ var createnewLists = exports.createnewLists = function () {
         }, _callee3, undefined);
     }));
 
-    return function createnewLists(_x6, _x7, _x8) {
+    return function createnewLabels(_x6, _x7, _x8) {
         return _ref3.apply(this, arguments);
     };
 }();
-//# sourceMappingURL=lists.js.map
+//# sourceMappingURL=labels.js.map

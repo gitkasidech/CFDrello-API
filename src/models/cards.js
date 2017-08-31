@@ -4,7 +4,6 @@ import { dbCFDrello } from './index'
 const CardsSchema = mongoose.Schema({
     id: String,
     name: String,
-    dateLastActivity: Date,
     idBoard: String,
     idList: String,
     idMembers: Array,

@@ -65,7 +65,7 @@ var checkCreateBoard = exports.checkCreateBoard = function () {
                                                 case 7:
                                                     callcreate = _context.sent;
 
-                                                    if (callcreate) console.log("create new board complete");else console.log("have a board already!!");
+                                                    if (callcreate) console.log("create or update new board complete");else console.log("have a board already!!");
                                                     _context.next = 11;
                                                     return (0, _lists.checkCreateLists)(inf.app_id, inf.token, inf.idBoards[i]);
 

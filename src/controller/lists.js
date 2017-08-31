@@ -10,7 +10,7 @@ export const checkCreateLists = async(app_id, token, idBoard) => {
             const lists = await Lists.findOne({id: data[i].id});
             const callcreate = await createnewLists(Lists,lists, data[i])
             if (callcreate)
-                console.log("create new lists complete");
+                console.log("create or update new lists complete");
             else
                 console.log("have a lists already!!");
         } 

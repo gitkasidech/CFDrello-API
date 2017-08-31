@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.Cards = undefined;
+exports.Actions = undefined;
 
 var _mongoose = require('mongoose');
 
@@ -13,14 +13,13 @@ var _index = require('./index');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var CardsSchema = _mongoose2.default.Schema({
+var ActionsSchema = _mongoose2.default.Schema({
     id: String,
-    name: String,
-    idBoard: String,
-    idList: String,
-    idMembers: Array,
-    idLabels: Array
+    idMemberCreator: String,
+    data: Object,
+    type: String,
+    date: Date
 });
 
-var Cards = exports.Cards = _mongoose2.default.model('Cards', CardsSchema);
-//# sourceMappingURL=cards.js.map
+var Actions = exports.Actions = _mongoose2.default.model('Actions', ActionsSchema);
+//# sourceMappingURL=actions.js.map

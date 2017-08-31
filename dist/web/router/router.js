@@ -21,7 +21,9 @@ var _getLists = require('../../controller/getLists');
 
 var _dashboards = require('../../controller/dashboards');
 
-var _getDashboards = require('../../controller/getDashboards');
+var _getAllDashboards = require('../../controller/getAllDashboards.js');
+
+var _createLCA = require('../../controller/createLCA.js');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33,12 +35,13 @@ var setRoute = exports.setRoute = function () {
                     case 0:
                         app.get('/login', _login.loginAuthen);
                         app.get('/callback', _login.callback);
-                        app.get('/dashboards/:idMember', _getDashboards.findDashboards);
+                        app.get('/alldashboards/:idMember', _getAllDashboards.findDashboards);
                         app.get('/boards/:idMember', _getBoards.findBoards);
                         app.get('/lists/:idBoard', _getLists.findLists);
                         app.post('/dashboards', _dashboards.saveData);
+                        app.post('/actioncards', _createLCA.saveLCA);
 
-                    case 6:
+                    case 7:
                     case 'end':
                         return _context.stop();
                 }

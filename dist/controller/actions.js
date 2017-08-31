@@ -3,7 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.createnewLists = exports.checkCreateLists = undefined;
+exports.createnewActions = exports.checkCreateActions = undefined;
+
+var _stringify = require('babel-runtime/core-js/json/stringify');
+
+var _stringify2 = _interopRequireDefault(_stringify);
 
 var _regenerator = require('babel-runtime/regenerator');
 
@@ -17,22 +21,22 @@ var _nodeTrello = require('node-trello');
 
 var _nodeTrello2 = _interopRequireDefault(_nodeTrello);
 
-var _lists = require('../models/lists');
+var _actions = require('../models/actions');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var checkCreateLists = exports.checkCreateLists = function () {
-    var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(app_id, token, idBoard) {
+var checkCreateActions = exports.checkCreateActions = function () {
+    var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(board, key, token) {
         var t;
         return _regenerator2.default.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
-                        t = new _nodeTrello2.default(app_id, token);
+                        t = new _nodeTrello2.default(key, token);
 
-                        t.get("/1/boards/" + idBoard + "/lists", function () {
+                        t.get("/1/boards/" + board + "/actions", function () {
                             var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(err, data) {
-                                var len, i, lists, callcreate;
+                                var len, i, actions, callActions;
                                 return _regenerator2.default.wrap(function _callee$(_context) {
                                     while (1) {
                                         switch (_context.prev = _context.next) {
@@ -55,17 +59,17 @@ var checkCreateLists = exports.checkCreateLists = function () {
                                                 }
 
                                                 _context.next = 7;
-                                                return _lists.Lists.findOne({ id: data[i].id });
+                                                return _actions.Actions.findOne({ id: data[i].id });
 
                                             case 7:
-                                                lists = _context.sent;
+                                                actions = _context.sent;
                                                 _context.next = 10;
-                                                return createnewLists(_lists.Lists, lists, data[i]);
+                                                return createnewActions(_actions.Actions, actions, data[i]);
 
                                             case 10:
-                                                callcreate = _context.sent;
+                                                callActions = _context.sent;
 
-                                                if (callcreate) console.log("create or update new lists complete");else console.log("have a lists already!!");
+                                                if (callActions) console.log("create or update new action complete");else console.log("have a action already!!");
 
                                             case 12:
                                                 i++;
@@ -93,49 +97,54 @@ var checkCreateLists = exports.checkCreateLists = function () {
         }, _callee2, undefined);
     }));
 
-    return function checkCreateLists(_x, _x2, _x3) {
+    return function checkCreateActions(_x, _x2, _x3) {
         return _ref.apply(this, arguments);
     };
 }();
 
-var createnewLists = exports.createnewLists = function () {
-    var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(Lists, lists, data) {
-        var newlist, _newlist;
+var createnewActions = exports.createnewActions = function () {
+    var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(Actions, actions, data) {
+        var newactions, _newactions;
 
         return _regenerator2.default.wrap(function _callee3$(_context3) {
             while (1) {
                 switch (_context3.prev = _context3.next) {
                     case 0:
-                        if (lists) {
+                        if (actions) {
                             _context3.next = 7;
                             break;
                         }
 
                         _context3.next = 3;
-                        return Lists.create({
+                        return Actions.create({
                             id: data.id,
-                            name: data.name,
-                            idBoard: data.idBoard
+                            idMemberCreator: data.idMemberCreator,
+                            data: data.data,
+                            type: data.type,
+                            date: data.date
                         });
 
                     case 3:
-                        newlist = _context3.sent;
-                        return _context3.abrupt('return', newlist);
+                        newactions = _context3.sent;
+                        return _context3.abrupt('return', newactions);
 
                     case 7:
-                        if (!(lists.name != data.name)) {
+                        if (!(actions.idMemberCreator != data.idMemberCreator || (0, _stringify2.default)(actions.data) != (0, _stringify2.default)(data.data) || actions.type != data.type || actions.date != data.date)) {
                             _context3.next = 14;
                             break;
                         }
 
                         _context3.next = 10;
-                        return Lists.update({ id: data.id }, { $set: {
-                                name: data.name
+                        return Actions.update({ id: data.id }, { $set: {
+                                idMemberCreator: data.idMemberCreator,
+                                data: data.data,
+                                type: data.type,
+                                date: data.date
                             } });
 
                     case 10:
-                        _newlist = _context3.sent;
-                        return _context3.abrupt('return', _newlist);
+                        _newactions = _context3.sent;
+                        return _context3.abrupt('return', _newactions);
 
                     case 14:
                         return _context3.abrupt('return', false);
@@ -148,8 +157,8 @@ var createnewLists = exports.createnewLists = function () {
         }, _callee3, undefined);
     }));
 
-    return function createnewLists(_x6, _x7, _x8) {
+    return function createnewActions(_x6, _x7, _x8) {
         return _ref3.apply(this, arguments);
     };
 }();
-//# sourceMappingURL=lists.js.map
+//# sourceMappingURL=actions.js.map

@@ -6,8 +6,8 @@ import { havedata } from './members'
 const requestURL = "https://trello.com/1/OAuthGetRequestToken"
 const accessURL = "https://trello.com/1/OAuthGetAccessToken"
 const authorizeURL = "https://trello.com/1/OAuthAuthorizeToken"
-const sendURL = "http://localhost:4200/gettoken"
-const beginURL = "http://localhost:4200"
+const sendURL = "http://localhost:5000/gettoken"
+const beginURL = "http://localhost:5000"
 const appName = "CFDrello Dashboard"
 
 const key = "662fa775f48bd56cea11e8be634da284"
