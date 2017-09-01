@@ -1,40 +1,38 @@
-'use strict';
+import {checkInf} from '../controller/createLCA'
 
-var _createLCA = require('./createLCA');
-
-test('checkInf', function () {
-    expect((0, _createLCA.checkInf)({
+test('checkInf', () => {
+    expect(checkInf({
         "name": "a"
     })).toBe(true);
-    expect((0, _createLCA.checkInf)({
+    expect(checkInf({
         "idBoard": "1"
     })).toBe(true);
-    expect((0, _createLCA.checkInf)({
+    expect(checkInf({
         "listComp": ["123a", "456b"]
     })).toBe(true);
-    expect((0, _createLCA.checkInf)({
+    expect(checkInf({
         "colorComp": "#ff0000"
     })).toBe(true);
-    expect((0, _createLCA.checkInf)({
+    expect(checkInf({
         "listInpr": ["789a"]
     })).toBe(true);
-    expect((0, _createLCA.checkInf)({
+    expect(checkInf({
         "colorInpr": "#ff00ff"
     })).toBe(true);
-    expect((0, _createLCA.checkInf)({
+    expect(checkInf({
         "listBack": ["789b"]
     })).toBe(true);
-    expect((0, _createLCA.checkInf)({
+    expect(checkInf({
         "colorBack": "#ffffff"
     })).toBe(true);
-    expect((0, _createLCA.checkInf)({
+    expect(checkInf({
         "idMember": "a1"
     })).toBe(true);
-    expect((0, _createLCA.checkInf)({
+    expect(checkInf({
         "token": "1234"
     })).toBe(true);
-    expect((0, _createLCA.checkInf)({})).toBe(true);
-    expect((0, _createLCA.checkInf)({
+    expect(checkInf({})).toBe(true);
+    expect(checkInf({
         "name": "a",
         "idBoard": "1",
         "listComp": ["123a", "456b"],
@@ -45,6 +43,7 @@ test('checkInf', function () {
         "colorBack": "#ffffff",
         "idMember": "a1",
         "token": "1234"
-    })) === false;
-});
-//# sourceMappingURL=createLCA.test.js.map
+    })) === (false);
+})
+
+

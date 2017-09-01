@@ -1,7 +1,7 @@
 jest.mock('../models', () => {})
 import mongoose from 'mongoose'
 import MockMembers from 'members'
-import {createnewUser,checkreq} from './members'
+import {createnewUser,checkreq} from '../controller/members'
 
 const mockMembers = new MockMembers()
 const user = {

@@ -16,7 +16,7 @@ var _cards = require('cards');
 
 var _cards2 = _interopRequireDefault(_cards);
 
-var _cards3 = require('./cards');
+var _cards3 = require('../controller/cards');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

@@ -12,72 +12,46 @@ var _mongoose = require('mongoose');
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
-var _members = require('members');
+var _labels = require('labels');
 
-var _members2 = _interopRequireDefault(_members);
+var _labels2 = _interopRequireDefault(_labels);
 
-var _members3 = require('./members');
+var _labels3 = require('../controller/labels');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 jest.mock('../models', function () {});
 
 
-var mockMembers = new _members2.default();
-var user = {
-    id: "001",
-    username: "xxx",
-    fullName: "yyy",
-    token: "zzz",
-    idBoards: ["123a", "456b"]
+var mockLabels = new _labels2.default();
+var labels = {
+    id: "123a",
+    name: "xxx",
+    color: "red",
+    uses: "10",
+    idBoard: "456z"
 };
 
-test('checkreq', function () {
-    expect((0, _members3.checkreq)({
-        "token": "12345678"
-    })).toBe(true);
-    expect((0, _members3.checkreq)({
-        "id": "1"
-    })).toBe(true);
-    expect((0, _members3.checkreq)({
-        "username": "xxxxx"
-    })).toBe(true);
-    expect((0, _members3.checkreq)({
-        "app_id": "abc123"
-    })).toBe(true);
-    expect((0, _members3.checkreq)({
-        "idBoards": ["123a", "456b"]
-    })).toBe(true);
-    expect((0, _members3.checkreq)({})).toBe(true);
-    expect((0, _members3.checkreq)({
-        "id": "1",
-        "username": "xxxxx",
-        "app_id": "abc123",
-        "idBoards": ["123a", "456b"],
-        "token": "12345678"
-    })) === false;
-});
-
-test('new user', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee() {
-    var send, userNew, receive, callRec;
+test('new labels', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee() {
+    var send, labelsNew, receive, callRec;
     return _regenerator2.default.wrap(function _callee$(_context) {
         while (1) {
             switch (_context.prev = _context.next) {
                 case 0:
                     send = {
-                        id: "001",
-                        username: "xxx",
-                        fullName: "yyy",
-                        token: "zzz",
-                        idBoards: ["123a", "456b"]
+                        id: "123a",
+                        name: "xxx",
+                        color: "red",
+                        uses: "10",
+                        idBoard: "456z"
                     };
-                    userNew = undefined;
+                    labelsNew = undefined;
                     _context.next = 4;
-                    return (0, _members3.createnewUser)(mockMembers, userNew, send);
+                    return (0, _labels3.createnewLabels)(mockLabels, labelsNew, send);
 
                 case 4:
                     receive = _context.sent;
-                    callRec = mockMembers.getCreate();
+                    callRec = mockLabels.getCreate();
 
                     expect(callRec.length).toEqual(1);
 
@@ -89,25 +63,25 @@ test('new user', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(func
     }, _callee, undefined);
 })));
 
-test('update username', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2() {
+test('update name', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2() {
     var send, receive, callRec;
     return _regenerator2.default.wrap(function _callee2$(_context2) {
         while (1) {
             switch (_context2.prev = _context2.next) {
                 case 0:
                     send = {
-                        id: "001",
-                        username: "aaa",
-                        fullName: "yyy",
-                        token: "zzz",
-                        idBoards: ["123a", "456b"]
+                        id: "123a",
+                        name: "yyy",
+                        color: "red",
+                        uses: "10",
+                        idBoard: "456z"
                     };
                     _context2.next = 3;
-                    return (0, _members3.createnewUser)(mockMembers, user, send);
+                    return (0, _labels3.createnewLabels)(mockLabels, labels, send);
 
                 case 3:
                     receive = _context2.sent;
-                    callRec = mockMembers.getUpdate();
+                    callRec = mockLabels.getUpdate();
 
                     expect(callRec[0]).toEqual(send);
 
@@ -119,25 +93,25 @@ test('update username', (0, _asyncToGenerator3.default)(_regenerator2.default.ma
     }, _callee2, undefined);
 })));
 
-test('update fullName', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3() {
+test('update color', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3() {
     var send, receive, callRec;
     return _regenerator2.default.wrap(function _callee3$(_context3) {
         while (1) {
             switch (_context3.prev = _context3.next) {
                 case 0:
                     send = {
-                        id: "001",
-                        username: "xxx",
-                        fullName: "bbb",
-                        token: "zzz",
-                        idBoards: ["123a", "456b"]
+                        id: "123a",
+                        name: "xxx",
+                        color: "blue",
+                        uses: "10",
+                        idBoard: "456z"
                     };
                     _context3.next = 3;
-                    return (0, _members3.createnewUser)(mockMembers, user, send);
+                    return (0, _labels3.createnewLabels)(mockLabels, labels, send);
 
                 case 3:
                     receive = _context3.sent;
-                    callRec = mockMembers.getUpdate();
+                    callRec = mockLabels.getUpdate();
 
                     expect(callRec[0]).toEqual(send);
 
@@ -149,25 +123,25 @@ test('update fullName', (0, _asyncToGenerator3.default)(_regenerator2.default.ma
     }, _callee3, undefined);
 })));
 
-test('update idBoards', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee4() {
+test('update name', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee4() {
     var send, receive, callRec;
     return _regenerator2.default.wrap(function _callee4$(_context4) {
         while (1) {
             switch (_context4.prev = _context4.next) {
                 case 0:
                     send = {
-                        id: "001",
-                        username: "xxx",
-                        fullName: "yyy",
-                        token: "zzz",
-                        idBoards: ["789c", "456b"]
+                        id: "123a",
+                        name: "xxx",
+                        color: "red",
+                        uses: "15",
+                        idBoard: "456z"
                     };
                     _context4.next = 3;
-                    return (0, _members3.createnewUser)(mockMembers, user, send);
+                    return (0, _labels3.createnewLabels)(mockLabels, labels, send);
 
                 case 3:
                     receive = _context4.sent;
-                    callRec = mockMembers.getUpdate();
+                    callRec = mockLabels.getUpdate();
 
                     expect(callRec[0]).toEqual(send);
 
@@ -186,18 +160,18 @@ test('update all', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(fu
             switch (_context5.prev = _context5.next) {
                 case 0:
                     send = {
-                        id: "001",
-                        username: "aaa",
-                        fullName: "bbb",
-                        token: "zzz",
-                        idBoards: ["789c", "456b"]
+                        id: "123a",
+                        name: "yyy",
+                        color: "blue",
+                        uses: "15",
+                        idBoard: "456z"
                     };
                     _context5.next = 3;
-                    return (0, _members3.createnewUser)(mockMembers, user, send);
+                    return (0, _labels3.createnewLabels)(mockLabels, labels, send);
 
                 case 3:
                     receive = _context5.sent;
-                    callRec = mockMembers.getUpdate();
+                    callRec = mockLabels.getUpdate();
 
                     expect(callRec[0]).toEqual(send);
 
@@ -209,21 +183,21 @@ test('update all', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(fu
     }, _callee5, undefined);
 })));
 
-test('have user already', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee6() {
+test('have labels already', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee6() {
     var send, rec;
     return _regenerator2.default.wrap(function _callee6$(_context6) {
         while (1) {
             switch (_context6.prev = _context6.next) {
                 case 0:
                     send = {
-                        id: "001",
-                        username: "xxx",
-                        fullName: "yyy",
-                        token: "zzz",
-                        idBoards: ["123a", "456b"]
+                        id: "123a",
+                        name: "xxx",
+                        color: "red",
+                        uses: "10",
+                        idBoard: "456z"
                     };
                     _context6.next = 3;
-                    return (0, _members3.createnewUser)(mockMembers, user, send);
+                    return (0, _labels3.createnewLabels)(mockLabels, labels, send);
 
                 case 3:
                     rec = _context6.sent;
@@ -237,4 +211,4 @@ test('have user already', (0, _asyncToGenerator3.default)(_regenerator2.default.
         }
     }, _callee6, undefined);
 })));
-//# sourceMappingURL=members.test.js.map
+//# sourceMappingURL=labels.test.js.map

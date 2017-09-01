@@ -1,7 +1,7 @@
 jest.mock('../models', () => { })
 import mongoose from 'mongoose'
 import MockDashboards from 'dashboards'
-import { createnewDashboards } from './dashboards'
+import { createnewDashboards } from '../controller/dashboards'
 
 const mockDashboards = new MockDashboards()
 

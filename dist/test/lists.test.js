@@ -16,7 +16,7 @@ var _lists = require('lists');
 
 var _lists2 = _interopRequireDefault(_lists);
 
-var _lists3 = require('./lists');
+var _lists3 = require('../controller/lists');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

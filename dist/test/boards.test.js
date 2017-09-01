@@ -16,7 +16,7 @@ var _boards = require('boards');
 
 var _boards2 = _interopRequireDefault(_boards);
 
-var _boards3 = require('./boards');
+var _boards3 = require('../controller/boards');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

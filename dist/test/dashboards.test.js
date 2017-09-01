@@ -16,7 +16,7 @@ var _dashboards = require('dashboards');
 
 var _dashboards2 = _interopRequireDefault(_dashboards);
 
-var _dashboards3 = require('./dashboards');
+var _dashboards3 = require('../controller/dashboards');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

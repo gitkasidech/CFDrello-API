@@ -16,7 +16,7 @@ var _actions = require('actions');
 
 var _actions2 = _interopRequireDefault(_actions);
 
-var _actions3 = require('./actions');
+var _actions3 = require('../controller/actions');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
