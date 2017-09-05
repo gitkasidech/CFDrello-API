@@ -49,7 +49,8 @@ var actions = {
     }
   },
   type: "updateCard",
-  date: "2017-06-08T19:40:27.915Z"
+  date: "2017-06-08T14:40:27.915Z",
+  dateString: "2017-06-08-4"
 };
 
 test('new actions', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee() {
@@ -83,7 +84,8 @@ test('new actions', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(f
               }
             },
             type: "updateCard",
-            date: "2017-06-08T19:40:27.915Z"
+            date: "2017-06-08T14:40:27.915Z",
+            dateString: "2017-06-08-4"
           };
           actionsNew = undefined;
           _context.next = 4;
@@ -134,7 +136,8 @@ test('update idMemberCreator', (0, _asyncToGenerator3.default)(_regenerator2.def
               }
             },
             type: "updateCard",
-            date: "2017-06-08T19:40:27.915Z"
+            date: "2017-06-08T14:40:27.915Z",
+            dateString: "2017-06-08-4"
           };
           _context2.next = 3;
           return (0, _actions3.createnewActions)(mockActions, actions, send);
@@ -188,7 +191,8 @@ test('update data', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(f
               }
             },
             type: "updateCard",
-            date: "2017-06-08T19:40:27.915Z"
+            date: "2017-06-08T14:40:27.915Z",
+            dateString: "2017-06-08-4"
           };
           _context3.next = 3;
           return (0, _actions3.createnewActions)(mockActions, actions, send);
@@ -238,7 +242,8 @@ test('update type', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(f
               }
             },
             type: "createCard",
-            date: "2017-06-08T19:40:27.915Z"
+            date: "2017-06-08T14:40:27.915Z",
+            dateString: "2017-06-08-4"
           };
           _context4.next = 3;
           return (0, _actions3.createnewActions)(mockActions, actions, send);
@@ -288,7 +293,8 @@ test('update date', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(f
               }
             },
             type: "updateCard",
-            date: "2017-07-30T19:40:27.915Z"
+            date: "2017-06-07T14:40:27.915Z",
+            dateString: "2017-06-07-3"
           };
           _context5.next = 3;
           return (0, _actions3.createnewActions)(mockActions, actions, send);
@@ -342,7 +348,8 @@ test('update all', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(fu
               }
             },
             type: "addCard",
-            date: "2017-08-30T19:40:27.915Z"
+            date: "2017-06-07T14:40:27.915Z",
+            dateString: "2017-06-07-3"
           };
           _context6.next = 3;
           return (0, _actions3.createnewActions)(mockActions, actions, send);
@@ -392,7 +399,8 @@ test('have actions already', (0, _asyncToGenerator3.default)(_regenerator2.defau
               }
             },
             type: "updateCard",
-            date: "2017-06-08T19:40:27.915Z"
+            date: "2017-06-08T14:40:27.915Z",
+            dateString: "2017-06-08-4"
           };
           _context7.next = 3;
           return (0, _actions3.createnewActions)(mockActions, actions, send);

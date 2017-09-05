@@ -29,7 +29,8 @@ const actions = {
         }
       },
     type: "updateCard",
-    date: "2017-06-08T19:40:27.915Z"
+    date: "2017-06-08T14:40:27.915Z",
+    dateString: "2017-06-08-4"
 }
 
 test('new actions', async () => {
@@ -58,7 +59,8 @@ test('new actions', async () => {
             }
           },
         type: "updateCard",
-        date: "2017-06-08T19:40:27.915Z"
+        date: "2017-06-08T14:40:27.915Z",
+        dateString: "2017-06-08-4"
     }
     const actionsNew = undefined
     const receive = await createnewActions(mockActions,actionsNew, send)
@@ -92,7 +94,8 @@ test('update idMemberCreator', async() => {
             }
           },
         type: "updateCard",
-        date: "2017-06-08T19:40:27.915Z"
+        date: "2017-06-08T14:40:27.915Z",
+        dateString: "2017-06-08-4"
     }
     const receive = await createnewActions(mockActions,actions, send)
     const callRec = mockActions.getUpdate()
@@ -129,7 +132,8 @@ test('update data', async() => {
             }
           },
         type: "updateCard",
-        date: "2017-06-08T19:40:27.915Z"
+        date: "2017-06-08T14:40:27.915Z",
+        dateString: "2017-06-08-4"
     }
     const receive = await createnewActions(mockActions,actions, send)
     const callRec = mockActions.getUpdate()
@@ -162,7 +166,8 @@ test('update type', async() => {
             }
           },
         type: "createCard",
-        date: "2017-06-08T19:40:27.915Z"
+        date: "2017-06-08T14:40:27.915Z",
+        dateString: "2017-06-08-4"
     }
     const receive = await createnewActions(mockActions,actions, send)
     const callRec = mockActions.getUpdate()
@@ -195,7 +200,8 @@ test('update date', async() => {
             }
           },
         type: "updateCard",
-        date: "2017-07-30T19:40:27.915Z"
+        date: "2017-06-07T14:40:27.915Z",
+        dateString: "2017-06-07-3"
     }
     const receive = await createnewActions(mockActions,actions, send)
     const callRec = mockActions.getUpdate()
@@ -232,7 +238,8 @@ test('update all', async() => {
             }
           },
         type: "addCard",
-        date: "2017-08-30T19:40:27.915Z"
+        date: "2017-06-07T14:40:27.915Z",
+        dateString: "2017-06-07-3"
     }
     const receive = await createnewActions(mockActions,actions, send)
     const callRec = mockActions.getUpdate()
@@ -265,7 +272,8 @@ test('have actions already', async() => {
             }
           },
         type: "updateCard",
-        date: "2017-06-08T19:40:27.915Z"
+        date: "2017-06-08T14:40:27.915Z",
+        dateString: "2017-06-08-4"
     }
     const rec = await createnewActions(mockActions,actions, send)
     expect(rec).toBe(false)

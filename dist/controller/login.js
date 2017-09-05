@@ -31,8 +31,8 @@ var OAuth = require('oauth').OAuth;
 var requestURL = "https://trello.com/1/OAuthGetRequestToken";
 var accessURL = "https://trello.com/1/OAuthGetAccessToken";
 var authorizeURL = "https://trello.com/1/OAuthAuthorizeToken";
-var sendURL = "http://localhost:5000/gettoken";
-var beginURL = "http://localhost:5000";
+var sendURL = "http://localhost:4200/gettoken";
+var beginURL = "http://localhost:4200";
 var appName = "CFDrello Dashboard";
 
 var key = "662fa775f48bd56cea11e8be634da284";

@@ -3,8 +3,9 @@ import { callback } from '../../controller/login'
 import { findBoards } from '../../controller/getBoards'
 import { findLists } from '../../controller/getLists'
 import { saveData } from '../../controller/dashboards'
-import { findDashboards } from '../../controller/getAllDashboards.js'
-import { saveLCA } from '../../controller/createLCA.js'
+import { findDashboards } from '../../controller/getAllDashboards'
+import { saveLCAD } from '../../controller/createLCAD'
+import { dayCountCards } from '../../controller/getDateActionCards'
 
 export const setRoute = async (app) => {
     app.get('/login',loginAuthen)
@@ -13,5 +14,6 @@ export const setRoute = async (app) => {
     app.get('/boards/:idMember',findBoards)
     app.get('/lists/:idBoard',findLists)
     app.post('/dashboards',saveData)
-    app.post('/actioncards',saveLCA)
+    app.post('/createlcad',saveLCAD)
+    app.get('/actioncards/:idDashboard/:start/:end',dayCountCards)
 }

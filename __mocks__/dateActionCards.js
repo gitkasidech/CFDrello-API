@@ -1,6 +1,6 @@
 import Promise from 'bluebird'
 
-export default class MockActions {
+export default class MockDateActionCards {
     constructor(records = []) {
         this.records = records
         this.recordsUpdate = []
@@ -19,11 +19,9 @@ export default class MockActions {
     update({id},objUpdate) {
         return new Promise(resolve => {
             const updateItem = this.records
-            updateItem[0].idMemberCreator = objUpdate['$set'].idMemberCreator
-            updateItem[0].data = objUpdate['$set'].data
-            updateItem[0].type = objUpdate['$set'].type
-            updateItem[0].date = objUpdate['$set'].date
-            updateItem[0].dateString = objUpdate['$set'].dateString
+            updateItem[0].countBack = objUpdate['$set'].countBack
+            updateItem[0].countInpr = objUpdate['$set'].countInpr
+            updateItem[0].countComp = objUpdate['$set'].countComp
             this.recordsUpdate.push(updateItem[0])
             resolve()
         })

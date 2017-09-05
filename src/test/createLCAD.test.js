@@ -1,4 +1,4 @@
-import {checkInf} from '../controller/createLCA'
+import {checkInf} from '../controller/createLCAD'
 
 test('checkInf', () => {
     expect(checkInf({

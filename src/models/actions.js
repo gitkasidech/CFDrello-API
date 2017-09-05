@@ -6,7 +6,8 @@ const ActionsSchema = mongoose.Schema({
     idMemberCreator: String,
     data: Object,
     type: String,
-    date: Date
+    date: Date,
+    dateString: String
 });
 
 export const Actions = mongoose.model('Actions', ActionsSchema);

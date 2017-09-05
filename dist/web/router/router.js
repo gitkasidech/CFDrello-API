@@ -21,9 +21,11 @@ var _getLists = require('../../controller/getLists');
 
 var _dashboards = require('../../controller/dashboards');
 
-var _getAllDashboards = require('../../controller/getAllDashboards.js');
+var _getAllDashboards = require('../../controller/getAllDashboards');
 
-var _createLCA = require('../../controller/createLCA.js');
+var _createLCAD = require('../../controller/createLCAD');
+
+var _getDateActionCards = require('../../controller/getDateActionCards');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -39,9 +41,10 @@ var setRoute = exports.setRoute = function () {
                         app.get('/boards/:idMember', _getBoards.findBoards);
                         app.get('/lists/:idBoard', _getLists.findLists);
                         app.post('/dashboards', _dashboards.saveData);
-                        app.post('/actioncards', _createLCA.saveLCA);
+                        app.post('/createlcad', _createLCAD.saveLCAD);
+                        app.get('/actioncards/:idDashboard/:start/:end', _getDateActionCards.dayCountCards);
 
-                    case 7:
+                    case 8:
                     case 'end':
                         return _context.stop();
                 }

@@ -17,7 +17,13 @@ var _mongoose = require('mongoose');
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
+var _bluebird = require('bluebird');
+
+var _bluebird2 = _interopRequireDefault(_bluebird);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_mongoose2.default.Promise = global.Promise;
 
 var dbCFDrello = exports.dbCFDrello = _mongoose2.default.connect('mongodb://localhost:27017/CFDrello', function () {
     var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(err) {

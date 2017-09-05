@@ -23,6 +23,12 @@ var _nodeTrello2 = _interopRequireDefault(_nodeTrello);
 
 var _actions = require('../models/actions');
 
+var _bluebird = require('bluebird');
+
+var _bluebird2 = _interopRequireDefault(_bluebird);
+
+var _convertDates = require('./convertDates');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var checkCreateActions = exports.checkCreateActions = function () {
@@ -33,50 +39,49 @@ var checkCreateActions = exports.checkCreateActions = function () {
                 switch (_context2.prev = _context2.next) {
                     case 0:
                         t = new _nodeTrello2.default(key, token);
-
-                        t.get("/1/boards/" + board + "/actions", function () {
-                            var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(err, data) {
+                        return _context2.abrupt('return', new _bluebird2.default(function (resolve, reject) {
+                            t.get("/1/boards/" + board + "/actions/?limit=1000", function (err, data) {
+                                if (err) reject(err);
+                                resolve(data);
+                            });
+                        }).then(function () {
+                            var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(data) {
                                 var len, i, actions, callActions;
                                 return _regenerator2.default.wrap(function _callee$(_context) {
                                     while (1) {
                                         switch (_context.prev = _context.next) {
                                             case 0:
-                                                if (!err) {
-                                                    _context.next = 2;
-                                                    break;
-                                                }
-
-                                                throw err;
-
-                                            case 2:
                                                 len = data.length;
                                                 i = 0;
 
-                                            case 4:
+                                            case 2:
                                                 if (!(i < len)) {
-                                                    _context.next = 15;
+                                                    _context.next = 13;
                                                     break;
                                                 }
 
-                                                _context.next = 7;
+                                                _context.next = 5;
                                                 return _actions.Actions.findOne({ id: data[i].id });
 
-                                            case 7:
+                                            case 5:
                                                 actions = _context.sent;
-                                                _context.next = 10;
+                                                _context.next = 8;
                                                 return createnewActions(_actions.Actions, actions, data[i]);
 
-                                            case 10:
+                                            case 8:
                                                 callActions = _context.sent;
 
                                                 if (callActions) console.log("create or update new action complete");else console.log("have a action already!!");
 
-                                            case 12:
+                                            case 10:
                                                 i++;
-                                                _context.next = 4;
+                                                _context.next = 2;
                                                 break;
 
-                                            case 15:
+                                            case 13:
+                                                return _context.abrupt('return', data[len - 1].date);
+
+                                            case 14:
                                             case 'end':
                                                 return _context.stop();
                                         }
@@ -84,10 +89,10 @@ var checkCreateActions = exports.checkCreateActions = function () {
                                 }, _callee, undefined);
                             }));
 
-                            return function (_x4, _x5) {
+                            return function (_x4) {
                                 return _ref2.apply(this, arguments);
                             };
-                        }());
+                        }()));
 
                     case 2:
                     case 'end':
@@ -104,52 +109,66 @@ var checkCreateActions = exports.checkCreateActions = function () {
 
 var createnewActions = exports.createnewActions = function () {
     var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(Actions, actions, data) {
-        var newactions, _newactions;
+        var d, ymd, newactions, _d, _ymd, _newactions;
 
         return _regenerator2.default.wrap(function _callee3$(_context3) {
             while (1) {
                 switch (_context3.prev = _context3.next) {
                     case 0:
                         if (actions) {
-                            _context3.next = 7;
+                            _context3.next = 11;
                             break;
                         }
 
-                        _context3.next = 3;
+                        d = new Date(data.date);
+                        _context3.next = 4;
+                        return (0, _convertDates.convertDates)(d);
+
+                    case 4:
+                        ymd = _context3.sent;
+                        _context3.next = 7;
                         return Actions.create({
                             id: data.id,
                             idMemberCreator: data.idMemberCreator,
                             data: data.data,
                             type: data.type,
-                            date: data.date
+                            date: data.date,
+                            dateString: ymd
                         });
 
-                    case 3:
+                    case 7:
                         newactions = _context3.sent;
                         return _context3.abrupt('return', newactions);
 
-                    case 7:
+                    case 11:
                         if (!(actions.idMemberCreator != data.idMemberCreator || (0, _stringify2.default)(actions.data) != (0, _stringify2.default)(data.data) || actions.type != data.type || actions.date != data.date)) {
-                            _context3.next = 14;
+                            _context3.next = 22;
                             break;
                         }
 
-                        _context3.next = 10;
+                        _d = new Date(data.date);
+                        _context3.next = 15;
+                        return (0, _convertDates.convertDates)(_d);
+
+                    case 15:
+                        _ymd = _context3.sent;
+                        _context3.next = 18;
                         return Actions.update({ id: data.id }, { $set: {
                                 idMemberCreator: data.idMemberCreator,
                                 data: data.data,
                                 type: data.type,
-                                date: data.date
+                                date: data.date,
+                                dateString: _ymd
                             } });
 
-                    case 10:
+                    case 18:
                         _newactions = _context3.sent;
                         return _context3.abrupt('return', _newactions);
 
-                    case 14:
+                    case 22:
                         return _context3.abrupt('return', false);
 
-                    case 15:
+                    case 23:
                     case 'end':
                         return _context3.stop();
                 }
@@ -157,7 +176,7 @@ var createnewActions = exports.createnewActions = function () {
         }, _callee3, undefined);
     }));
 
-    return function createnewActions(_x6, _x7, _x8) {
+    return function createnewActions(_x5, _x6, _x7) {
         return _ref3.apply(this, arguments);
     };
 }();

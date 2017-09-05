@@ -18,7 +18,8 @@ var ActionsSchema = _mongoose2.default.Schema({
     idMemberCreator: String,
     data: Object,
     type: String,
-    date: Date
+    date: Date,
+    dateString: String
 });
 
 var Actions = exports.Actions = _mongoose2.default.model('Actions', ActionsSchema);
