@@ -40,7 +40,7 @@ var createDateActionCards = exports.createDateActionCards = function () {
 
                     case 5:
                         if (!(d <= now)) {
-                            _context.next = 28;
+                            _context.next = 27;
                             break;
                         }
 
@@ -89,14 +89,12 @@ var createDateActionCards = exports.createDateActionCards = function () {
                     case 23:
                         callDateActionCards = _context.sent;
 
-                        if (callDateActionCards) console.log("create or update new DateActionCards complete");else console.log("have a DateActionCards already!!");
-
-                    case 25:
+                    case 24:
                         d.setDate(d.getDate() + 1);
                         _context.next = 5;
                         break;
 
-                    case 28:
+                    case 27:
                     case 'end':
                         return _context.stop();
                 }

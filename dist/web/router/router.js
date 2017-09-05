@@ -42,7 +42,7 @@ var setRoute = exports.setRoute = function () {
                         app.get('/lists/:idBoard', _getLists.findLists);
                         app.post('/dashboards', _dashboards.saveData);
                         app.post('/createlcad', _createLCAD.saveLCAD);
-                        app.get('/actioncards/:idDashboard/:start/:end', _getDateActionCards.dayCountCards);
+                        app.get('/dateactioncards/:idDashboard/:start/:end', _getDateActionCards.dayCountCards);
 
                     case 8:
                     case 'end':

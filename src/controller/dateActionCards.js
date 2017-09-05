@@ -42,10 +42,10 @@ export const createDateActionCards = async(dateStart,dashboard) => {
         }
         const dateActionCards = await DateActionCards.findOne({ dateString: allData.dateString, idDashboard: allData.idDashboard})
         const callDateActionCards = await createnewDateActionCards(DateActionCards,allData,dateActionCards)
-        if (callDateActionCards)
-            console.log("create or update new DateActionCards complete")
-        else
-            console.log("have a DateActionCards already!!")
+        // if (callDateActionCards)
+        //     console.log("create or update new DateActionCards complete")
+        // else
+        //     console.log("have a DateActionCards already!!")
     }
 }
 

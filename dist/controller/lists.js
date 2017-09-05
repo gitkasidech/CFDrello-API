@@ -50,7 +50,7 @@ var checkCreateLists = exports.checkCreateLists = function () {
 
                                             case 4:
                                                 if (!(i < len)) {
-                                                    _context.next = 15;
+                                                    _context.next = 14;
                                                     break;
                                                 }
 
@@ -65,14 +65,12 @@ var checkCreateLists = exports.checkCreateLists = function () {
                                             case 10:
                                                 callcreate = _context.sent;
 
-                                                if (callcreate) console.log("create or update new lists complete");else console.log("have a lists already!!");
-
-                                            case 12:
+                                            case 11:
                                                 i++;
                                                 _context.next = 4;
                                                 break;
 
-                                            case 15:
+                                            case 14:
                                             case 'end':
                                                 return _context.stop();
                                         }
@@ -83,7 +81,12 @@ var checkCreateLists = exports.checkCreateLists = function () {
                             return function (_x4, _x5) {
                                 return _ref2.apply(this, arguments);
                             };
-                        }());
+                        }()
+                        // if (callcreate)
+                        //     console.log("create or update new lists complete");
+                        // else
+                        //     console.log("have a lists already!!");
+                        );
 
                     case 2:
                     case 'end':

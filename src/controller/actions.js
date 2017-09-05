@@ -15,10 +15,10 @@ export const checkCreateActions = async (board,key,token) => {
             for (let i = 0; i < len; i++) {
                 const actions = await Actions.findOne({ id: (data[i]).id })
                 const callActions = await createnewActions(Actions, actions, data[i])
-                if (callActions)
-                    console.log("create or update new action complete")
-                else
-                    console.log("have a action already!!")
+                // if (callActions)
+                //     console.log("create or update new action complete")
+                // else
+                //     console.log("have a action already!!")
             }
             return  data[len-1].date
     

@@ -15,5 +15,5 @@ export const setRoute = async (app) => {
     app.get('/lists/:idBoard',findLists)
     app.post('/dashboards',saveData)
     app.post('/createlcad',saveLCAD)
-    app.get('/actioncards/:idDashboard/:start/:end',dayCountCards)
+    app.get('/dateactioncards/:idDashboard/:start/:end',dayCountCards)
 }

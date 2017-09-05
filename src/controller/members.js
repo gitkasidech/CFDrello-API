@@ -3,19 +3,18 @@ import { checkCreateBoard } from './boards'
 
 export const havedata = async (sendData) => {
     const inf = sendData
-    const callcheckreq = await checkreq(inf);
+    const callcheckreq = await checkreq(inf)
     if (callcheckreq) 
         return res.status(500).send("format should be")
 
-    const user = await Members.findOne({ id: inf.id });
+    const user = await Members.findOne({ id: inf.id })
 
-    const callcreate = await createnewUser(Members,user, inf);
-    if (callcreate) {
-        console.log("create or update new user complete");
-    }
-    else {
-        console.log("have a user already!!");
-    }
+    const callcreate = await createnewUser(Members,user, inf)
+    // if (callcreate) 
+    //     console.log("create or update new user complete")
+    // else 
+    //     console.log("have a user already!!")
+
     const callBoards = await checkCreateBoard(inf)
 }
 

@@ -64,15 +64,13 @@ var checkCreateBoard = exports.checkCreateBoard = function () {
 
                                                 case 7:
                                                     callcreate = _context.sent;
-
-                                                    if (callcreate) console.log("create or update new board complete");else console.log("have a board already!!");
-                                                    _context.next = 11;
+                                                    _context.next = 10;
                                                     return (0, _lists.checkCreateLists)(inf.app_id, inf.token, inf.idBoards[i]);
 
-                                                case 11:
+                                                case 10:
                                                     callLists = _context.sent;
 
-                                                case 12:
+                                                case 11:
                                                 case 'end':
                                                     return _context.stop();
                                             }

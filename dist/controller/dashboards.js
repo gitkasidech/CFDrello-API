@@ -28,35 +28,28 @@ var saveData = exports.saveData = function () {
                     case 0:
                         console.log("POST '/dashboards' \uD83E\uDD20 " + Date());
                         inf = req.body;
-
-                        console.log(inf);
-                        _context.next = 5;
+                        _context.next = 4;
                         return checkInf(inf);
 
-                    case 5:
+                    case 4:
                         callInf = _context.sent;
 
-                        console.log(callInf);
-
                         if (!callInf) {
-                            _context.next = 9;
+                            _context.next = 7;
                             break;
                         }
 
                         return _context.abrupt("return", res.status(500).send("format should be"));
 
-                    case 9:
-                        _context.next = 11;
+                    case 7:
+                        _context.next = 9;
                         return createnewDashboards(_dashboards.Dashboards, inf);
 
-                    case 11:
+                    case 9:
                         callCreate = _context.sent;
-
-                        console.log("create new dashboards complete");
-                        console.log(callCreate);
                         return _context.abrupt("return", res.json({ idDashboard: callCreate._id }));
 
-                    case 15:
+                    case 11:
                     case "end":
                         return _context.stop();
                 }

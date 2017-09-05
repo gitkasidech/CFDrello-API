@@ -51,19 +51,13 @@ var havedata = exports.havedata = function () {
 
                     case 11:
                         callcreate = _context.sent;
-
-                        if (callcreate) {
-                            console.log("create or update new user complete");
-                        } else {
-                            console.log("have a user already!!");
-                        }
-                        _context.next = 15;
+                        _context.next = 14;
                         return (0, _boards.checkCreateBoard)(inf);
 
-                    case 15:
+                    case 14:
                         callBoards = _context.sent;
 
-                    case 16:
+                    case 15:
                     case 'end':
                         return _context.stop();
                 }

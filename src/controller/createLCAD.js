@@ -23,22 +23,23 @@ export const saveLCAD = async (req, res, next) => {
     const [callLabels,callCards,callActions] = await Promise.all(promises) 
     const postDateActionCards = await createDateActionCards(callActions,inf)
 
-
-    // let d = new Date()
-    // d.setDate(d.getDate() - 1)
-    // const endDate = convertDates(d)
-    // console.log(endDate)
-    // let day = d.getDay()
-    // d.setDate(d.getDate() - day)
-    // const startDate = convertDates(d)
-    // const data = {
-    //     idDashboard: inf._id,
-    //     start: startDate,
-    //     end: endDate
-    // }
-    // const getActionCards = await countData(data)
-    // res.json(getActionCards)
-    res.send("OK")
+    let d = new Date()
+    d.setDate(d.getDate() - 1)
+    let endDate = await convertDates(d)
+    let day = d.getDay()
+    d.setDate(d.getDate() - day)
+    let startDate = await convertDates(d)
+    let [yearS, monthS, dateS, dayS] = startDate.split('-')
+    let [yearE, monthE, dateE, dayE] = endDate.split('-')
+    startDate = [yearS, monthS, dateS].join('-')
+    endDate = [yearE, monthE, dateE].join('-')
+    const data = {
+        idDashboard: inf._id,
+        start: startDate,
+        end: endDate
+    }
+    const getDateActionCards = await countData(data)
+    res.json(getDateActionCards)
 }
 
 export const checkInf = (inf) => {

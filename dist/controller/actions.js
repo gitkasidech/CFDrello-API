@@ -56,7 +56,7 @@ var checkCreateActions = exports.checkCreateActions = function () {
 
                                             case 2:
                                                 if (!(i < len)) {
-                                                    _context.next = 13;
+                                                    _context.next = 12;
                                                     break;
                                                 }
 
@@ -71,17 +71,15 @@ var checkCreateActions = exports.checkCreateActions = function () {
                                             case 8:
                                                 callActions = _context.sent;
 
-                                                if (callActions) console.log("create or update new action complete");else console.log("have a action already!!");
-
-                                            case 10:
+                                            case 9:
                                                 i++;
                                                 _context.next = 2;
                                                 break;
 
-                                            case 13:
+                                            case 12:
                                                 return _context.abrupt('return', data[len - 1].date);
 
-                                            case 14:
+                                            case 13:
                                             case 'end':
                                                 return _context.stop();
                                         }

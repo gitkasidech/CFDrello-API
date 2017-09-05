@@ -45,7 +45,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var saveLCAD = exports.saveLCAD = function () {
     var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(req, res, next) {
-        var inf, callInf, key, promises, _ref2, _ref3, callLabels, callCards, callActions, postDateActionCards;
+        var inf, callInf, key, promises, _ref2, _ref3, callLabels, callCards, callActions, postDateActionCards, d, endDate, day, startDate, _startDate$split, _startDate$split2, yearS, monthS, dateS, dayS, _endDate$split, _endDate$split2, yearE, monthE, dateE, dayE, data, getDateActionCards;
 
         return _regenerator2.default.wrap(function _callee$(_context) {
             while (1) {
@@ -83,25 +83,41 @@ var saveLCAD = exports.saveLCAD = function () {
 
                     case 18:
                         postDateActionCards = _context.sent;
+                        d = new Date();
 
+                        d.setDate(d.getDate() - 1);
+                        _context.next = 23;
+                        return (0, _convertDates.convertDates)(d);
 
-                        // let d = new Date()
-                        // d.setDate(d.getDate() - 1)
-                        // const endDate = convertDates(d)
-                        // console.log(endDate)
-                        // let day = d.getDay()
-                        // d.setDate(d.getDate() - day)
-                        // const startDate = convertDates(d)
-                        // const data = {
-                        //     idDashboard: inf._id,
-                        //     start: startDate,
-                        //     end: endDate
-                        // }
-                        // const getActionCards = await countData(data)
-                        // res.json(getActionCards)
-                        res.send("OK");
+                    case 23:
+                        endDate = _context.sent;
+                        day = d.getDay();
 
-                    case 20:
+                        d.setDate(d.getDate() - day);
+                        _context.next = 28;
+                        return (0, _convertDates.convertDates)(d);
+
+                    case 28:
+                        startDate = _context.sent;
+                        _startDate$split = startDate.split('-'), _startDate$split2 = (0, _slicedToArray3.default)(_startDate$split, 4), yearS = _startDate$split2[0], monthS = _startDate$split2[1], dateS = _startDate$split2[2], dayS = _startDate$split2[3];
+                        _endDate$split = endDate.split('-'), _endDate$split2 = (0, _slicedToArray3.default)(_endDate$split, 4), yearE = _endDate$split2[0], monthE = _endDate$split2[1], dateE = _endDate$split2[2], dayE = _endDate$split2[3];
+
+                        startDate = [yearS, monthS, dateS].join('-');
+                        endDate = [yearE, monthE, dateE].join('-');
+                        data = {
+                            idDashboard: inf._id,
+                            start: startDate,
+                            end: endDate
+                        };
+                        _context.next = 36;
+                        return (0, _getDateActionCards.countData)(data);
+
+                    case 36:
+                        getDateActionCards = _context.sent;
+
+                        res.json(getDateActionCards);
+
+                    case 38:
                     case 'end':
                         return _context.stop();
                 }

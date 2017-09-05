@@ -54,7 +54,7 @@ var checkCreateCards = exports.checkCreateCards = function () {
 
                                             case 4:
                                                 if (!(i < len)) {
-                                                    _context.next = 15;
+                                                    _context.next = 14;
                                                     break;
                                                 }
 
@@ -69,14 +69,12 @@ var checkCreateCards = exports.checkCreateCards = function () {
                                             case 10:
                                                 callCards = _context.sent;
 
-                                                if (callCards) console.log("create or update new card complete");else console.log("have a card already!!");
-
-                                            case 12:
+                                            case 11:
                                                 i++;
                                                 _context.next = 4;
                                                 break;
 
-                                            case 15:
+                                            case 14:
                                             case 'end':
                                                 return _context.stop();
                                         }
@@ -87,7 +85,12 @@ var checkCreateCards = exports.checkCreateCards = function () {
                             return function (_x4, _x5) {
                                 return _ref2.apply(this, arguments);
                             };
-                        }());
+                        }()
+                        // if (callCards) 
+                        //     console.log("create or update new card complete")
+                        // else 
+                        //     console.log("have a card already!!")
+                        );
 
                     case 2:
                     case 'end':

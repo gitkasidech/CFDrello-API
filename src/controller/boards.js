@@ -11,10 +11,10 @@ export const checkCreateBoard = async (inf) => {
             if (err) throw err
             const boards = await Boards.findOne({id:(inf.idBoards)[i]});
             const callcreate = await createnewBoards(Boards,boards,data)
-            if (callcreate) 
-                console.log("create or update new board complete")
-            else 
-                console.log("have a board already!!")
+            // if (callcreate) 
+            //     console.log("create or update new board complete")
+            // else 
+            //     console.log("have a board already!!")
             const callLists = await checkCreateLists(inf.app_id, inf.token,(inf.idBoards)[i])
         })
     }

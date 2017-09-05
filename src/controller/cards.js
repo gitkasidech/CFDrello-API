@@ -9,10 +9,10 @@ export const checkCreateCards = async(board,key,token) => {
         for (let i = 0; i < len; i++){
             const cards = await Cards.findOne({id:(data[i]).id})
             const callCards = await createnewCards(Cards,cards,data[i])
-            if (callCards) 
-                console.log("create or update new card complete")
-            else 
-                console.log("have a card already!!")
+            // if (callCards) 
+            //     console.log("create or update new card complete")
+            // else 
+            //     console.log("have a card already!!")
         }  
     })   
 }

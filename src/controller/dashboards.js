@@ -3,15 +3,13 @@ import {Dashboards} from '../models/dashboards' //as rename
 export const saveData = async(req, res, next) => {
     console.log(`POST '/dashboards' 🤠 ${Date()}`)
     const inf = req.body
-    console.log(inf)
     const callInf = await checkInf(inf);
-    console.log(callInf)
     if (callInf)
         return res.status(500).send("format should be")
 
     const callCreate = await createnewDashboards(Dashboards, inf);
-    console.log("create new dashboards complete");
-    console.log(callCreate);
+    // console.log("create new dashboards complete");
+    // console.log(callCreate);
     return res.json({idDashboard: callCreate._id})
 }
 
