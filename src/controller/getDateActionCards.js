@@ -1,5 +1,6 @@
 import {DateActionCards} from '../models/dateActionCards'
 import {convertDates} from './convertDates'
+import {createHourActionCards} from './hourActionCards'
 
 export const dayCountCards = async (req, res, next) => {
     console.log(`GET '/dateactioncards/${req.params.idDashboard}/${req.params.start}/${req.params.end}' 🤠 ${Date()}`)
@@ -11,8 +12,14 @@ export const dayCountCards = async (req, res, next) => {
         start: req.params.start,
         end: req.params.end
     }
-    const getDateActionCards = await countData(data)
-    res.json(getDateActionCards)
+    if(data.start == data.end){
+        const hourActionCards = await createHourActionCards(data)
+        res.json(hourActionCards)
+    }
+    else{
+        const getDateActionCards = await countData(data)
+        res.json(getDateActionCards)
+    }  
 }
 
 export const countData = async (data) => {
@@ -48,3 +55,5 @@ export const countData = async (data) => {
     }
     return getDateActionCards
 }
+
+

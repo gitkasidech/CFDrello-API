@@ -13,10 +13,6 @@ var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _nodeTrello = require('node-trello');
-
-var _nodeTrello2 = _interopRequireDefault(_nodeTrello);
-
 var _dateActionCards = require('../models/dateActionCards');
 
 var _actions = require('../models/actions');
@@ -27,7 +23,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var createDateActionCards = exports.createDateActionCards = function () {
     var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(dateStart, dashboard) {
-        var now, countBack, countInpr, countComp, d, ymd, dataThisDay, len, listBack, listInpr, listComp, i, data, allData, dateActionCards, callDateActionCards;
+        var now, countBack, countInpr, countComp, d, ymd, dataThisDay, len, listBack, listInpr, listComp, dateAction, i, data, allData, dateActionCards, callDateActionCards;
         return _regenerator2.default.wrap(function _callee$(_context) {
             while (1) {
                 switch (_context.prev = _context.next) {
@@ -40,7 +36,7 @@ var createDateActionCards = exports.createDateActionCards = function () {
 
                     case 5:
                         if (!(d <= now)) {
-                            _context.next = 27;
+                            _context.next = 28;
                             break;
                         }
 
@@ -58,43 +54,46 @@ var createDateActionCards = exports.createDateActionCards = function () {
                         listBack = dashboard.listBack;
                         listInpr = dashboard.listInpr;
                         listComp = dashboard.listComp;
+                        dateAction = d;
 
                         for (i = 0; i < len; i++) {
                             data = dataThisDay[i].data;
 
                             if (dataThisDay[i].type == "createCard") {
                                 if (listBack.indexOf(data.list.id) != -1) countBack++;else if (listInpr.indexOf(data.list.id) != -1) countInpr++;else if (listComp.indexOf(data.list.id) != -1) countComp++;
+                                dateAction = dataThisDay[i].date;
                             } else if (dataThisDay[i].type == "updateCard" && data.listAfter && data.listBefore) {
                                 if (listBack.indexOf(data.listAfter.id) != -1) countBack++;else if (listInpr.indexOf(data.listAfter.id) != -1) countInpr++;else if (listComp.indexOf(data.listAfter.id) != -1) countComp++;
 
                                 if (listBack.indexOf(data.listBefore.id) != -1) countBack--;else if (listInpr.indexOf(data.listBefore.id) != -1) countInpr--;else if (listComp.indexOf(data.listBefore.id) != -1) countComp--;
+                                dateAction = dataThisDay[i].date;
                             }
                         }
                         allData = {
-                            date: d,
+                            date: dateAction,
                             dateString: ymd,
                             countBack: countBack,
                             countInpr: countInpr,
                             countComp: countComp,
                             idDashboard: dashboard._id
                         };
-                        _context.next = 20;
+                        _context.next = 21;
                         return _dateActionCards.DateActionCards.findOne({ dateString: allData.dateString, idDashboard: allData.idDashboard });
 
-                    case 20:
+                    case 21:
                         dateActionCards = _context.sent;
-                        _context.next = 23;
+                        _context.next = 24;
                         return createnewDateActionCards(_dateActionCards.DateActionCards, allData, dateActionCards);
 
-                    case 23:
+                    case 24:
                         callDateActionCards = _context.sent;
 
-                    case 24:
+                    case 25:
                         d.setDate(d.getDate() + 1);
                         _context.next = 5;
                         break;
 
-                    case 27:
+                    case 28:
                     case 'end':
                         return _context.stop();
                 }

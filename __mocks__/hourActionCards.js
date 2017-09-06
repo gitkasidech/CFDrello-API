@@ -1,6 +1,6 @@
 import Promise from 'bluebird'
 
-export default class MockDateActionCards {
+export default class MockHourActionCards {
     constructor(records = []) {
         this.records = records
         this.recordsUpdate = []

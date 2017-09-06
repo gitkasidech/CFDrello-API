@@ -21,11 +21,13 @@ var _dateActionCards = require('../models/dateActionCards');
 
 var _convertDates = require('./convertDates');
 
+var _hourActionCards = require('./hourActionCards');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var dayCountCards = exports.dayCountCards = function () {
     var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(req, res, next) {
-        var data, getDateActionCards;
+        var data, hourActionCards, getDateActionCards;
         return _regenerator2.default.wrap(function _callee$(_context) {
             while (1) {
                 switch (_context.prev = _context.next) {
@@ -39,15 +41,32 @@ var dayCountCards = exports.dayCountCards = function () {
                             start: req.params.start,
                             end: req.params.end
                         };
-                        _context.next = 6;
+
+                        if (!(data.start == data.end)) {
+                            _context.next = 11;
+                            break;
+                        }
+
+                        _context.next = 7;
+                        return (0, _hourActionCards.createHourActionCards)(data);
+
+                    case 7:
+                        hourActionCards = _context.sent;
+
+                        res.json(hourActionCards);
+                        _context.next = 15;
+                        break;
+
+                    case 11:
+                        _context.next = 13;
                         return countData(data);
 
-                    case 6:
+                    case 13:
                         getDateActionCards = _context.sent;
 
                         res.json(getDateActionCards);
 
-                    case 8:
+                    case 15:
                     case 'end':
                         return _context.stop();
                 }

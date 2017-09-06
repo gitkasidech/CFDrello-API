@@ -1,4 +1,3 @@
-import Trello from 'node-trello'
 import {DateActionCards} from '../models/dateActionCards'
 import {Actions} from '../models/actions'
 import {convertDates} from './convertDates'
@@ -15,12 +14,14 @@ export const createDateActionCards = async(dateStart,dashboard) => {
         const listBack = dashboard.listBack
         const listInpr = dashboard.listInpr
         const listComp = dashboard.listComp
+        let dateAction = d
         for(let i=0;i<len;i++){
             const data = dataThisDay[i].data
             if(dataThisDay[i].type=="createCard"){
                 if (listBack.indexOf(data.list.id) != -1) countBack++
                 else if (listInpr.indexOf(data.list.id) != -1) countInpr++
                 else if (listComp.indexOf(data.list.id) != -1) countComp++
+                dateAction = dataThisDay[i].date
             }
             else if(dataThisDay[i].type=="updateCard" && data.listAfter && data.listBefore){
                 if (listBack.indexOf(data.listAfter.id) != -1) countBack++
@@ -30,10 +31,11 @@ export const createDateActionCards = async(dateStart,dashboard) => {
                 if (listBack.indexOf(data.listBefore.id) != -1) countBack--
                 else if (listInpr.indexOf(data.listBefore.id) != -1) countInpr--
                 else if (listComp.indexOf(data.listBefore.id) != -1) countComp--
+                dateAction = dataThisDay[i].date
             }
         }
         const allData = {
-            date: d,
+            date: dateAction,
             dateString: ymd,
             countBack: countBack,
             countInpr: countInpr,
@@ -55,7 +57,7 @@ export const createnewDateActionCards = async (DateActionCards,allData,dateActio
         return newDateActionCards
     }
     else if (allData.countBack != dateActionCards.countBack || allData.countInpr != dateActionCards.countInpr || allData.countComp != dateActionCards.countComp ) {
-        const newDateActionCards = await DateActionCards.update({id: dateActionCards._id},{$set:{
+        const newDateActionCards = await DateActionCards.update({_id: dateActionCards._id},{$set:{
             countBack: allData.countBack,
             countInpr: allData.countInpr,
             countComp: allData.countComp
