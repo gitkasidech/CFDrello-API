@@ -32,23 +32,26 @@ var createDateActionCards = exports.createDateActionCards = function () {
                         countBack = 0;
                         countInpr = 0;
                         countComp = 0;
+
+                        now.setDate(now.getDate() + 1);
                         d = new Date(dateStart);
 
-                    case 5:
+                    case 6:
                         if (!(d <= now)) {
-                            _context.next = 28;
+                            _context.next = 30;
                             break;
                         }
 
-                        _context.next = 8;
+                        console.log(d);
+                        _context.next = 10;
                         return (0, _convertDates.convertDates)(d);
 
-                    case 8:
+                    case 10:
                         ymd = _context.sent;
-                        _context.next = 11;
+                        _context.next = 13;
                         return _actions.Actions.find({ dateString: ymd });
 
-                    case 11:
+                    case 13:
                         dataThisDay = _context.sent;
                         len = dataThisDay.length;
                         listBack = dashboard.listBack;
@@ -83,23 +86,23 @@ var createDateActionCards = exports.createDateActionCards = function () {
                             countComp: countComp,
                             idDashboard: dashboard._id
                         };
-                        _context.next = 21;
+                        _context.next = 23;
                         return _dateActionCards.DateActionCards.findOne({ dateString: allData.dateString, idDashboard: allData.idDashboard });
 
-                    case 21:
+                    case 23:
                         dateActionCards = _context.sent;
-                        _context.next = 24;
+                        _context.next = 26;
                         return createnewDateActionCards(_dateActionCards.DateActionCards, allData, dateActionCards);
 
-                    case 24:
+                    case 26:
                         callDateActionCards = _context.sent;
 
-                    case 25:
+                    case 27:
                         d.setDate(d.getDate() + 1);
-                        _context.next = 5;
+                        _context.next = 6;
                         break;
 
-                    case 28:
+                    case 30:
                     case 'end':
                         return _context.stop();
                 }
