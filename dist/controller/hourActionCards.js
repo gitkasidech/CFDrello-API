@@ -38,43 +38,35 @@ var createHourActionCards = exports.createHourActionCards = function () {
                 switch (_context.prev = _context.next) {
                     case 0:
                         _context.next = 2;
-                        return getYesterday(data);
+                        return getYesterday(_dateActionCards.DateActionCards, data);
 
                     case 2:
                         dataYesterday = _context.sent;
-
-                        console.log(dataYesterday);
                         today = new Date(data.start);
-                        _context.next = 7;
+                        _context.next = 6;
                         return (0, _convertDates.convertDates)(today);
 
-                    case 7:
+                    case 6:
                         thisDate = _context.sent;
-
-                        console.log(thisDate);
-                        _context.next = 11;
+                        _context.next = 9;
                         return _actions.Actions.find({ dateString: thisDate });
 
-                    case 11:
+                    case 9:
                         actions = _context.sent;
-
-                        console.log(actions);
-                        _context.next = 15;
+                        _context.next = 12;
                         return _dashboards.Dashboards.findOne({ _id: data.idDashboard });
 
-                    case 15:
+                    case 12:
                         dashboard = _context.sent;
 
-                        console.log(dashboard);
-
                         if (dashboard) {
-                            _context.next = 19;
+                            _context.next = 15;
                             break;
                         }
 
                         return _context.abrupt('return', "Error!! Not found dashboard");
 
-                    case 19:
+                    case 15:
                         listBack = dashboard.listBack;
                         listInpr = dashboard.listInpr;
                         listComp = dashboard.listComp;
@@ -85,9 +77,9 @@ var createHourActionCards = exports.createHourActionCards = function () {
                         dataComp = [];
                         i = 0;
 
-                    case 28:
+                    case 24:
                         if (!(i <= 23)) {
-                            _context.next = 45;
+                            _context.next = 41;
                             break;
                         }
 
@@ -97,12 +89,16 @@ var createHourActionCards = exports.createHourActionCards = function () {
                             hour = d.getHours();
 
                             if (i == hour) {
-                                if (actions[j].type == "createCard") {
+                                if (actions[j].type == "createCard" || actions[j].type == "moveCardToBoard") {
                                     if (listBack.indexOf(_data.list.id) != -1) dataYesterday.countBack++;else if (listInpr.indexOf(_data.list.id) != -1) dataYesterday.countInpr++;else if (listComp.indexOf(_data.list.id) != -1) dataYesterday.countComp++;
                                 } else if (actions[j].type == "updateCard" && _data.listAfter && _data.listBefore) {
                                     if (listBack.indexOf(_data.listAfter.id) != -1) dataYesterday.countBack++;else if (listInpr.indexOf(_data.listAfter.id) != -1) dataYesterday.countInpr++;else if (listComp.indexOf(_data.listAfter.id) != -1) dataYesterday.countComp++;
 
                                     if (listBack.indexOf(_data.listBefore.id) != -1) dataYesterday.countBack--;else if (listInpr.indexOf(_data.listBefore.id) != -1) dataYesterday.countInpr--;else if (listComp.indexOf(_data.listBefore.id) != -1) dataYesterday.countComp--;
+                                } else if (actions[j].type == "updateCard" && _data.card.closed == false && _data.old.closed == true) {
+                                    if (listBack.indexOf(_data.list.id) != -1) countBack++;else if (listInpr.indexOf(_data.list.id) != -1) countInpr++;else if (listComp.indexOf(_data.list.id) != -1) countComp++;
+                                } else if (actions[j].type == "updateCard" && _data.card.closed == true && _data.old.closed == false) {
+                                    if (listBack.indexOf(_data.list.id) != -1) countBack--;else if (listInpr.indexOf(_data.list.id) != -1) countInpr--;else if (listComp.indexOf(_data.list.id) != -1) countComp--;
                                 }
                             }
                         }
@@ -114,14 +110,14 @@ var createHourActionCards = exports.createHourActionCards = function () {
                             countComp: dataYesterday.countComp,
                             idDashboard: dashboard._id
                         };
-                        _context.next = 33;
+                        _context.next = 29;
                         return _hourActionCards.HourActionCards.findOne({
                             dateString: allData.dateString,
                             timeHour: allData.timeHour,
                             idDashboard: allData.idDashboard
                         });
 
-                    case 33:
+                    case 29:
                         hourActionCards = _context.sent;
 
                         console.log(allData);
@@ -130,18 +126,18 @@ var createHourActionCards = exports.createHourActionCards = function () {
                         dataInpr.push(allData.countInpr);
                         dataComp.push(allData.countComp);
 
-                        _context.next = 41;
+                        _context.next = 37;
                         return createnewHourActionCards(_hourActionCards.HourActionCards, allData, hourActionCards);
 
-                    case 41:
+                    case 37:
                         callHourActionCards = _context.sent;
 
-                    case 42:
+                    case 38:
                         i++;
-                        _context.next = 28;
+                        _context.next = 24;
                         break;
 
-                    case 45:
+                    case 41:
                         getHourActionCards = {
                             dataHour: dataHour,
                             dataBack: dataBack,
@@ -150,7 +146,7 @@ var createHourActionCards = exports.createHourActionCards = function () {
                         };
                         return _context.abrupt('return', getHourActionCards);
 
-                    case 47:
+                    case 43:
                     case 'end':
                         return _context.stop();
                 }
@@ -164,7 +160,7 @@ var createHourActionCards = exports.createHourActionCards = function () {
 }();
 
 var getYesterday = exports.getYesterday = function () {
-    var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(data) {
+    var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(DateActionCards, data) {
         var d, yesterday, dateActionCards, _yesterday$split, _yesterday$split2, year, month, date, day, dateY;
 
         return _regenerator2.default.wrap(function _callee2$(_context2) {
@@ -182,7 +178,7 @@ var getYesterday = exports.getYesterday = function () {
 
                         console.log("yesterday = " + yesterday);
                         _context2.next = 8;
-                        return _dateActionCards.DateActionCards.findOne({ dateString: yesterday, idDashboard: data.idDashboard });
+                        return DateActionCards.findOne({ dateString: yesterday, idDashboard: data.idDashboard });
 
                     case 8:
                         dateActionCards = _context2.sent;
@@ -212,7 +208,7 @@ var getYesterday = exports.getYesterday = function () {
         }, _callee2, undefined);
     }));
 
-    return function getYesterday(_x2) {
+    return function getYesterday(_x2, _x3) {
         return _ref2.apply(this, arguments);
     };
 }();
@@ -244,7 +240,7 @@ var createnewHourActionCards = exports.createnewHourActionCards = function () {
                         }
 
                         _context3.next = 10;
-                        return HourActionCards.update({ id: hourActionCards._id }, { $set: {
+                        return HourActionCards.update({ _id: hourActionCards._id }, { $set: {
                                 countBack: allData.countBack,
                                 countInpr: allData.countInpr,
                                 countComp: allData.countComp
@@ -265,7 +261,7 @@ var createnewHourActionCards = exports.createnewHourActionCards = function () {
         }, _callee3, undefined);
     }));
 
-    return function createnewHourActionCards(_x3, _x4, _x5) {
+    return function createnewHourActionCards(_x4, _x5, _x6) {
         return _ref3.apply(this, arguments);
     };
 }();

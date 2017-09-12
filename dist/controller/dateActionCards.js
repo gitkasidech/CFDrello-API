@@ -59,13 +59,19 @@ var createDateActionCards = exports.createDateActionCards = function () {
                         for (i = 0; i < len; i++) {
                             data = dataThisDay[i].data;
 
-                            if (dataThisDay[i].type == "createCard") {
+                            if (dataThisDay[i].type == "createCard" || dataThisDay[i].type == "moveCardToBoard") {
                                 if (listBack.indexOf(data.list.id) != -1) countBack++;else if (listInpr.indexOf(data.list.id) != -1) countInpr++;else if (listComp.indexOf(data.list.id) != -1) countComp++;
                                 dateAction = dataThisDay[i].date;
                             } else if (dataThisDay[i].type == "updateCard" && data.listAfter && data.listBefore) {
                                 if (listBack.indexOf(data.listAfter.id) != -1) countBack++;else if (listInpr.indexOf(data.listAfter.id) != -1) countInpr++;else if (listComp.indexOf(data.listAfter.id) != -1) countComp++;
 
                                 if (listBack.indexOf(data.listBefore.id) != -1) countBack--;else if (listInpr.indexOf(data.listBefore.id) != -1) countInpr--;else if (listComp.indexOf(data.listBefore.id) != -1) countComp--;
+                                dateAction = dataThisDay[i].date;
+                            } else if (dataThisDay[i].type == "updateCard" && data.card.closed == false && data.old.closed == true) {
+                                if (listBack.indexOf(data.list.id) != -1) countBack++;else if (listInpr.indexOf(data.list.id) != -1) countInpr++;else if (listComp.indexOf(data.list.id) != -1) countComp++;
+                                dateAction = dataThisDay[i].date;
+                            } else if (dataThisDay[i].type == "updateCard" && data.card.closed == true && data.old.closed == false) {
+                                if (listBack.indexOf(data.list.id) != -1) countBack--;else if (listInpr.indexOf(data.list.id) != -1) countInpr--;else if (listComp.indexOf(data.list.id) != -1) countComp--;
                                 dateAction = dataThisDay[i].date;
                             }
                         }
@@ -133,7 +139,7 @@ var createnewDateActionCards = exports.createnewDateActionCards = function () {
                         }
 
                         _context2.next = 10;
-                        return DateActionCards.update({ id: dateActionCards._id }, { $set: {
+                        return DateActionCards.update({ _id: dateActionCards._id }, { $set: {
                                 countBack: allData.countBack,
                                 countInpr: allData.countInpr,
                                 countComp: allData.countComp

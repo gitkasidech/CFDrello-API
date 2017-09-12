@@ -40,7 +40,7 @@ var checkCreateActions = exports.checkCreateActions = function () {
                     case 0:
                         t = new _nodeTrello2.default(key, token);
                         return _context2.abrupt('return', new _bluebird2.default(function (resolve, reject) {
-                            t.get("/1/boards/" + board + "/actions/?limit=1000", function (err, data) {
+                            t.get("/1/boards/" + board + "/actions/?filter=createCard,moveCardToBoard,updateCard:idList,updateCard:closed&limit=1000", function (err, data) {
                                 if (err) reject(err);
                                 resolve(data);
                             });

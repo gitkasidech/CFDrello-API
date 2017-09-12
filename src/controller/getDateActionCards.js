@@ -12,7 +12,7 @@ export const dayCountCards = async (req, res, next) => {
         start: req.params.start,
         end: req.params.end
     }
-    if(data.start == data.end){
+    if(data.start == data.end && req.params.end !=1){
         const hourActionCards = await createHourActionCards(data)
         res.json(hourActionCards)
     }

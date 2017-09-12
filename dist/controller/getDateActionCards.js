@@ -42,7 +42,7 @@ var dayCountCards = exports.dayCountCards = function () {
                             end: req.params.end
                         };
 
-                        if (!(data.start == data.end)) {
+                        if (!(data.start == data.end && req.params.end != 1)) {
                             _context.next = 11;
                             break;
                         }

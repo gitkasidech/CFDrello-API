@@ -28,7 +28,7 @@ export const createHourActionCards = async(data) => {
             let d = new Date(actions[j].date)
             let hour = (d.getHours())
             if(i==hour){
-                if(actions[j].type=="createCard"){
+                if(actions[j].type=="createCard" || actions[j].type=="moveCardToBoard"){
                     if (listBack.indexOf(data.list.id) != -1) dataYesterday.countBack++
                     else if (listInpr.indexOf(data.list.id) != -1) dataYesterday.countInpr++
                     else if (listComp.indexOf(data.list.id) != -1) dataYesterday.countComp++
@@ -41,6 +41,16 @@ export const createHourActionCards = async(data) => {
                     if (listBack.indexOf(data.listBefore.id) != -1) dataYesterday.countBack--
                     else if (listInpr.indexOf(data.listBefore.id) != -1) dataYesterday.countInpr--
                     else if (listComp.indexOf(data.listBefore.id) != -1) dataYesterday.countComp--
+                }
+                else if(actions[j].type=="updateCard" && data.card.closed == false && data.old.closed == true){ 
+                    if (listBack.indexOf(data.list.id) != -1) countBack++
+                    else if (listInpr.indexOf(data.list.id) != -1) countInpr++
+                    else if (listComp.indexOf(data.list.id) != -1) countComp++
+                }
+                else if(actions[j].type=="updateCard" && data.card.closed == true && data.old.closed == false){ 
+                    if (listBack.indexOf(data.list.id) != -1) countBack--
+                    else if (listInpr.indexOf(data.list.id) != -1) countInpr--
+                    else if (listComp.indexOf(data.list.id) != -1) countComp--
                 }
             }   
         }

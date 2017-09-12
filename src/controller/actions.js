@@ -4,9 +4,9 @@ import Promise from 'bluebird'
 import {convertDates} from './convertDates'
 
 export const checkCreateActions = async (board,key,token) => {
-    let t = new Trello(key,token)  
+    let t = new Trello(key,token)
     return new Promise((resolve, reject) => {
-        t.get("/1/boards/" + board + "/actions/?limit=1000", (err, data) =>{
+        t.get("/1/boards/"+board+"/actions/?filter=createCard,moveCardToBoard,updateCard:idList,updateCard:closed&limit=1000", (err, data) =>{
             if (err) reject(err)
             resolve(data)
         })
