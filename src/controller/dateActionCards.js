@@ -9,7 +9,6 @@ export const createDateActionCards = async(dateStart,dashboard) => {
     let countComp = 0
     now.setDate(now.getDate() + 1)
     for (let d = new Date(dateStart); d <= now; d.setDate(d.getDate() + 1)) {
-        console.log(d)
         const ymd = await convertDates(d)
         const dataThisDay =  await Actions.find({dateString: ymd})
         const len = dataThisDay.length

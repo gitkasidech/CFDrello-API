@@ -20,6 +20,8 @@ var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
 
+var _configs = require('./configs');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = (0, _express2.default)();
@@ -61,7 +63,7 @@ app.use(function () {
 
 route.setRoute(app); //go to route 
 
-app.set('port', process.env.PORT || 4444); //set port is 7777
+app.set('port', _configs.server.port || 3030); //set port is 4444
 
 app.listen(app.get('port'), (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2() {
     return _regenerator2.default.wrap(function _callee2$(_context2) {

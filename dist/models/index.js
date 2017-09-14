@@ -21,11 +21,13 @@ var _bluebird = require('bluebird');
 
 var _bluebird2 = _interopRequireDefault(_bluebird);
 
+var _configs = require('../configs');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _mongoose2.default.Promise = global.Promise;
 
-var dbCFDrello = exports.dbCFDrello = _mongoose2.default.connect('mongodb://localhost:27017/CFDrello', function () {
+var dbCFDrello = exports.dbCFDrello = _mongoose2.default.connect('mongodb://' + _configs.mongo.host + ':' + _configs.mongo.port + '/' + _configs.mongo.database, function () {
     var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(err) {
         return _regenerator2.default.wrap(function _callee$(_context) {
             while (1) {

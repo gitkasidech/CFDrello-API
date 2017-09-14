@@ -38,20 +38,19 @@ var createDateActionCards = exports.createDateActionCards = function () {
 
                     case 6:
                         if (!(d <= now)) {
-                            _context.next = 30;
+                            _context.next = 29;
                             break;
                         }
 
-                        console.log(d);
-                        _context.next = 10;
+                        _context.next = 9;
                         return (0, _convertDates.convertDates)(d);
 
-                    case 10:
+                    case 9:
                         ymd = _context.sent;
-                        _context.next = 13;
+                        _context.next = 12;
                         return _actions.Actions.find({ dateString: ymd });
 
-                    case 13:
+                    case 12:
                         dataThisDay = _context.sent;
                         len = dataThisDay.length;
                         listBack = dashboard.listBack;
@@ -86,23 +85,23 @@ var createDateActionCards = exports.createDateActionCards = function () {
                             countComp: countComp,
                             idDashboard: dashboard._id
                         };
-                        _context.next = 23;
+                        _context.next = 22;
                         return _dateActionCards.DateActionCards.findOne({ dateString: allData.dateString, idDashboard: allData.idDashboard });
 
-                    case 23:
+                    case 22:
                         dateActionCards = _context.sent;
-                        _context.next = 26;
+                        _context.next = 25;
                         return createnewDateActionCards(_dateActionCards.DateActionCards, allData, dateActionCards);
 
-                    case 26:
+                    case 25:
                         callDateActionCards = _context.sent;
 
-                    case 27:
+                    case 26:
                         d.setDate(d.getDate() + 1);
                         _context.next = 6;
                         break;
 
-                    case 30:
+                    case 29:
                     case 'end':
                         return _context.stop();
                 }

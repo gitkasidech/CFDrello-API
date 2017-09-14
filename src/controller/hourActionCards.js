@@ -67,7 +67,6 @@ export const createHourActionCards = async(data) => {
             timeHour: allData.timeHour,
             idDashboard: allData.idDashboard
         })
-        console.log(allData)
         dataHour.push(i)
         dataBack.push(allData.countBack)
         dataInpr.push(allData.countInpr)
@@ -92,7 +91,6 @@ export const getYesterday = async (DateActionCards,data) => {
     let d = new Date(data.start)
     d.setDate(d.getDate() - 1)
     let yesterday = await convertDates(d)
-    console.log("yesterday = "+yesterday)
     let dateActionCards = await DateActionCards.findOne({ dateString: yesterday, idDashboard: data.idDashboard})
     if(!dateActionCards){
         let [year, month, date, day] = yesterday.split('-')
