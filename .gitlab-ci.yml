@@ -8,8 +8,8 @@ build_docker_image_prod:
   stage: build_image
   script:
     - "echo $(date +%s) >> g_timestamp"
-    - docker build -t asia.gcr.io/socialenable4/trainee/cfdrello-api:production .
-    - "docker tag asia.gcr.io/socialenable4/trainee/cfdrello-api:production \"asia.gcr.io/socialenable4/trainee/cfdrello-api:`cat g_timestamp`\""
+    - docker build -t asia.gcr.io/socialenable4/trainee/cfdrelloapi:production .
+    - "docker tag asia.gcr.io/socialenable4/trainee/cfdrelloapi:production \"asia.gcr.io/socialenable4/trainee/cfdrelloapi:`cat g_timestamp`\""
   artifacts:
     paths:
     - g_timestamp
@@ -19,14 +19,14 @@ build_docker_image_prod:
 push_docker_image:
   stage: push_image
   script:
-    - gcloud docker -- push asia.gcr.io/socialenable4/trainee/cfdrello-api
+    - gcloud docker -- push asia.gcr.io/socialenable4/trainee/cfdrelloapi
   only:
     - master
 
 clean_image:
   stage: clean_image
   script:
-    - docker images | grep asia.gcr.io/socialenable4/trainee/cfdrello-api | awk '{ print $3 }' | uniq | awk 'NR > 4 { print }' | xargs -i docker rmi {} -f
+    - docker images | grep asia.gcr.io/socialenable4/trainee/cfdrelloapi | awk '{ print $3 }' | uniq | awk 'NR > 4 { print }' | xargs -i docker rmi {} -f
   allow_failure: true
   only:
     - master
