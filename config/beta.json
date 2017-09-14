@@ -9,7 +9,7 @@
     "port": 3000
   },
   "webs": {
-    "host": "127.0.0.1",
-    "port": 80
+    "host": "CFDrello-WEB",
+    "port": 30356
   }
 }
