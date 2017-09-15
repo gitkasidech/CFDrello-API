@@ -18,7 +18,7 @@ spec:
         - name: PORT
           value: '3000'
           name: NODE_ENV
-          value: beta
+          value: 'beta'
         ports:
         - name: cfdrelloapi
           containerPort: 3000
