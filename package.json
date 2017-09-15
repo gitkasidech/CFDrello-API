@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./index",
+    "start": "node dist/server.js",
     "development": "nodemon ./src/app --exec babel-node",
     "prestart": "npm run build",
     "build": "babel src --source-maps --out-dir dist",
