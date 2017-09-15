@@ -10,6 +10,6 @@
   },
   "webs": {
     "host": "cfdrellweb",
-    "port": 30356
+    "port": 4200
   }
 }
