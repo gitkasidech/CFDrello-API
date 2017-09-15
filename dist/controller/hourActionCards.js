@@ -79,7 +79,7 @@ var createHourActionCards = exports.createHourActionCards = function () {
 
                     case 24:
                         if (!(i <= 23)) {
-                            _context.next = 41;
+                            _context.next = 40;
                             break;
                         }
 
@@ -120,24 +120,23 @@ var createHourActionCards = exports.createHourActionCards = function () {
                     case 29:
                         hourActionCards = _context.sent;
 
-                        console.log(allData);
                         dataHour.push(i);
                         dataBack.push(allData.countBack);
                         dataInpr.push(allData.countInpr);
                         dataComp.push(allData.countComp);
 
-                        _context.next = 37;
+                        _context.next = 36;
                         return createnewHourActionCards(_hourActionCards.HourActionCards, allData, hourActionCards);
 
-                    case 37:
+                    case 36:
                         callHourActionCards = _context.sent;
 
-                    case 38:
+                    case 37:
                         i++;
                         _context.next = 24;
                         break;
 
-                    case 41:
+                    case 40:
                         getHourActionCards = {
                             dataHour: dataHour,
                             dataBack: dataBack,
@@ -146,7 +145,7 @@ var createHourActionCards = exports.createHourActionCards = function () {
                         };
                         return _context.abrupt('return', getHourActionCards);
 
-                    case 43:
+                    case 42:
                     case 'end':
                         return _context.stop();
                 }
@@ -175,12 +174,10 @@ var getYesterday = exports.getYesterday = function () {
 
                     case 4:
                         yesterday = _context2.sent;
-
-                        console.log("yesterday = " + yesterday);
-                        _context2.next = 8;
+                        _context2.next = 7;
                         return DateActionCards.findOne({ dateString: yesterday, idDashboard: data.idDashboard });
 
-                    case 8:
+                    case 7:
                         dateActionCards = _context2.sent;
 
                         if (!dateActionCards) {
@@ -200,7 +197,7 @@ var getYesterday = exports.getYesterday = function () {
                         }
                         return _context2.abrupt('return', dateActionCards);
 
-                    case 11:
+                    case 10:
                     case 'end':
                         return _context2.stop();
                 }

@@ -15,4 +15,9 @@ var mongo = exports.mongo = {
 var server = exports.server = {
   port: process.env.PORT || configs.server.port
 };
+
+var webs = exports.webs = {
+  host: process.env.WEBS_HOST || configs.webs.host,
+  port: process.env.WEBS_PORT || configs.webs.port
+};
 //# sourceMappingURL=configs.js.map

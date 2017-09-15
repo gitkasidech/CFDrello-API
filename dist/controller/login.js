@@ -23,6 +23,8 @@ var _url2 = _interopRequireDefault(_url);
 
 var _members = require('./members');
 
+var _configs = require('../configs');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var OAuth = require('oauth').OAuth;
@@ -31,14 +33,14 @@ var OAuth = require('oauth').OAuth;
 var requestURL = "https://trello.com/1/OAuthGetRequestToken";
 var accessURL = "https://trello.com/1/OAuthGetAccessToken";
 var authorizeURL = "https://trello.com/1/OAuthAuthorizeToken";
-var sendURL = "http://localhost:4200/gettoken";
-var beginURL = "http://localhost:4200";
+// const sendURL = "http://127.0.0.1/gettoken"
+// const beginURL = "http://127.0.0.1"
 var appName = "CFDrello Dashboard";
 
 var key = "662fa775f48bd56cea11e8be634da284";
 var secret = "8e3dd310f5a5a5e8757563ecc30d992664d895abc296441bfc1cf515ffdefa51";
 
-var loginCallback = "http://localhost:4444/callback";
+var loginCallback = "http://127.0.0.1:3000/callback";
 var oauth_secrets = {};
 
 var oauth = new OAuth(requestURL, accessURL, key, secret, "1.0A", loginCallback, "HMAC-SHA1");
@@ -95,7 +97,7 @@ var callback = exports.callback = function () {
                                                             while (1) {
                                                                 switch (_context2.prev = _context2.next) {
                                                                     case 0:
-                                                                        if (error) res.redirect('' + beginURL);
+                                                                        if (error) res.redirect('http://' + _configs.webs.host);
                                                                         console.log('in getProtectedResource - accessToken: ' + accessToken + ', accessTokenSecret: ' + accessTokenSecret);
                                                                         dataJ = JSON.parse(data);
                                                                         sendData = {
@@ -112,7 +114,7 @@ var callback = exports.callback = function () {
                                                                     case 6:
                                                                         resData = _context2.sent;
 
-                                                                        res.redirect(sendURL + '/' + accessToken + '/' + dataJ.id);
+                                                                        res.redirect('http://' + _configs.webs.host + '/gettoken/' + accessToken + '/' + dataJ.id);
 
                                                                     case 8:
                                                                     case 'end':
