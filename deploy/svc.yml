@@ -5,11 +5,10 @@ metadata:
   namespace: trainee
 spec:
   ports:
-  - name: '3000'
-    port: 3000
+  - port: 3000
     protocol: TCP
     targetPort: 3000
-  nodePort: 30355
+    nodePort: 30355
   type: NodePort
   selector:
     app: trainee
