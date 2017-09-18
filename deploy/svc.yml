@@ -1,14 +1,15 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: cfdrelloapi
   namespace: trainee
 spec:
+  selector:
+    app: cfdrelloapi
+  type: NodePort
   ports:
-  - port: 3000
+  - name: cfdrelloapi
     protocol: TCP
+    port: 3000
     targetPort: 3000
     nodePort: 30355
-  type: NodePort
-  selector:
-    app: trainee
