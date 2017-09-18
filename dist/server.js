@@ -63,7 +63,7 @@ app.use(function () {
 
 route.setRoute(app); //go to route 
 
-app.set('port', _configs.server.port || 3000); //set port is 4444
+app.set('port', _configs.server.port || 4444); //set port is 4444
 
 app.listen(app.get('port'), (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2() {
     return _regenerator2.default.wrap(function _callee2$(_context2) {
