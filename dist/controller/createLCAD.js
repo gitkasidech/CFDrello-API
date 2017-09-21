@@ -41,6 +41,8 @@ var _dateActionCards = require('./dateActionCards');
 
 var _convertDates = require('./convertDates');
 
+var _actions2 = require('../models/actions');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var saveLCAD = exports.saveLCAD = function () {
@@ -78,26 +80,28 @@ var saveLCAD = exports.saveLCAD = function () {
                         callLabels = _ref3[0];
                         callCards = _ref3[1];
                         callActions = _ref3[2];
-                        _context.next = 18;
+
+                        console.log(callActions);
+                        _context.next = 19;
                         return (0, _dateActionCards.createDateActionCards)(callActions, inf);
 
-                    case 18:
+                    case 19:
                         postDateActionCards = _context.sent;
                         d = new Date();
 
                         d.setDate(d.getDate() - 1);
-                        _context.next = 23;
+                        _context.next = 24;
                         return (0, _convertDates.convertDates)(d);
 
-                    case 23:
+                    case 24:
                         endDate = _context.sent;
                         day = d.getDay();
 
                         d.setDate(d.getDate() - day);
-                        _context.next = 28;
+                        _context.next = 29;
                         return (0, _convertDates.convertDates)(d);
 
-                    case 28:
+                    case 29:
                         startDate = _context.sent;
                         _startDate$split = startDate.split('-'), _startDate$split2 = (0, _slicedToArray3.default)(_startDate$split, 4), yearS = _startDate$split2[0], monthS = _startDate$split2[1], dateS = _startDate$split2[2], dayS = _startDate$split2[3];
                         _endDate$split = endDate.split('-'), _endDate$split2 = (0, _slicedToArray3.default)(_endDate$split, 4), yearE = _endDate$split2[0], monthE = _endDate$split2[1], dateE = _endDate$split2[2], dayE = _endDate$split2[3];
@@ -109,15 +113,15 @@ var saveLCAD = exports.saveLCAD = function () {
                             start: startDate,
                             end: endDate
                         };
-                        _context.next = 36;
+                        _context.next = 37;
                         return (0, _getDateActionCards.countData)(data);
 
-                    case 36:
+                    case 37:
                         getDateActionCards = _context.sent;
 
                         res.json(getDateActionCards);
 
-                    case 38:
+                    case 39:
                     case 'end':
                         return _context.stop();
                 }
