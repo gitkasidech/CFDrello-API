@@ -6,6 +6,7 @@ import { checkCreateActions } from './actions'
 import { countData } from './getDateActionCards'
 import { createDateActionCards } from './dateActionCards'
 import {convertDates} from './convertDates'
+import {Actions} from '../models/actions'
 
 export const saveLCAD = async (req, res, next) => {
     console.log(`POST '/createlcad' 🤠 ${Date()}`)
@@ -21,6 +22,7 @@ export const saveLCAD = async (req, res, next) => {
         checkCreateActions(inf.idBoard,key,inf.token)
     ]
     const [callLabels,callCards,callActions] = await Promise.all(promises) 
+    console.log(callActions)
     const postDateActionCards = await createDateActionCards(callActions,inf)
 
     let d = new Date()

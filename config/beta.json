@@ -1,15 +1,15 @@
 {
   "mongo": {
     "adapter": "mongodb",
-    "host": "mymongo",
+    "host": "mongodb",
     "database": "CFDrello",
     "port": 27017
   },
   "server": {
-    "port": 3000
+    "port": 30355
   },
   "webs": {
-    "host": "127.0.0.1",
-    "port": 80
+    "host": "104.199.181.163",
+    "port": 30356
   }
 }
