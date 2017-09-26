@@ -4,6 +4,7 @@ import { dbCFDrello } from './index'
 const ActionsSchema = mongoose.Schema({
     id: String,
     idMemberCreator: String,
+    memberCreator: Object,
     data: Object,
     type: String,
     date: Date,

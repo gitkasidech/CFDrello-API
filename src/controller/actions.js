@@ -94,6 +94,7 @@ export const createnewActions = async (Actions,actions,data) => {
         const newactions = await Actions.create({
             id: data.id,
             idMemberCreator: data.idMemberCreator,
+            memberCreator: data.memberCreator,
             data: data.data,
             type: data.type,
             date: data.date,
@@ -101,11 +102,12 @@ export const createnewActions = async (Actions,actions,data) => {
         })
         return newactions
     }
-    else if (actions.idMemberCreator != data.idMemberCreator || JSON.stringify(actions.data) != JSON.stringify(data.data) || actions.type != data.type || actions.date != data.date ) {
+    else if (actions.idMemberCreator != data.idMemberCreator || JSON.stringify(actions.data) != JSON.stringify(data.data) || actions.type != data.type || actions.date != data.date || JSON.stringify(actions.memberCreator) != JSON.stringify(data.memberCreator)) {
         let d = new Date(data.date)
         const ymd = await convertDates(d)
         const newactions = await Actions.update({id: data.id},{$set:{
             idMemberCreator: data.idMemberCreator,
+            memberCreator: data.memberCreator,
             data: data.data,
             type: data.type,
             date: data.date,
