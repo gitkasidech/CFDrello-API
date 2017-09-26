@@ -27,6 +27,8 @@ var _createLCAD = require('../../controller/createLCAD');
 
 var _getDateActionCards = require('../../controller/getDateActionCards');
 
+var _getActionActivity = require('../../controller/getActionActivity');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var setRoute = exports.setRoute = function () {
@@ -43,8 +45,9 @@ var setRoute = exports.setRoute = function () {
                         app.post('/dashboards', _dashboards.saveData);
                         app.post('/createlcad', _createLCAD.saveLCAD);
                         app.get('/dateactioncards/:idDashboard/:start/:end', _getDateActionCards.dayCountCards);
+                        app.get('/getactionactivity/:idBoard', _getActionActivity.getActionActivity);
 
-                    case 8:
+                    case 9:
                     case 'end':
                         return _context.stop();
                 }

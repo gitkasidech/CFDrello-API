@@ -7,6 +7,13 @@ const mockActions = new MockActions()
 const actions = {
     id: "123a",
     idMemberCreator: "aa11",
+    memberCreator: {
+      id: "aa11",
+      avatarHash: "a1",
+      fullName: "Brian Cervino",
+      initials: "BC",
+      username: "brian"
+    },
     data: {
         list: {
           name: "Done",
@@ -37,6 +44,13 @@ test('new actions', async () => {
     const send = {
         id: "123a",
         idMemberCreator: "aa11",
+        memberCreator: {
+          id: "aa11",
+          avatarHash: "a1",
+          fullName: "Brian Cervino",
+          initials: "BC",
+          username: "brian"
+        },
         data: {
             list: {
               name: "Done",
@@ -68,10 +82,17 @@ test('new actions', async () => {
     expect(callRec.length).toEqual(1)
 });
 
-test('update idMemberCreator', async() => {
+test('update idMemberCreator and memberCreator', async() => {
     const send = {
         id: "123a",
         idMemberCreator: "bb22",
+        memberCreator: {
+          id: "bb22",
+          avatarHash: "a1",
+          fullName: "Brian Cervino",
+          initials: "BC",
+          username: "brian"
+        },
         data: {
             list: {
               name: "Done",
@@ -106,6 +127,13 @@ test('update data', async() => {
     const send = {
         id: "123a",
         idMemberCreator: "aa11",
+        memberCreator: {
+          id: "aa11",
+          avatarHash: "a1",
+          fullName: "Brian Cervino",
+          initials: "BC",
+          username: "brian"
+        },
         data: {
             listAfter: {
               name: "Done",
@@ -144,6 +172,13 @@ test('update type', async() => {
     const send = {
         id: "123a",
         idMemberCreator: "aa11",
+        memberCreator: {
+          id: "aa11",
+          avatarHash: "a1",
+          fullName: "Brian Cervino",
+          initials: "BC",
+          username: "brian"
+        },
         data: {
             list: {
               name: "Done",
@@ -178,6 +213,13 @@ test('update date', async() => {
     const send = {
         id: "123a",
         idMemberCreator: "aa11",
+        memberCreator: {
+          id: "aa11",
+          avatarHash: "a1",
+          fullName: "Brian Cervino",
+          initials: "BC",
+          username: "brian"
+        },
         data: {
             list: {
               name: "Done",
@@ -212,6 +254,13 @@ test('update all', async() => {
     const send = {
         id: "123a",
         idMemberCreator: "bb22",
+        memberCreator: {
+          id: "bb22",
+          avatarHash: "a1",
+          fullName: "Brian Cervino",
+          initials: "BC",
+          username: "brian"
+        },
         data: {
             listAfter: {
               name: "Done",
@@ -250,6 +299,13 @@ test('have actions already', async() => {
     const send = {
         id: "123a",
         idMemberCreator: "aa11",
+        memberCreator: {
+          id: "aa11",
+          avatarHash: "a1",
+          fullName: "Brian Cervino",
+          initials: "BC",
+          username: "brian"
+        },
         data: {
             list: {
               name: "Done",

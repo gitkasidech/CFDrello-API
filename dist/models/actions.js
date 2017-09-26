@@ -16,6 +16,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var ActionsSchema = _mongoose2.default.Schema({
     id: String,
     idMemberCreator: String,
+    memberCreator: Object,
     data: Object,
     type: String,
     date: Date,

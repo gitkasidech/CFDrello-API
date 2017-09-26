@@ -20,6 +20,7 @@ export default class MockActions {
         return new Promise(resolve => {
             const updateItem = this.records
             updateItem[0].idMemberCreator = objUpdate['$set'].idMemberCreator
+            updateItem[0].memberCreator = objUpdate['$set'].memberCreator
             updateItem[0].data = objUpdate['$set'].data
             updateItem[0].type = objUpdate['$set'].type
             updateItem[0].date = objUpdate['$set'].date

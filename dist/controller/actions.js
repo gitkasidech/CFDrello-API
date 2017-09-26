@@ -355,6 +355,7 @@ var createnewActions = exports.createnewActions = function () {
                         return Actions.create({
                             id: data.id,
                             idMemberCreator: data.idMemberCreator,
+                            memberCreator: data.memberCreator,
                             data: data.data,
                             type: data.type,
                             date: data.date,
@@ -366,7 +367,7 @@ var createnewActions = exports.createnewActions = function () {
                         return _context7.abrupt('return', newactions);
 
                     case 11:
-                        if (!(actions.idMemberCreator != data.idMemberCreator || (0, _stringify2.default)(actions.data) != (0, _stringify2.default)(data.data) || actions.type != data.type || actions.date != data.date)) {
+                        if (!(actions.idMemberCreator != data.idMemberCreator || (0, _stringify2.default)(actions.data) != (0, _stringify2.default)(data.data) || actions.type != data.type || actions.date != data.date || (0, _stringify2.default)(actions.memberCreator) != (0, _stringify2.default)(data.memberCreator))) {
                             _context7.next = 22;
                             break;
                         }
@@ -380,6 +381,7 @@ var createnewActions = exports.createnewActions = function () {
                         _context7.next = 18;
                         return Actions.update({ id: data.id }, { $set: {
                                 idMemberCreator: data.idMemberCreator,
+                                memberCreator: data.memberCreator,
                                 data: data.data,
                                 type: data.type,
                                 date: data.date,

@@ -1,7 +1,7 @@
 {
   "mongo": {
     "adapter": "mongodb",
-    "host": "mymongo",
+    "host": "127.0.0.1",
     "database": "CFDrello",
     "port": 27017
   },

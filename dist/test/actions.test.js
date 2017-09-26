@@ -27,6 +27,13 @@ var mockActions = new _actions2.default();
 var actions = {
   id: "123a",
   idMemberCreator: "aa11",
+  memberCreator: {
+    id: "aa11",
+    avatarHash: "a1",
+    fullName: "Brian Cervino",
+    initials: "BC",
+    username: "brian"
+  },
   data: {
     list: {
       name: "Done",
@@ -62,6 +69,13 @@ test('new actions', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(f
           send = {
             id: "123a",
             idMemberCreator: "aa11",
+            memberCreator: {
+              id: "aa11",
+              avatarHash: "a1",
+              fullName: "Brian Cervino",
+              initials: "BC",
+              username: "brian"
+            },
             data: {
               list: {
                 name: "Done",
@@ -105,7 +119,7 @@ test('new actions', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(f
   }, _callee, undefined);
 })));
 
-test('update idMemberCreator', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2() {
+test('update idMemberCreator and memberCreator', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2() {
   var send, receive, callRec;
   return _regenerator2.default.wrap(function _callee2$(_context2) {
     while (1) {
@@ -114,6 +128,13 @@ test('update idMemberCreator', (0, _asyncToGenerator3.default)(_regenerator2.def
           send = {
             id: "123a",
             idMemberCreator: "bb22",
+            memberCreator: {
+              id: "bb22",
+              avatarHash: "a1",
+              fullName: "Brian Cervino",
+              initials: "BC",
+              username: "brian"
+            },
             data: {
               list: {
                 name: "Done",
@@ -165,6 +186,13 @@ test('update data', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(f
           send = {
             id: "123a",
             idMemberCreator: "aa11",
+            memberCreator: {
+              id: "aa11",
+              avatarHash: "a1",
+              fullName: "Brian Cervino",
+              initials: "BC",
+              username: "brian"
+            },
             data: {
               listAfter: {
                 name: "Done",
@@ -220,6 +248,13 @@ test('update type', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(f
           send = {
             id: "123a",
             idMemberCreator: "aa11",
+            memberCreator: {
+              id: "aa11",
+              avatarHash: "a1",
+              fullName: "Brian Cervino",
+              initials: "BC",
+              username: "brian"
+            },
             data: {
               list: {
                 name: "Done",
@@ -271,6 +306,13 @@ test('update date', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(f
           send = {
             id: "123a",
             idMemberCreator: "aa11",
+            memberCreator: {
+              id: "aa11",
+              avatarHash: "a1",
+              fullName: "Brian Cervino",
+              initials: "BC",
+              username: "brian"
+            },
             data: {
               list: {
                 name: "Done",
@@ -322,6 +364,13 @@ test('update all', (0, _asyncToGenerator3.default)(_regenerator2.default.mark(fu
           send = {
             id: "123a",
             idMemberCreator: "bb22",
+            memberCreator: {
+              id: "bb22",
+              avatarHash: "a1",
+              fullName: "Brian Cervino",
+              initials: "BC",
+              username: "brian"
+            },
             data: {
               listAfter: {
                 name: "Done",
@@ -377,6 +426,13 @@ test('have actions already', (0, _asyncToGenerator3.default)(_regenerator2.defau
           send = {
             id: "123a",
             idMemberCreator: "aa11",
+            memberCreator: {
+              id: "aa11",
+              avatarHash: "a1",
+              fullName: "Brian Cervino",
+              initials: "BC",
+              username: "brian"
+            },
             data: {
               list: {
                 name: "Done",

@@ -6,6 +6,7 @@ import { saveData } from '../../controller/dashboards'
 import { findDashboards } from '../../controller/getAllDashboards'
 import { saveLCAD } from '../../controller/createLCAD'
 import { dayCountCards } from '../../controller/getDateActionCards'
+import { getActionActivity } from '../../controller/getActionActivity'
 
 export const setRoute = async (app) => {
     app.get('/login',loginAuthen)
@@ -16,4 +17,5 @@ export const setRoute = async (app) => {
     app.post('/dashboards',saveData)
     app.post('/createlcad',saveLCAD)
     app.get('/dateactioncards/:idDashboard/:start/:end',dayCountCards)
+    app.get('/getactionactivity/:idBoard',getActionActivity)
 }
