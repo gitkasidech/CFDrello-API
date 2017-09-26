@@ -17,5 +17,5 @@ export const setRoute = async (app) => {
     app.post('/dashboards',saveData)
     app.post('/createlcad',saveLCAD)
     app.get('/dateactioncards/:idDashboard/:start/:end',dayCountCards)
-    app.get('/getactionactivity/:idBoard',getActionActivity)
+    app.get('/getactionactivity/:idBoard/:start/:end',getActionActivity)
 }

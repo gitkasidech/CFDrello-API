@@ -21,21 +21,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var getActionActivity = exports.getActionActivity = function () {
     var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(req, res) {
-        var idBoard, findActions, i, activity, d, cond2Date, cond3Date, cond3_1Date, cond3_2Date, cond4Date, hour, minute, now, timeago, dayAction, hourAction, minuteAction, dayCond, calTime;
+        var idBoard, start, end, activity, d, cond2Date, cond3Date, cond3_1Date, cond3_2Date, cond4Date, hour, minute, now, iDate, ymdd, findActions, len, timeago, i, dayAction, hourAction, minuteAction, dayCond, calTime, act;
         return _regenerator2.default.wrap(function _callee$(_context) {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
-                        console.log('GET \'/getactionactivity/' + req.params.idBoard + '\' \uD83E\uDD20 ' + Date());
+                        console.log('GET \'/getactionactivity/' + req.params.idBoard + '/' + req.params.start + '/' + req.params.end + '\' \uD83E\uDD20 ' + Date());
 
                         idBoard = req.params.idBoard;
-                        _context.next = 4;
-                        return _actions.Actions.find({ "data.board.id": idBoard }).sort({ date: -1 });
-
-                    case 4:
-                        findActions = _context.sent;
-                        //now to ago
-                        i = 0;
+                        start = req.params.start;
+                        end = req.params.end;
                         activity = [];
                         d = new Date();
                         cond2Date = new Date();
@@ -47,15 +42,34 @@ var getActionActivity = exports.getActionActivity = function () {
                         minute = d.getMinutes();
                         now = (0, _convertDates.convertDates)(d);
 
-                        d.setDate(d.getDate() - 90);
                         cond2Date.setDate(cond2Date.getDate() - 7);
                         cond3Date.setDate(cond3Date.getDate() - 30);
-                        cond3_1Date.setDate(cond3Date.getDate() - 14);
-                        cond3_2Date.setDate(cond3Date.getDate() - 21);
+                        cond3_1Date.setDate(cond3_1Date.getDate() - 14);
+                        cond3_2Date.setDate(cond3_2Date.getDate() - 21);
                         cond4Date.setDate(cond4Date.getDate() - 60);
+                        iDate = new Date(end);
+
+                    case 20:
+                        if (!(iDate >= new Date(start))) {
+                            _context.next = 33;
+                            break;
+                        }
+
+                        _context.next = 23;
+                        return (0, _convertDates.convertDates)(iDate);
+
+                    case 23:
+                        ymdd = _context.sent;
+                        _context.next = 26;
+                        return _actions.Actions.find({ "data.board.id": idBoard, dateString: ymdd }).sort({ date: -1 });
+
+                    case 26:
+                        findActions = _context.sent;
+                        //now to ago
+                        len = findActions.length;
                         timeago = void 0;
 
-                        while (findActions[i].date >= d) {
+                        for (i = 0; i < len; i++) {
                             dayAction = findActions[i].date.getDay();
                             hourAction = findActions[i].date.getHours();
                             minuteAction = findActions[i].date.getMinutes();
@@ -73,14 +87,29 @@ var getActionActivity = exports.getActionActivity = function () {
                             } else {
                                 if (cond4Date < findActions[i].date) timeago = "1 month ago";else timeago = "2 month ago";
                             }
-                            //toObject make use object from query mongo
-                            activity.push(findActions[i].toObject());
-                            activity[i].timeago = timeago;
-                            i++;
+                            act = {
+                                id: findActions[i].id,
+                                idMemberCreator: findActions[i].idMemberCreator,
+                                memberCreator: findActions[i].memberCreator,
+                                data: findActions[i].data,
+                                type: findActions[i].type,
+                                date: findActions[i].date,
+                                dateString: findActions[i].dateString,
+                                timeago: timeago
+                            };
+
+                            activity.push(act);
                         }
+
+                    case 30:
+                        iDate.setDate(iDate.getDate() - 1);
+                        _context.next = 20;
+                        break;
+
+                    case 33:
                         res.json(activity);
 
-                    case 25:
+                    case 34:
                     case 'end':
                         return _context.stop();
                 }
