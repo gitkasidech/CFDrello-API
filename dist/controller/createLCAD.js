@@ -47,7 +47,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var saveLCAD = exports.saveLCAD = function () {
     var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(req, res, next) {
-        var inf, callInf, key, promises, _ref2, _ref3, callLabels, callCards, callActions, postDateActionCards, d, endDate, day, startDate, _startDate$split, _startDate$split2, yearS, monthS, dateS, dayS, _endDate$split, _endDate$split2, yearE, monthE, dateE, dayE, data, getDateActionCards;
+        var inf, callInf, key, promises, _ref2, _ref3, callLabels, callCards, callActionsDate, now, iDate, i, sinceDate, beforeDate, callActions, postDateActionCards, d, endDate, day, startDate, data, getDateActionCards;
 
         return _regenerator2.default.wrap(function _callee$(_context) {
             while (1) {
@@ -70,7 +70,7 @@ var saveLCAD = exports.saveLCAD = function () {
 
                     case 7:
                         key = "662fa775f48bd56cea11e8be634da284";
-                        promises = [(0, _labels.checkCreateLabels)(inf.idBoard, key, inf.token), (0, _cards.checkCreateCards)(inf.idBoard, key, inf.token), (0, _actions.checkCreateActions)(inf.idBoard, key, inf.token)];
+                        promises = [(0, _labels.checkCreateLabels)(inf.idBoard, key, inf.token), (0, _cards.checkCreateCards)(inf.idBoard, key, inf.token), (0, _actions.getDateCreateBoard)(inf.idBoard, key, inf.token)];
                         _context.next = 11;
                         return _promise2.default.all(promises);
 
@@ -79,49 +79,76 @@ var saveLCAD = exports.saveLCAD = function () {
                         _ref3 = (0, _slicedToArray3.default)(_ref2, 3);
                         callLabels = _ref3[0];
                         callCards = _ref3[1];
-                        callActions = _ref3[2];
-
-                        console.log(callActions);
-                        _context.next = 19;
-                        return (0, _dateActionCards.createDateActionCards)(callActions, inf);
+                        callActionsDate = _ref3[2];
+                        now = new Date();
+                        iDate = new Date(callActionsDate);
+                        i = new Date(callActionsDate);
 
                     case 19:
+                        if (!(i <= now)) {
+                            _context.next = 33;
+                            break;
+                        }
+
+                        _context.next = 22;
+                        return (0, _convertDates.convertShortDates)(iDate);
+
+                    case 22:
+                        sinceDate = _context.sent;
+
+                        iDate.setDate(iDate.getDate() + 1);
+                        _context.next = 26;
+                        return (0, _convertDates.convertShortDates)(iDate);
+
+                    case 26:
+                        beforeDate = _context.sent;
+                        _context.next = 29;
+                        return (0, _actions.checkCreateActions)(inf.idBoard, key, inf.token, sinceDate, beforeDate);
+
+                    case 29:
+                        callActions = _context.sent;
+
+                    case 30:
+                        i.setDate(i.getDate() + 1);
+                        _context.next = 19;
+                        break;
+
+                    case 33:
+                        _context.next = 35;
+                        return (0, _dateActionCards.createDateActionCards)(callActionsDate, inf);
+
+                    case 35:
                         postDateActionCards = _context.sent;
                         d = new Date();
 
                         d.setDate(d.getDate() - 1);
-                        _context.next = 24;
-                        return (0, _convertDates.convertDates)(d);
+                        _context.next = 40;
+                        return (0, _convertDates.convertShortDates)(d);
 
-                    case 24:
+                    case 40:
                         endDate = _context.sent;
                         day = d.getDay();
 
                         d.setDate(d.getDate() - day);
-                        _context.next = 29;
-                        return (0, _convertDates.convertDates)(d);
+                        _context.next = 45;
+                        return (0, _convertDates.convertShortDates)(d);
 
-                    case 29:
+                    case 45:
                         startDate = _context.sent;
-                        _startDate$split = startDate.split('-'), _startDate$split2 = (0, _slicedToArray3.default)(_startDate$split, 4), yearS = _startDate$split2[0], monthS = _startDate$split2[1], dateS = _startDate$split2[2], dayS = _startDate$split2[3];
-                        _endDate$split = endDate.split('-'), _endDate$split2 = (0, _slicedToArray3.default)(_endDate$split, 4), yearE = _endDate$split2[0], monthE = _endDate$split2[1], dateE = _endDate$split2[2], dayE = _endDate$split2[3];
-
-                        startDate = [yearS, monthS, dateS].join('-');
-                        endDate = [yearE, monthE, dateE].join('-');
                         data = {
                             idDashboard: inf._id,
                             start: startDate,
                             end: endDate
                         };
-                        _context.next = 37;
+                        _context.next = 49;
                         return (0, _getDateActionCards.countData)(data);
 
-                    case 37:
+                    case 49:
                         getDateActionCards = _context.sent;
 
                         res.json(getDateActionCards);
 
-                    case 39:
+                    case 51:
                     case 'end':
                         return _context.stop();
                 }
