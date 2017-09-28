@@ -23,14 +23,6 @@ export const saveLCAD = async (req, res, next) => {
     const [callLabels,callCards,callActionsDate] = await Promise.all(promises)
 
     const now = new Date()
-    // let cardDate = new Date(callActionsDate)
-    // for(let i = new Date(cardDate); i <= now; i.setDate(i.getDate() + 1)){
-    //     let sinceCardDate = await convertShortDates(cardDate)
-    //     cardDate.setDate(cardDate.getDate() + 1)
-    //     let beforeCardDate = await convertShortDates(cardDate)
-    //     const callCards = await checkCreateCards(inf.idBoard,key,inf.token,sinceCardDate,beforeCardDate)
-    // }
-
     let actionDate = new Date(callActionsDate)
     const findActions = await Actions.find({"data.board.id":inf.idBoard})
     const lenFindActions = findActions.length 

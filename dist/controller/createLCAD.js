@@ -75,14 +75,6 @@ var saveLCAD = exports.saveLCAD = function () {
                         callCards = _ref3[1];
                         callActionsDate = _ref3[2];
                         now = new Date();
-                        // let cardDate = new Date(callActionsDate)
-                        // for(let i = new Date(cardDate); i <= now; i.setDate(i.getDate() + 1)){
-                        //     let sinceCardDate = await convertShortDates(cardDate)
-                        //     cardDate.setDate(cardDate.getDate() + 1)
-                        //     let beforeCardDate = await convertShortDates(cardDate)
-                        //     const callCards = await checkCreateCards(inf.idBoard,key,inf.token,sinceCardDate,beforeCardDate)
-                        // }
-
                         actionDate = new Date(callActionsDate);
                         _context.next = 20;
                         return _actions2.Actions.find({ "data.board.id": inf.idBoard });

@@ -8,8 +8,6 @@ export const saveData = async(req, res, next) => {
         return res.status(500).send("format should be")
 
     const callCreate = await createnewDashboards(Dashboards, inf);
-    // console.log("create new dashboards complete");
-    // console.log(callCreate);
     return res.json({idDashboard: callCreate._id})
 }
 

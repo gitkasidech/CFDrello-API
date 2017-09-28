@@ -13,25 +13,6 @@ export const checkCreateCards = async(board,key,token) => {
             const callCards = await createnewCards(Cards,cards,data[i])
         }  
     })
-    // console.log(sinceDate)
-    // console.log(beforeDate)
-    // return new Promise((resolve, reject) => {
-    //     request({
-    //         uri: 'https://api.trello.com/1/board/'+board+'/cards/?fields=id,name,idBoard,idList,idMembers,idLabels&since='+sinceDate+'&before='+beforeDate+'&limit=1000&key='+key+'&token='+token,
-    //         method: 'GET'
-    //     }, (err, response, body) =>{
-    //         if (err) reject(JSON.stringify(err))
-    //         console.log(body)
-    //         resolve(body)
-    //     })
-    // }).then(async (data) => {
-    //         data = JSON.parse(data)
-    //         const len = data.length
-    //         for (let i = 0; i < len; i++) {
-    //             const cards = await Cards.findOne({ id: (data[i]).id })
-    //             const callCards = await createnewCards(Cards,cards, data[i])
-    //         }
-    // })   
 }
 
 export const createnewCards = async(Cards,cards,data) => {
