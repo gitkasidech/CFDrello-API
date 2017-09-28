@@ -9,10 +9,6 @@ export const checkCreateLabels = async (board,key,token) => {
         for (let i = 0; i < len; i++){
             const labels = await Labels.findOne({id:(data[i]).id})
             const callLabels = await createnewLabels(Labels,labels,data[i])
-            // if (callLabels) 
-            //     console.log("create or update new label complete")
-            // else 
-            //     console.log("have a label already!!")
         }  
     })   
 }

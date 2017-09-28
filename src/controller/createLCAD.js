@@ -1,5 +1,3 @@
-import http from 'http'
-import url from 'url'
 import { checkCreateLabels } from './labels'
 import { checkCreateCards } from './cards'
 import { checkCreateActions,getDateCreateBoard } from './actions'
@@ -7,6 +5,7 @@ import { countData } from './getDateActionCards'
 import { createDateActionCards } from './dateActionCards'
 import {convertDates,convertShortDates} from './convertDates'
 import {Actions} from '../models/actions'
+import {Cards} from '../models/cards'
 
 export const saveLCAD = async (req, res, next) => {
     console.log(`POST '/createlcad' 🤠 ${Date()}`)
@@ -22,13 +21,28 @@ export const saveLCAD = async (req, res, next) => {
         getDateCreateBoard(inf.idBoard,key,inf.token)
     ]
     const [callLabels,callCards,callActionsDate] = await Promise.all(promises)
+
     const now = new Date()
-    let iDate = new Date(callActionsDate)
-    for(let i = new Date(callActionsDate); i <= now; i.setDate(i.getDate() + 1)){
-        let sinceDate = await convertShortDates(iDate)
-        iDate.setDate(iDate.getDate() + 1)
-        let beforeDate = await convertShortDates(iDate)
-        const callActions = await checkCreateActions(inf.idBoard,key,inf.token,sinceDate,beforeDate)
+    // let cardDate = new Date(callActionsDate)
+    // for(let i = new Date(cardDate); i <= now; i.setDate(i.getDate() + 1)){
+    //     let sinceCardDate = await convertShortDates(cardDate)
+    //     cardDate.setDate(cardDate.getDate() + 1)
+    //     let beforeCardDate = await convertShortDates(cardDate)
+    //     const callCards = await checkCreateCards(inf.idBoard,key,inf.token,sinceCardDate,beforeCardDate)
+    // }
+
+    let actionDate = new Date(callActionsDate)
+    const findActions = await Actions.find({"data.board.id":inf.idBoard})
+    const lenFindActions = findActions.length 
+    if(lenFindActions!=0){
+        actionDate = new Date(findActions[lenFindActions-1].date)
+    } 
+    now.setDate(now.getDate() + 1)
+    for(let i = new Date(actionDate); i <= now; i.setDate(i.getDate() + 2)){
+        let sinceActionDate = await convertShortDates(actionDate)
+        actionDate.setDate(actionDate.getDate() + 2)
+        let beforeActionDate = await convertShortDates(actionDate)
+        const callActions = await checkCreateActions(inf.idBoard,key,inf.token,sinceActionDate,beforeActionDate)
     }
     const postDateActionCards = await createDateActionCards(callActionsDate,inf)
 
@@ -44,6 +58,7 @@ export const saveLCAD = async (req, res, next) => {
         end: endDate
     }
     const getDateActionCards = await countData(data)
+    console.log(Date())
     res.json(getDateActionCards)
 }
 

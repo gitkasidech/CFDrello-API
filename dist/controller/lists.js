@@ -81,12 +81,7 @@ var checkCreateLists = exports.checkCreateLists = function () {
                             return function (_x4, _x5) {
                                 return _ref2.apply(this, arguments);
                             };
-                        }()
-                        // if (callcreate)
-                        //     console.log("create or update new lists complete");
-                        // else
-                        //     console.log("have a lists already!!");
-                        );
+                        }());
 
                     case 2:
                     case 'end':

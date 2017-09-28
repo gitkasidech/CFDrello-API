@@ -73,10 +73,6 @@ export const createHourActionCards = async(data) => {
         dataComp.push(allData.countComp)
 
         const callHourActionCards = await createnewHourActionCards(HourActionCards,allData,hourActionCards)
-        // if (callHourActionCards)
-        //     console.log("create or update new HourActionCards complete")
-        // else
-        //     console.log("have a HourActionCards already!!")
     }
     const getHourActionCards = {
         dataHour: dataHour,

@@ -23,7 +23,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var createDateActionCards = exports.createDateActionCards = function () {
     var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(dateStart, dashboard) {
-        var now, countBack, countInpr, countComp, d, ymd, dataThisDay, len, listBack, listInpr, listComp, dateAction, i, data, allData, dateActionCards, callDateActionCards;
+        var now, countBack, countInpr, countComp, findDateAction, lenFind, d, ymd, dataThisDay, len, listBack, listInpr, listComp, dateAction, i, data, allData, dateActionCards, callDateActionCards;
         return _regenerator2.default.wrap(function _callee$(_context) {
             while (1) {
                 switch (_context.prev = _context.next) {
@@ -32,25 +32,37 @@ var createDateActionCards = exports.createDateActionCards = function () {
                         countBack = 0;
                         countInpr = 0;
                         countComp = 0;
+                        _context.next = 6;
+                        return _dateActionCards.DateActionCards.find({ idDashboard: dashboard._id });
 
+                    case 6:
+                        findDateAction = _context.sent;
+                        lenFind = findDateAction.length;
+
+                        if (lenFind > 2) {
+                            dateStart = new Date(findDateAction[lenFind - 2].date);
+                            countBack = findDateAction[lenFind - 3].countBack;
+                            countInpr = findDateAction[lenFind - 3].countInpr;
+                            countComp = findDateAction[lenFind - 3].countComp;
+                        }
                         now.setDate(now.getDate() + 1);
                         d = new Date(dateStart);
 
-                    case 6:
+                    case 11:
                         if (!(d <= now)) {
-                            _context.next = 29;
+                            _context.next = 34;
                             break;
                         }
 
-                        _context.next = 9;
+                        _context.next = 14;
                         return (0, _convertDates.convertDates)(d);
 
-                    case 9:
+                    case 14:
                         ymd = _context.sent;
-                        _context.next = 12;
-                        return _actions.Actions.find({ dateString: ymd });
+                        _context.next = 17;
+                        return _actions.Actions.find({ dateString: ymd }).sort({ date: 1 });
 
-                    case 12:
+                    case 17:
                         dataThisDay = _context.sent;
                         len = dataThisDay.length;
                         listBack = dashboard.listBack;
@@ -85,23 +97,23 @@ var createDateActionCards = exports.createDateActionCards = function () {
                             countComp: countComp,
                             idDashboard: dashboard._id
                         };
-                        _context.next = 22;
+                        _context.next = 27;
                         return _dateActionCards.DateActionCards.findOne({ dateString: allData.dateString, idDashboard: allData.idDashboard });
 
-                    case 22:
+                    case 27:
                         dateActionCards = _context.sent;
-                        _context.next = 25;
+                        _context.next = 30;
                         return createnewDateActionCards(_dateActionCards.DateActionCards, allData, dateActionCards);
 
-                    case 25:
+                    case 30:
                         callDateActionCards = _context.sent;
 
-                    case 26:
+                    case 31:
                         d.setDate(d.getDate() + 1);
-                        _context.next = 6;
+                        _context.next = 11;
                         break;
 
-                    case 29:
+                    case 34:
                     case 'end':
                         return _context.stop();
                 }

@@ -21,14 +21,6 @@ var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _http = require('http');
-
-var _http2 = _interopRequireDefault(_http);
-
-var _url = require('url');
-
-var _url2 = _interopRequireDefault(_url);
-
 var _labels = require('./labels');
 
 var _cards = require('./cards');
@@ -43,11 +35,13 @@ var _convertDates = require('./convertDates');
 
 var _actions2 = require('../models/actions');
 
+var _cards2 = require('../models/cards');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var saveLCAD = exports.saveLCAD = function () {
     var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(req, res, next) {
-        var inf, callInf, key, promises, _ref2, _ref3, callLabels, callCards, callActionsDate, now, iDate, i, sinceDate, beforeDate, callActions, postDateActionCards, d, endDate, day, startDate, data, getDateActionCards;
+        var inf, callInf, key, promises, _ref2, _ref3, callLabels, callCards, callActionsDate, now, actionDate, findActions, lenFindActions, i, sinceActionDate, beforeActionDate, callActions, postDateActionCards, d, endDate, day, startDate, data, getDateActionCards;
 
         return _regenerator2.default.wrap(function _callee$(_context) {
             while (1) {
@@ -81,74 +75,94 @@ var saveLCAD = exports.saveLCAD = function () {
                         callCards = _ref3[1];
                         callActionsDate = _ref3[2];
                         now = new Date();
-                        iDate = new Date(callActionsDate);
-                        i = new Date(callActionsDate);
+                        // let cardDate = new Date(callActionsDate)
+                        // for(let i = new Date(cardDate); i <= now; i.setDate(i.getDate() + 1)){
+                        //     let sinceCardDate = await convertShortDates(cardDate)
+                        //     cardDate.setDate(cardDate.getDate() + 1)
+                        //     let beforeCardDate = await convertShortDates(cardDate)
+                        //     const callCards = await checkCreateCards(inf.idBoard,key,inf.token,sinceCardDate,beforeCardDate)
+                        // }
 
-                    case 19:
+                        actionDate = new Date(callActionsDate);
+                        _context.next = 20;
+                        return _actions2.Actions.find({ "data.board.id": inf.idBoard });
+
+                    case 20:
+                        findActions = _context.sent;
+                        lenFindActions = findActions.length;
+
+                        if (lenFindActions != 0) {
+                            actionDate = new Date(findActions[lenFindActions - 1].date);
+                        }
+                        now.setDate(now.getDate() + 1);
+                        i = new Date(actionDate);
+
+                    case 25:
                         if (!(i <= now)) {
-                            _context.next = 33;
+                            _context.next = 39;
                             break;
                         }
 
-                        _context.next = 22;
-                        return (0, _convertDates.convertShortDates)(iDate);
+                        _context.next = 28;
+                        return (0, _convertDates.convertShortDates)(actionDate);
 
-                    case 22:
-                        sinceDate = _context.sent;
+                    case 28:
+                        sinceActionDate = _context.sent;
 
-                        iDate.setDate(iDate.getDate() + 1);
-                        _context.next = 26;
-                        return (0, _convertDates.convertShortDates)(iDate);
+                        actionDate.setDate(actionDate.getDate() + 2);
+                        _context.next = 32;
+                        return (0, _convertDates.convertShortDates)(actionDate);
 
-                    case 26:
-                        beforeDate = _context.sent;
-                        _context.next = 29;
-                        return (0, _actions.checkCreateActions)(inf.idBoard, key, inf.token, sinceDate, beforeDate);
-
-                    case 29:
-                        callActions = _context.sent;
-
-                    case 30:
-                        i.setDate(i.getDate() + 1);
-                        _context.next = 19;
-                        break;
-
-                    case 33:
+                    case 32:
+                        beforeActionDate = _context.sent;
                         _context.next = 35;
-                        return (0, _dateActionCards.createDateActionCards)(callActionsDate, inf);
+                        return (0, _actions.checkCreateActions)(inf.idBoard, key, inf.token, sinceActionDate, beforeActionDate);
 
                     case 35:
+                        callActions = _context.sent;
+
+                    case 36:
+                        i.setDate(i.getDate() + 2);
+                        _context.next = 25;
+                        break;
+
+                    case 39:
+                        _context.next = 41;
+                        return (0, _dateActionCards.createDateActionCards)(callActionsDate, inf);
+
+                    case 41:
                         postDateActionCards = _context.sent;
                         d = new Date();
 
                         d.setDate(d.getDate() - 1);
-                        _context.next = 40;
+                        _context.next = 46;
                         return (0, _convertDates.convertShortDates)(d);
 
-                    case 40:
+                    case 46:
                         endDate = _context.sent;
                         day = d.getDay();
 
                         d.setDate(d.getDate() - day);
-                        _context.next = 45;
+                        _context.next = 51;
                         return (0, _convertDates.convertShortDates)(d);
 
-                    case 45:
+                    case 51:
                         startDate = _context.sent;
                         data = {
                             idDashboard: inf._id,
                             start: startDate,
                             end: endDate
                         };
-                        _context.next = 49;
+                        _context.next = 55;
                         return (0, _getDateActionCards.countData)(data);
 
-                    case 49:
+                    case 55:
                         getDateActionCards = _context.sent;
 
+                        console.log(Date());
                         res.json(getDateActionCards);
 
-                    case 51:
+                    case 58:
                     case 'end':
                         return _context.stop();
                 }
