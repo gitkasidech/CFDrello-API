@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./index",
+    "start": "nodemon --watch src --exec babel-node src/server.js",
     "development": "nodemon ./src/app --exec babel-node",
     "prestart": "npm run build",
     "build": "babel src --source-maps --out-dir dist",
@@ -36,6 +36,7 @@
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
+    "babel-watch": "^2.0.7",
     "jest": "^20.0.4",
     "jest-cli": "^20.0.4",
     "nodemon": "^1.11.0"

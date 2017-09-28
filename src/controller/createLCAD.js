@@ -50,7 +50,6 @@ export const saveLCAD = async (req, res, next) => {
         end: endDate
     }
     const getDateActionCards = await countData(data)
-    console.log(Date())
     res.json(getDateActionCards)
 }
 

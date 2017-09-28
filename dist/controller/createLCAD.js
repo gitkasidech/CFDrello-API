@@ -151,10 +151,9 @@ var saveLCAD = exports.saveLCAD = function () {
                     case 55:
                         getDateActionCards = _context.sent;
 
-                        console.log(Date());
                         res.json(getDateActionCards);
 
-                    case 58:
+                    case 57:
                     case 'end':
                         return _context.stop();
                 }
