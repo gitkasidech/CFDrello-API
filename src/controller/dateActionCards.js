@@ -7,10 +7,18 @@ export const createDateActionCards = async(dateStart,dashboard) => {
     let countBack = 0 
     let countInpr = 0
     let countComp = 0
+    const findDateAction = await DateActionCards.find({idDashboard:dashboard._id})
+    const lenFind = findDateAction.length
+    if(lenFind>2){
+        dateStart = new Date(findDateAction[lenFind-2].date)
+        countBack = findDateAction[lenFind-3].countBack
+        countInpr = findDateAction[lenFind-3].countInpr
+        countComp = findDateAction[lenFind-3].countComp
+    }
     now.setDate(now.getDate() + 1)
     for (let d = new Date(dateStart); d <= now; d.setDate(d.getDate() + 1)) {
         const ymd = await convertDates(d)
-        const dataThisDay =  await Actions.find({dateString: ymd})
+        const dataThisDay =  await Actions.find({dateString: ymd}).sort({date:1})
         const len = dataThisDay.length
         const listBack = dashboard.listBack
         const listInpr = dashboard.listInpr
@@ -57,10 +65,6 @@ export const createDateActionCards = async(dateStart,dashboard) => {
         }
         const dateActionCards = await DateActionCards.findOne({ dateString: allData.dateString, idDashboard: allData.idDashboard})
         const callDateActionCards = await createnewDateActionCards(DateActionCards,allData,dateActionCards)
-        // if (callDateActionCards)
-        //     console.log("create or update new DateActionCards complete")
-        // else
-        //     console.log("have a DateActionCards already!!")
     }
 }
 

@@ -10,11 +10,6 @@ export const havedata = async (sendData) => {
     const user = await Members.findOne({ id: inf.id })
 
     const callcreate = await createnewUser(Members,user, inf)
-    // if (callcreate) 
-    //     console.log("create or update new user complete")
-    // else 
-    //     console.log("have a user already!!")
-
     const callBoards = await checkCreateBoard(inf)
 }
 

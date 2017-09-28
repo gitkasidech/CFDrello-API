@@ -81,12 +81,7 @@ var checkCreateLabels = exports.checkCreateLabels = function () {
                             return function (_x4, _x5) {
                                 return _ref2.apply(this, arguments);
                             };
-                        }()
-                        // if (callLabels) 
-                        //     console.log("create or update new label complete")
-                        // else 
-                        //     console.log("have a label already!!")
-                        );
+                        }());
 
                     case 2:
                     case 'end':

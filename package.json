@@ -23,6 +23,7 @@
     "mongodb": "^2.2.30",
     "mongoose": "^4.11.3",
     "mongoose-findorcreate": "^2.0.0",
+    "node-cron": "^1.2.1",
     "node-trello": "^1.2.1",
     "path": "^0.12.7",
     "trello": "^0.8.0",

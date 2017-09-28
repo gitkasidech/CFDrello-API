@@ -21,6 +21,10 @@ var _nodeTrello = require('node-trello');
 
 var _nodeTrello2 = _interopRequireDefault(_nodeTrello);
 
+var _request = require('request');
+
+var _request2 = _interopRequireDefault(_request);
+
 var _actions = require('../models/actions');
 
 var _bluebird = require('bluebird');
@@ -31,7 +35,6 @@ var _convertDates = require('./convertDates');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var request = require("request");
 var checkCreateActions = exports.checkCreateActions = function () {
     var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(board, key, token, sinceDate, beforeDate) {
         return _regenerator2.default.wrap(function _callee2$(_context2) {
@@ -39,7 +42,7 @@ var checkCreateActions = exports.checkCreateActions = function () {
                 switch (_context2.prev = _context2.next) {
                     case 0:
                         return _context2.abrupt('return', new _bluebird2.default(function (resolve, reject) {
-                            request({
+                            (0, _request2.default)({
                                 uri: 'https://api.trello.com/1/board/' + board + '/actions/?filter=createCard,moveCardToBoard,commentCard,updateCard:idList,updateCard:closed&since=' + sinceDate + '&before=' + beforeDate + '&limit=1000&key=' + key + '&token=' + token,
                                 method: 'GET'
                             }, function (err, response, body) {
@@ -104,6 +107,7 @@ var checkCreateActions = exports.checkCreateActions = function () {
         return _ref.apply(this, arguments);
     };
 }();
+
 var getDateCreateBoard = exports.getDateCreateBoard = function () {
     var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(board, key, token) {
         return _regenerator2.default.wrap(function _callee3$(_context3) {
@@ -111,7 +115,7 @@ var getDateCreateBoard = exports.getDateCreateBoard = function () {
                 switch (_context3.prev = _context3.next) {
                     case 0:
                         return _context3.abrupt('return', new _bluebird2.default(function (resolve, reject) {
-                            request({
+                            (0, _request2.default)({
                                 uri: 'https://api.trello.com/1/board/' + board + '/actions/?filter=createBoard&key=' + key + '&token=' + token,
                                 method: 'GET'
                             }, function (err, response, body) {

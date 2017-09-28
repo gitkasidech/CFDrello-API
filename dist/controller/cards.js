@@ -21,6 +21,14 @@ var _nodeTrello = require('node-trello');
 
 var _nodeTrello2 = _interopRequireDefault(_nodeTrello);
 
+var _request = require('request');
+
+var _request2 = _interopRequireDefault(_request);
+
+var _bluebird = require('bluebird');
+
+var _bluebird2 = _interopRequireDefault(_bluebird);
+
 var _cards = require('../models/cards');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -85,12 +93,26 @@ var checkCreateCards = exports.checkCreateCards = function () {
                             return function (_x4, _x5) {
                                 return _ref2.apply(this, arguments);
                             };
-                        }()
-                        // if (callCards) 
-                        //     console.log("create or update new card complete")
-                        // else 
-                        //     console.log("have a card already!!")
-                        );
+                        }());
+                        // console.log(sinceDate)
+                        // console.log(beforeDate)
+                        // return new Promise((resolve, reject) => {
+                        //     request({
+                        //         uri: 'https://api.trello.com/1/board/'+board+'/cards/?fields=id,name,idBoard,idList,idMembers,idLabels&since='+sinceDate+'&before='+beforeDate+'&limit=1000&key='+key+'&token='+token,
+                        //         method: 'GET'
+                        //     }, (err, response, body) =>{
+                        //         if (err) reject(JSON.stringify(err))
+                        //         console.log(body)
+                        //         resolve(body)
+                        //     })
+                        // }).then(async (data) => {
+                        //         data = JSON.parse(data)
+                        //         const len = data.length
+                        //         for (let i = 0; i < len; i++) {
+                        //             const cards = await Cards.findOne({ id: (data[i]).id })
+                        //             const callCards = await createnewCards(Cards,cards, data[i])
+                        //         }
+                        // })   
 
                     case 2:
                     case 'end':
