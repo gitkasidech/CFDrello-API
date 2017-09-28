@@ -7,7 +7,7 @@ import {convertDates} from './convertDates'
 export const checkCreateActions = async (board,key,token,sinceDate,beforeDate) => {
     return new Promise((resolve, reject) => {
         request({
-            uri: 'https://api.trello.com/1/board/'+board+'/actions/?filter=createCard,moveCardToBoard,commentCard,updateCard:idList,updateCard:closed&since='+sinceDate+'&before='+beforeDate+'&limit=1000&key='+key+'&token='+token,
+            uri: 'https://api.trello.com/1/board/'+board+'/actions/?filter=createCard,moveCardToBoard,commentCard,copyCard,convertToCardFromCheckItem,updateCard:idList,updateCard:closed&since='+sinceDate+'&before='+beforeDate+'&limit=1000&key='+key+'&token='+token,
             method: 'GET'
         }, (err, response, body) =>{
             if (err) reject(JSON.stringify(err))

@@ -89,7 +89,7 @@ var createHourActionCards = exports.createHourActionCards = function () {
                             hour = d.getHours();
 
                             if (i == hour) {
-                                if (actions[j].type == "createCard" || actions[j].type == "moveCardToBoard") {
+                                if (actions[j].type == "createCard" || actions[j].type == "moveCardToBoard" || actions[j].type == "copyCard" || actions[j].type == "convertToCardFromCheckItem") {
                                     if (listBack.indexOf(_data.list.id) != -1) dataYesterday.countBack++;else if (listInpr.indexOf(_data.list.id) != -1) dataYesterday.countInpr++;else if (listComp.indexOf(_data.list.id) != -1) dataYesterday.countComp++;
                                 } else if (actions[j].type == "updateCard" && _data.listAfter && _data.listBefore) {
                                     if (listBack.indexOf(_data.listAfter.id) != -1) dataYesterday.countBack++;else if (listInpr.indexOf(_data.listAfter.id) != -1) dataYesterday.countInpr++;else if (listComp.indexOf(_data.listAfter.id) != -1) dataYesterday.countComp++;
