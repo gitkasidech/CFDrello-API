@@ -28,7 +28,7 @@ export const createHourActionCards = async(data) => {
             let d = new Date(actions[j].date)
             let hour = (d.getHours())
             if(i==hour){
-                if(actions[j].type=="createCard" || actions[j].type=="moveCardToBoard"){
+                if(actions[j].type=="createCard" || actions[j].type=="moveCardToBoard" || actions[j].type== "copyCard" || actions[j].type== "convertToCardFromCheckItem"){
                     if (listBack.indexOf(data.list.id) != -1) dataYesterday.countBack++
                     else if (listInpr.indexOf(data.list.id) != -1) dataYesterday.countInpr++
                     else if (listComp.indexOf(data.list.id) != -1) dataYesterday.countComp++
