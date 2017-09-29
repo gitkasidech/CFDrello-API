@@ -96,9 +96,9 @@ var createHourActionCards = exports.createHourActionCards = function () {
 
                                     if (listBack.indexOf(_data.listBefore.id) != -1) dataYesterday.countBack--;else if (listInpr.indexOf(_data.listBefore.id) != -1) dataYesterday.countInpr--;else if (listComp.indexOf(_data.listBefore.id) != -1) dataYesterday.countComp--;
                                 } else if (actions[j].type == "updateCard" && _data.card.closed == false && _data.old.closed == true) {
-                                    if (listBack.indexOf(_data.list.id) != -1) countBack++;else if (listInpr.indexOf(_data.list.id) != -1) countInpr++;else if (listComp.indexOf(_data.list.id) != -1) countComp++;
+                                    if (listBack.indexOf(_data.list.id) != -1) dataYesterday.countBack++;else if (listInpr.indexOf(_data.list.id) != -1) dataYesterday.countInpr++;else if (listComp.indexOf(_data.list.id) != -1) dataYesterday.countComp++;
                                 } else if (actions[j].type == "updateCard" && _data.card.closed == true && _data.old.closed == false) {
-                                    if (listBack.indexOf(_data.list.id) != -1) countBack--;else if (listInpr.indexOf(_data.list.id) != -1) countInpr--;else if (listComp.indexOf(_data.list.id) != -1) countComp--;
+                                    if (listBack.indexOf(_data.list.id) != -1) dataYesterday.countBack--;else if (listInpr.indexOf(_data.list.id) != -1) dataYesterday.countInpr--;else if (listComp.indexOf(_data.list.id) != -1) dataYesterday.countComp--;
                                 }
                             }
                         }

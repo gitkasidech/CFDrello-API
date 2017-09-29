@@ -43,14 +43,14 @@ export const createHourActionCards = async(data) => {
                     else if (listComp.indexOf(data.listBefore.id) != -1) dataYesterday.countComp--
                 }
                 else if(actions[j].type=="updateCard" && data.card.closed == false && data.old.closed == true){ 
-                    if (listBack.indexOf(data.list.id) != -1) countBack++
-                    else if (listInpr.indexOf(data.list.id) != -1) countInpr++
-                    else if (listComp.indexOf(data.list.id) != -1) countComp++
+                    if (listBack.indexOf(data.list.id) != -1) dataYesterday.countBack++
+                    else if (listInpr.indexOf(data.list.id) != -1) dataYesterday.countInpr++
+                    else if (listComp.indexOf(data.list.id) != -1) dataYesterday.countComp++
                 }
                 else if(actions[j].type=="updateCard" && data.card.closed == true && data.old.closed == false){ 
-                    if (listBack.indexOf(data.list.id) != -1) countBack--
-                    else if (listInpr.indexOf(data.list.id) != -1) countInpr--
-                    else if (listComp.indexOf(data.list.id) != -1) countComp--
+                    if (listBack.indexOf(data.list.id) != -1) dataYesterday.countBack--
+                    else if (listInpr.indexOf(data.list.id) != -1) dataYesterday.countInpr--
+                    else if (listComp.indexOf(data.list.id) != -1) dataYesterday.countComp--
                 }
             }   
         }
