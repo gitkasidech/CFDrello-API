@@ -23,6 +23,10 @@ export const dayCountCards = async (req, res, next) => {
 }
 
 export const countData = async (data) => {
+    if(data.start == data.end){
+        const hourActionCards = await createHourActionCards(data)
+        return hourActionCards
+    }
     let start = data.start
     let end = data.end
     let listDate = []

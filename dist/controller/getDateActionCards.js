@@ -81,12 +81,25 @@ var dayCountCards = exports.dayCountCards = function () {
 
 var countData = exports.countData = function () {
     var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(data) {
-        var start, end, listDate, listBack, listInpr, listComp, d, ymdd, dateActionCards, _ymdd$split, _ymdd$split2, year, month, date, day, getDateActionCards;
+        var hourActionCards, start, end, listDate, listBack, listInpr, listComp, d, ymdd, dateActionCards, _ymdd$split, _ymdd$split2, year, month, date, day, getDateActionCards;
 
         return _regenerator2.default.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
+                        if (!(data.start == data.end)) {
+                            _context2.next = 5;
+                            break;
+                        }
+
+                        _context2.next = 3;
+                        return (0, _hourActionCards.createHourActionCards)(data);
+
+                    case 3:
+                        hourActionCards = _context2.sent;
+                        return _context2.abrupt('return', hourActionCards);
+
+                    case 5:
                         start = data.start;
                         end = data.end;
                         listDate = [];
@@ -95,21 +108,21 @@ var countData = exports.countData = function () {
                         listComp = [];
                         d = new Date(start);
 
-                    case 7:
+                    case 12:
                         if (!(d <= new Date(end))) {
-                            _context2.next = 24;
+                            _context2.next = 29;
                             break;
                         }
 
-                        _context2.next = 10;
+                        _context2.next = 15;
                         return (0, _convertDates.convertDates)(d);
 
-                    case 10:
+                    case 15:
                         ymdd = _context2.sent;
-                        _context2.next = 13;
+                        _context2.next = 18;
                         return _dateActionCards.DateActionCards.findOne({ dateString: ymdd, idDashboard: data.idDashboard });
 
-                    case 13:
+                    case 18:
                         dateActionCards = _context2.sent;
 
                         if (!dateActionCards) {
@@ -128,12 +141,12 @@ var countData = exports.countData = function () {
                         listInpr.push(dateActionCards.countInpr);
                         listComp.push(dateActionCards.countComp);
 
-                    case 21:
+                    case 26:
                         d.setDate(d.getDate() + 1);
-                        _context2.next = 7;
+                        _context2.next = 12;
                         break;
 
-                    case 24:
+                    case 29:
                         getDateActionCards = {
                             listDate: listDate,
                             listBack: listBack,
@@ -142,7 +155,7 @@ var countData = exports.countData = function () {
                         };
                         return _context2.abrupt('return', getDateActionCards);
 
-                    case 26:
+                    case 31:
                     case 'end':
                         return _context2.stop();
                 }
