@@ -89,7 +89,7 @@ var createHourActionCards = exports.createHourActionCards = function () {
                             hour = d.getHours();
 
                             if (i == hour) {
-                                if (actions[j].type == "createCard" || actions[j].type == "moveCardToBoard" || actions[j].type == "copyCard" || actions[j].type == "convertToCardFromCheckItem") {
+                                if (actions[j].type == "createCard" || actions[j].type == "moveCardToBoard" || actions[j].type == "copyCard" || actions[j].type == "convertToCardFromCheckItem" || actions[j].type == "emailCard") {
                                     if (listBack.indexOf(_data.list.id) != -1) dataYesterday.countBack++;else if (listInpr.indexOf(_data.list.id) != -1) dataYesterday.countInpr++;else if (listComp.indexOf(_data.list.id) != -1) dataYesterday.countComp++;
                                 } else if (actions[j].type == "updateCard" && _data.listAfter && _data.listBefore) {
                                     if (listBack.indexOf(_data.listAfter.id) != -1) dataYesterday.countBack++;else if (listInpr.indexOf(_data.listAfter.id) != -1) dataYesterday.countInpr++;else if (listComp.indexOf(_data.listAfter.id) != -1) dataYesterday.countComp++;
@@ -98,6 +98,8 @@ var createHourActionCards = exports.createHourActionCards = function () {
                                 } else if (actions[j].type == "updateCard" && _data.card.closed == false && _data.old.closed == true) {
                                     if (listBack.indexOf(_data.list.id) != -1) dataYesterday.countBack++;else if (listInpr.indexOf(_data.list.id) != -1) dataYesterday.countInpr++;else if (listComp.indexOf(_data.list.id) != -1) dataYesterday.countComp++;
                                 } else if (actions[j].type == "updateCard" && _data.card.closed == true && _data.old.closed == false) {
+                                    if (listBack.indexOf(_data.list.id) != -1) dataYesterday.countBack--;else if (listInpr.indexOf(_data.list.id) != -1) dataYesterday.countInpr--;else if (listComp.indexOf(_data.list.id) != -1) dataYesterday.countComp--;
+                                } else if (actions[j].type == "moveCardFromBoard") {
                                     if (listBack.indexOf(_data.list.id) != -1) dataYesterday.countBack--;else if (listInpr.indexOf(_data.list.id) != -1) dataYesterday.countInpr--;else if (listComp.indexOf(_data.list.id) != -1) dataYesterday.countComp--;
                                 }
                             }

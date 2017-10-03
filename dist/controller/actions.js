@@ -43,7 +43,7 @@ var checkCreateActions = exports.checkCreateActions = function () {
                     case 0:
                         return _context2.abrupt('return', new _bluebird2.default(function (resolve, reject) {
                             (0, _request2.default)({
-                                uri: 'https://api.trello.com/1/board/' + board + '/actions/?filter=createCard,moveCardToBoard,commentCard,copyCard,convertToCardFromCheckItem,updateCard:idList,updateCard:closed&since=' + sinceDate + '&before=' + beforeDate + '&limit=1000&key=' + key + '&token=' + token,
+                                uri: 'https://api.trello.com/1/board/' + board + '/actions/?filter=createCard,moveCardToBoard,commentCard,copyCard,convertToCardFromCheckItem,updateCard:idList,updateCard:closed,emailCard,moveListFromBoard&since=' + sinceDate + '&before=' + beforeDate + '&limit=1000&key=' + key + '&token=' + token,
                                 method: 'GET'
                             }, function (err, response, body) {
                                 if (err) reject((0, _stringify2.default)(err));
