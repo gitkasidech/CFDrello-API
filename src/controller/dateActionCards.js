@@ -26,7 +26,7 @@ export const createDateActionCards = async(dateStart,dashboard) => {
         let dateAction = d
         for(let i=0;i<len;i++){
             const data = dataThisDay[i].data
-            if(dataThisDay[i].type=="createCard" || dataThisDay[i].type=="moveCardToBoard"|| dataThisDay[i].type== "copyCard" || dataThisDay[i].type== "convertToCardFromCheckItem"){
+            if(dataThisDay[i].type=="createCard" || dataThisDay[i].type=="moveCardToBoard"|| dataThisDay[i].type== "copyCard" || dataThisDay[i].type== "convertToCardFromCheckItem"||dataThisDay[i].type=="emailCard"){
                 if (listBack.indexOf(data.list.id) != -1) countBack++
                 else if (listInpr.indexOf(data.list.id) != -1) countInpr++
                 else if (listComp.indexOf(data.list.id) != -1) countComp++
@@ -49,6 +49,12 @@ export const createDateActionCards = async(dateStart,dashboard) => {
                 dateAction = dataThisDay[i].date
             }
             else if(dataThisDay[i].type=="updateCard" && data.card.closed == true && data.old.closed == false){ 
+                if (listBack.indexOf(data.list.id) != -1) countBack--
+                else if (listInpr.indexOf(data.list.id) != -1) countInpr--
+                else if (listComp.indexOf(data.list.id) != -1) countComp--
+                dateAction = dataThisDay[i].date
+            }
+            else if(dataThisDay[i].type=="moveCardFromBoard"){ 
                 if (listBack.indexOf(data.list.id) != -1) countBack--
                 else if (listInpr.indexOf(data.list.id) != -1) countInpr--
                 else if (listComp.indexOf(data.list.id) != -1) countComp--
