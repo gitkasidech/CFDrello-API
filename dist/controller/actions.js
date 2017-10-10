@@ -188,10 +188,7 @@ var createnewActions = exports.createnewActions = function () {
                         return Actions.update({ id: data.id }, { $set: {
                                 idMemberCreator: data.idMemberCreator,
                                 memberCreator: data.memberCreator,
-                                data: data.data,
-                                type: data.type,
-                                date: data.date,
-                                dateString: _ymd
+                                type: data.type
                             } });
 
                     case 18:

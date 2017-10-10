@@ -57,10 +57,7 @@ export const createnewActions = async (Actions,actions,data) => {
         const newactions = await Actions.update({id: data.id},{$set:{
             idMemberCreator: data.idMemberCreator,
             memberCreator: data.memberCreator,
-            data: data.data,
             type: data.type,
-            date: data.date,
-            dateString: ymd
         }})
         return newactions
     } 
