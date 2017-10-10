@@ -17,3 +17,12 @@ run mongodb with docker
 * mongod อันนี้คือ run mongo daemon ทั่วไป
 * –-dbpath อันนี้คือ จะเอาข้อมูลไว้ที่ไหน
 * mongod --dbpath อันนี้เป็น command ทั่วไปที่ใช้ในการ run mongo daemon
+
+build api with docker
+* $ docker build -t NAME_IMAGE .
+
+run api with docker
+* $ docker run --name NAME_CONTAINER -p PORT_DOCKER:MYPORT  --link NAME_LINKCONTAINER NAME_IMAGE
+
+
+
