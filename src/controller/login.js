@@ -14,7 +14,7 @@ const appName = "CFDrello Dashboard"
 const key = "662fa775f48bd56cea11e8be634da284"
 const secret = "8e3dd310f5a5a5e8757563ecc30d992664d895abc296441bfc1cf515ffdefa51"
 
-const loginCallback = `http://${webs.host}:${server.port}/callback`
+const loginCallback = `http://${webs.host}:30355/callback`
 const oauth_secrets = {}
 
 const oauth = new OAuth(requestURL, accessURL, key, secret, "1.0A", loginCallback, "HMAC-SHA1")
